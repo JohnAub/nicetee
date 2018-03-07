@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\RoleUserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentaireRepository")
  */
-class RoleUser
+class Commentaire
 {
     /**
      * @ORM\Id
@@ -17,9 +17,10 @@ class RoleUser
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Entity:User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Dessin")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $advert;
+    private $dessin;
+
 
 }

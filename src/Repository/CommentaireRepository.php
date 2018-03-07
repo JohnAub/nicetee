@@ -2,23 +2,23 @@
 
 namespace App\Repository;
 
-use App\Entity\DeliveryAdressUser;
+use App\Entity\Commentaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class DeliveryAdressUserRepository extends ServiceEntityRepository
+class CommentaireRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, DeliveryAdressUser::class);
+        parent::__construct($registry, Commentaire::class);
     }
 
     /*
     public function findBySomething($value)
     {
-        return $this->createQueryBuilder('d')
-            ->where('d.something = :value')->setParameter('value', $value)
-            ->orderBy('d.id', 'ASC')
+        return $this->createQueryBuilder('c')
+            ->where('c.something = :value')->setParameter('value', $value)
+            ->orderBy('c.id', 'ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()

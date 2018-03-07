@@ -24,72 +24,71 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @Orm\Column(type="string")
+     * @Orm\Column(type="string", length=255)
      */
     private $fullName;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $pseudo;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $sex;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="integer")
      */
     private $phoneNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $adresse;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="integer", length=255)
      */
     private $codePostal;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $Ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $pays;
-
 
 
     /**
      * @var string
      *
-     * @ORM\column(type="sting", unique=true)
+     * @ORM\column(type="string", length=255)
      */
     private $email;
 
@@ -100,20 +99,10 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
-    /**
-     * @var array
-     *
-     * @ORM\Column(type="json")
-     */
-    private $roles= [];
-
-
 
     /**
      ***************Getters - Setters***************
      */
-
-
 
     /**
      * @return int
@@ -121,6 +110,14 @@ class User implements UserInterface, \Serializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -134,7 +131,7 @@ class User implements UserInterface, \Serializable
     /**
      * @param string $fullName
      */
-    public function setFullName(string $fullName): void
+    public function setFullName(string $fullName)
     {
         $this->fullName = $fullName;
     }
@@ -150,77 +147,9 @@ class User implements UserInterface, \Serializable
     /**
      * @param string $username
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username)
     {
         $this->username = $username;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     */
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRoles(): array
-    {
-        $roles =  $this->roles;
-
-        // Un User à toujour au moins 1 rôle
-        if (empty($roles))
-        {
-            $roles[] = 'ROLE_USER';
-        }
-        return array_unique($roles);
-    }
-
-    /**
-     * @param array $roles
-     */
-    public function setRoles(array $roles): void
-    {
-        $this->roles = $roles;
-    }
-
-    /**
-     * Salt pour cryptage des mots de passe fournis par -> Security component
-     *
-     * {@inheritdoc}
-     */
-    public function getSalt(): ?string
-    {
-        /**
-         *
-         */
-        return null;
     }
 
     /**
@@ -335,7 +264,50 @@ class User implements UserInterface, \Serializable
         $this->pays = $pays;
     }
 
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
 
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+    }
+
+    /**
+     * Salt pour cryptage des mots de passe fournis par -> Security component
+     *
+     * {@inheritdoc}
+     */
+    public function getSalt(): ?string
+    {
+        /**
+         *
+         */
+        return null;
+    }
 
     /**
      * Removes sensitive data from the user.
@@ -367,4 +339,24 @@ class User implements UserInterface, \Serializable
         [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
     }
 
+    /**
+     * Returns the roles granted to the user.
+     *
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
+     */
+    public function getRoles()
+    {
+        // TODO: Implement getRoles() method.
+    }
 }
