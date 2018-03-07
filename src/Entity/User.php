@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, \Serializable
 {
+    //@var sert a php Documentor
     /**
      * @var int
      *
@@ -38,6 +39,57 @@ class User implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(type="string", unique=true)
+     */
+    private $pseudo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $sex;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $adresse;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", unique=true)
+     */
+    private $codePostal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $Ville;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", unique=true)
+     */
+    private $pays;
+
+
+
+    /**
+     * @var string
+     *
+     * @ORM\column(type="sting", unique=true)
      */
     private $email;
 
@@ -170,6 +222,120 @@ class User implements UserInterface, \Serializable
          */
         return null;
     }
+
+    /**
+     * @return string
+     */
+    public function getPseudo(): string
+    {
+        return $this->pseudo;
+    }
+
+    /**
+     * @param string $pseudo
+     */
+    public function setPseudo(string $pseudo)
+    {
+        $this->pseudo = $pseudo;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSex(): string
+    {
+        return $this->sex;
+    }
+
+    /**
+     * @param string $sex
+     */
+    public function setSex(string $sex)
+    {
+        $this->sex = $sex;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPhoneNumber(): int
+    {
+        return $this->phoneNumber;
+    }
+
+    /**
+     * @param int $phoneNumber
+     */
+    public function setPhoneNumber(int $phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresse(): string
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse(string $adresse)
+    {
+        $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCodePostal(): int
+    {
+        return $this->codePostal;
+    }
+
+    /**
+     * @param int $codePostal
+     */
+    public function setCodePostal(int $codePostal)
+    {
+        $this->codePostal = $codePostal;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVille(): string
+    {
+        return $this->Ville;
+    }
+
+    /**
+     * @param string $Ville
+     */
+    public function setVille(string $Ville)
+    {
+        $this->Ville = $Ville;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPays(): string
+    {
+        return $this->pays;
+    }
+
+    /**
+     * @param string $pays
+     */
+    public function setPays(string $pays)
+    {
+        $this->pays = $pays;
+    }
+
+
 
     /**
      * Removes sensitive data from the user.
