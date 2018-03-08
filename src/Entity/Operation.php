@@ -40,7 +40,7 @@ class Operation
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $libélé;
+    private $libele;
 
     /**
      * @var string
@@ -56,7 +56,15 @@ class Operation
     {
         return $this->id;
     }
+    /***********************Constructeur***********************/
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
 
+
+
+    /****************************GETTER SETTER************************/
     /**
      * @return mixed
      */
@@ -90,9 +98,9 @@ class Operation
     }
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
@@ -105,20 +113,22 @@ class Operation
         $this->date = $date;
     }
 
+
+
     /**
      * @return string
      */
-    public function getLibélé(): string
+    public function getLibele(): string
     {
-        return $this->libélé;
+        return $this->libele;
     }
 
     /**
-     * @param string $libélé
+     * @param string $libele
      */
-    public function setLibélé(string $libélé)
+    public function setLibele(string $libele)
     {
-        $this->libélé = $libélé;
+        $this->libele = $libele;
     }
 
     /**
