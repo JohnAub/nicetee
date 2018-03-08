@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -99,10 +100,33 @@ class User implements UserInterface, \Serializable
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Dessin", mappedBy="user")
+     */
+    private $dessins;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DeliveryAdressUser", mappedBy="user")
+     */
+    private $deliveryAdressUsers;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Portefeuille", mappedBy="user")
+     */
+    private $portefeuille;
+
+    /****************Constructeur*******************/
+
+    public function __construct()
+    {
+        $this->dessins = new ArrayCollection();
+        $this->deliveryAdressUsers = new ArrayCollection();
+    }
 
     /**
      ***************Getters - Setters***************
      */
+
 
     /**
      * @return int
@@ -295,6 +319,63 @@ class User implements UserInterface, \Serializable
     {
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDessins()
+    {
+        return $this->dessins;
+    }
+
+
+    public function addDessin(Dessin $dessin)
+    {
+        $this->dessins[] = $dessin;
+        $dessin->setUser($this);
+        return $this;
+    }
+
+    public function removeDessin(Dessin $dessin){
+        $this->dessins->removeElement($dessin);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeliveryAdressUsers()
+    {
+        return $this->deliveryAdressUsers;
+    }
+
+    public function addDeliveryAdressUser(Dessin $deliveryAdressUser)
+    {
+        $this->deliveryAdressUsers[] = $deliveryAdressUser;
+        $deliveryAdressUser->setUser($this);
+        return $this;
+    }
+
+
+    public function removeDeliveryAdressUser(DeliveryAdressUser $deliveryAdressUser)
+    {
+        $this->deliveryAdressUsers->removeElement($deliveryAdressUser);
+    }
+
+
+    public function getPortefeuille()
+    {
+        return $this->portefeuille;
+    }
+
+    /**
+     * @param mixed $portefeuille
+     */
+    public function setPortefeuille($portefeuille)
+    {
+        $this->portefeuille = $portefeuille;
+    }
+
+
 
     /**
      * Salt pour cryptage des mots de passe fournis par -> Security component

@@ -3,6 +3,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,11 +24,10 @@ class Dessin
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="dessins")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-    //TODO Faire le liens dans les 2 cotés
 
     /**
      * @ORM\Column(type="datetime")
@@ -37,7 +37,7 @@ class Dessin
 
 
     /**
-     * @var string
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
@@ -58,14 +58,18 @@ class Dessin
     private $resume;
 
     /**
-     * @return int
+     * @ORM\OneToMany(targetEntity="App\Entity\Commentaire", mappedBy="dessin")
      */
+    private $commentaires;
+
+
 
 
     /**Constructeur*/
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->commentaires = new ArrayCollection();
     }
 
 
@@ -158,6 +162,24 @@ class Dessin
     }
 
 
+    /**
+     * @return mixed
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    public function adCommentaire(Commentaire $commentaire)
+    {
+        $this->commentaires[] = $commentaire;
+        $commentaire->setDessin($this);
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire){
+        $this->commentaires->removeElement($commentaire);
+    }
 
 
 
