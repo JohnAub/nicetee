@@ -90,14 +90,14 @@ class DeliveryAdressUser
      */
     private $pays;
 
-    /**
-     * @return int
-     */
+
 
 
     /**GETTER SETTER*/
 
-
+    /**
+     * @return mixed
+     */
     public function getId(): int
     {
         return $this->id;

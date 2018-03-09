@@ -18,9 +18,9 @@ class Portefeuille
     private $id;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $solde;
 
@@ -60,17 +60,17 @@ class Portefeuille
 
 
     /**
-     * @return int
+     * @return float
      */
-    public function getSolde(): int
+    public function getSolde(): float
     {
         return $this->solde;
     }
 
     /**
-     * @param int $solde
+     * @param float $solde
      */
-    public function setSolde(int $solde)
+    public function setSolde(float $solde)
     {
         $this->solde = $solde;
     }

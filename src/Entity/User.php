@@ -25,63 +25,63 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @Orm\Column(type="string", length=255)
+     * @Orm\Column(type="string", length=255, nullable=true)
      */
     private $fullName;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $username;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pseudo;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $sex;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $phoneNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresse;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", length=255)
+     * @ORM\Column(type="integer", length=255, nullable=true)
      */
     private $codePostal;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $pays;
 
@@ -89,14 +89,14 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\column(type="string", length=255)
+     * @ORM\column(type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
 
@@ -111,6 +111,11 @@ class User implements UserInterface, \Serializable
     private $deliveryAdressUsers;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="user")
+     */
+    private $commandes;
+
+    /**
      * @ORM\OneToOne(targetEntity="App\Entity\Portefeuille", mappedBy="user")
      */
     private $portefeuille;
@@ -121,6 +126,7 @@ class User implements UserInterface, \Serializable
     {
         $this->dessins = new ArrayCollection();
         $this->deliveryAdressUsers = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
     /**
@@ -163,7 +169,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getUserName(): string
     {
         return $this->username;
     }
@@ -171,7 +177,7 @@ class User implements UserInterface, \Serializable
     /**
      * @param string $username
      */
-    public function setUsername(string $username)
+    public function setUserName(string $username)
     {
         $this->username = $username;
     }
@@ -375,6 +381,25 @@ class User implements UserInterface, \Serializable
         $this->portefeuille = $portefeuille;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+
+
+    public function addCommandes(Commande $commande)
+    {
+        $this->commandes[] = $commande;
+        $commande->setUser($this);
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande){
+        $this->commandes->removeElement($commande);
+    }
 
 
     /**

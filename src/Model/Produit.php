@@ -47,9 +47,9 @@ abstract class Produit
     protected $qty;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     protected $prixVentes;
 
@@ -61,9 +61,9 @@ abstract class Produit
     protected $qtyVendu;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     protected $tva;
 
@@ -81,7 +81,7 @@ abstract class Produit
 
     /**
      * Produit constructor.
-     * @param int $prixVentes
+     * @param float $prixVentes
      */
     protected function __construct($prixVentes)
     {
@@ -191,17 +191,17 @@ abstract class Produit
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getPrixventes(): int
+    public function getPrixventes(): float
     {
         return $this->prixVentes;
     }
 
     /**
-     * @param int $prixVentes
+     * @param float $prixVentes
      */
-    public function setPrixventes(int $prixVentes)
+    public function setPrixventes(float $prixVentes)
     {
         $this->prixVentes = $prixVentes;
     }
@@ -223,17 +223,17 @@ abstract class Produit
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getTva(): int
+    public function getTva(): float
     {
         return $this->tva;
     }
 
     /**
-     * @param int $tva
+     * @param float $tva
      */
-    public function setTva(int $tva)
+    public function setTva(float $tva)
     {
         $this->tva = $tva;
     }

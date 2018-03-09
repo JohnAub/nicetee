@@ -26,16 +26,16 @@ class ProduitIntern extends Produit
     private $fournisseur;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $prixAchat;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $tauxVente;
 
@@ -73,33 +73,33 @@ class ProduitIntern extends Produit
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getPrixAchat(): int
+    public function getPrixAchat(): float
     {
         return $this->prixAchat;
     }
 
     /**
-     * @param int $prixAchat
+     * @param float $prixAchat
      */
-    public function setPrixAchat(int $prixAchat)
+    public function setPrixAchat(float $prixAchat)
     {
         $this->prixAchat = $prixAchat;
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getTauxVente(): int
+    public function getTauxVente(): float
     {
         return $this->tauxVente;
     }
 
     /**
-     * @param int $tauxVente
+     * @param float $tauxVente
      */
-    public function setTauxVente(int $tauxVente)
+    public function setTauxVente(float $tauxVente)
     {
         $this->tauxVente = $tauxVente;
     }

@@ -76,7 +76,9 @@ class Dessin
 
     /****************************GETTER SETTER************************/
 
-
+    /**
+     * @return integer
+     */
     public function getId(): int
     {
         return $this->id;
@@ -97,6 +99,7 @@ class Dessin
     {
         $this->user = $user;
     }
+
     /**
      * @return mixed
      */

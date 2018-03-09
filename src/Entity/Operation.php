@@ -23,9 +23,9 @@ class Operation
     private $portefeuille;
 
     /**
-     * @var int
+     * @var float
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $montant;
 
@@ -49,13 +49,7 @@ class Operation
      */
     private $ref;
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
     /***********************Constructeur***********************/
     public function __construct()
     {
@@ -65,6 +59,14 @@ class Operation
 
 
     /****************************GETTER SETTER************************/
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @return mixed
      */
@@ -82,17 +84,17 @@ class Operation
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getMontant(): int
+    public function getMontant(): float
     {
         return $this->montant;
     }
 
     /**
-     * @param int $montant
+     * @param float $montant
      */
-    public function setMontant(int $montant)
+    public function setMontant(float $montant)
     {
         $this->montant = $montant;
     }

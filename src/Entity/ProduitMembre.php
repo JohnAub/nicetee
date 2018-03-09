@@ -39,7 +39,7 @@ class ProduitMembre extends Produit
 
     /**
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="float")
      */
     private $PrixVenteMembre;
 
@@ -85,6 +85,22 @@ class ProduitMembre extends Produit
     public function getVisibilite()
     {
         return $this->visibilite;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrixVenteMembre()
+    {
+        return $this->PrixVenteMembre;
+    }
+
+    /**
+     * @param mixed $PrixVenteMembre
+     */
+    public function setPrixVenteMembre($PrixVenteMembre)
+    {
+        $this->PrixVenteMembre = $PrixVenteMembre;
     }
 
 }
