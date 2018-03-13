@@ -1,8 +1,116 @@
 
+/***
+*****Bare de navigation
+**/
+#navLogo{
+  margin-left:10px;
+}
+#navbarCollapse{
+  margin-right:10px;
+}
 #navUser{
+  margin-right:10px;
   height: 28px;
   a{
+    text-decoration: none;
+    color: black;
     display: block;
     margin-right: 25px;
+    &:hover{
+      color: #718C00;
+    }
   }
 }
+
+/***
+*****Tee du jour
+**/
+#teeDay{
+  margin-bottom:25px;
+  .priceTeeJour{
+    font-size: 26px;
+    bottom: 7px;
+    right: 13px;
+    color: yellow;
+  }
+  .cardPseudoTee{
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 0px;
+    a{
+      text-decoration: none;
+      color: black;
+      .cardPseudoTee_Pseudo{
+        font-size: 14px;
+        font-style: italic;
+      }
+      &:hover{
+        color: #718C00;
+      }
+    }
+  }
+}
+
+
+/***
+*****Liste Tee
+**/
+#content{
+  margin-bottom:25px;
+  #boutonTeeList{
+    bottom: 0px;
+    .btn-group{
+      margin-left:2px;
+      margin-bottom:2px;
+      button{
+        border-color: white;
+        color: white;
+      }
+    }
+  }
+}
+
+
+
+/***
+*****A ranger
+**/
+:root {
+  --jumbotron-padding-y: 3rem;
+}
+
+.jumbotron {
+  padding-top: var(--jumbotron-padding-y);
+  padding-bottom: var(--jumbotron-padding-y);
+  margin-bottom: 0;
+  background-color: #fff;
+}
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: calc(var(--jumbotron-padding-y) * 2);
+    padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+  }
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
