@@ -354,7 +354,7 @@ class User implements UserInterface, \Serializable
         return $this->deliveryAdressUsers;
     }
 
-    public function addDeliveryAdressUser(Dessin $deliveryAdressUser)
+    public function addDeliveryAdressUser(DeliveryAdressUser $deliveryAdressUser)
     {
         $this->deliveryAdressUsers[] = $deliveryAdressUser;
         $deliveryAdressUser->setUser($this);

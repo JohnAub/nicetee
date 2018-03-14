@@ -73,32 +73,23 @@ abstract class Produit
      */
     protected $dateAjout;
 
-
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      */
     protected $imageHomme;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      */
     protected $imageFemme;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      */
     protected $imageZoomListe;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      */
     protected $imageZoomItem;
 
@@ -271,65 +262,65 @@ abstract class Produit
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageHomme(): string
+    public function getImageHomme()
     {
         return $this->imageHomme;
     }
 
     /**
-     * @param string $imageHomme
+     * @param mixed $imageHomme
      */
-    public function setImageHomme(string $imageHomme)
+    public function setImageHomme($imageHomme)
     {
         $this->imageHomme = $imageHomme;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageFemme(): string
+    public function getImageFemme()
     {
         return $this->imageFemme;
     }
 
     /**
-     * @param string $imageFemme
+     * @param mixed $imageFemme
      */
-    public function setImageFemme(string $imageFemme)
+    public function setImageFemme($imageFemme)
     {
         $this->imageFemme = $imageFemme;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageZoomListe(): string
+    public function getImageZoomListe()
     {
         return $this->imageZoomListe;
     }
 
     /**
-     * @param string $imageZoomListe
+     * @param mixed $imageZoomListe
      */
-    public function setImageZoomListe(string $imageZoomListe)
+    public function setImageZoomListe($imageZoomListe)
     {
         $this->imageZoomListe = $imageZoomListe;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageZoomItem(): string
+    public function getImageZoomItem()
     {
         return $this->imageZoomItem;
     }
 
     /**
-     * @param string $imageZoomItem
+     * @param mixed $imageZoomItem
      */
-    public function setImageZoomItem(string $imageZoomItem)
+    public function setImageZoomItem($imageZoomItem)
     {
         $this->imageZoomItem = $imageZoomItem;
     }
