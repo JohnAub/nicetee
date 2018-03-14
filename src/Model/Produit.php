@@ -3,7 +3,7 @@
 
 namespace App\Model;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  *
@@ -14,81 +14,113 @@ abstract class Produit
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $designation;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $sex;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $taille;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $couleur;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $qty;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $prixVentes;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $qtyVendu;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $tva;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      */
     protected $dateAjout;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $imageHomme;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $imageFemme;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $imageZoomListe;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $imageZoomItem;
 
 
 
 
     /**************************Constructeur********************/
 
-    /**
-     * Produit constructor.
-     * @param float $prixVentes
-     */
-    protected function __construct($prixVentes)
+    public function __construct()
+    {
+        $this->dateAjout = new \Datetime();
+    }
+    ///**
+     //* Produit constructor.
+     //* @param float $prixVentes
+     //*/
+   /* protected function __construct($prixVentes)
     {
         $this->tva = 1.20;
         $this->prixVentes = $prixVentes * $this->tva;
         $this->dateAjout = new \DateTime();
-    }
+    }*/
 
 
 
@@ -97,7 +129,7 @@ abstract class Produit
     /**
      * @return \DateTime
      */
-    public function getDateAjout(): \DateTime
+    public function getDateAjout()
     {
         return $this->dateAjout;
     }
@@ -129,7 +161,7 @@ abstract class Produit
     /**
      * @return string
      */
-    public function getSex(): string
+    public function getSex()
     {
         return $this->sex;
     }
@@ -145,7 +177,7 @@ abstract class Produit
     /**
      * @return string
      */
-    public function getTaille(): string
+    public function getTaille()
     {
         return $this->taille;
     }
@@ -161,7 +193,7 @@ abstract class Produit
     /**
      * @return string
      */
-    public function getCouleur(): string
+    public function getCouleur()
     {
         return $this->couleur;
     }
@@ -177,7 +209,7 @@ abstract class Produit
     /**
      * @return int
      */
-    public function getQty(): int
+    public function getQty()
     {
         return $this->qty;
     }
@@ -193,7 +225,7 @@ abstract class Produit
     /**
      * @return float
      */
-    public function getPrixventes(): float
+    public function getPrixventes()
     {
         return $this->prixVentes;
     }
@@ -209,7 +241,7 @@ abstract class Produit
     /**
      * @return int
      */
-    public function getQtyVendu(): int
+    public function getQtyVendu()
     {
         return $this->qtyVendu;
     }
@@ -225,7 +257,7 @@ abstract class Produit
     /**
      * @return float
      */
-    public function getTva(): float
+    public function getTva()
     {
         return $this->tva;
     }
@@ -237,6 +269,72 @@ abstract class Produit
     {
         $this->tva = $tva;
     }
+
+    /**
+     * @return string
+     */
+    public function getImageHomme(): string
+    {
+        return $this->imageHomme;
+    }
+
+    /**
+     * @param string $imageHomme
+     */
+    public function setImageHomme(string $imageHomme)
+    {
+        $this->imageHomme = $imageHomme;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageFemme(): string
+    {
+        return $this->imageFemme;
+    }
+
+    /**
+     * @param string $imageFemme
+     */
+    public function setImageFemme(string $imageFemme)
+    {
+        $this->imageFemme = $imageFemme;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageZoomListe(): string
+    {
+        return $this->imageZoomListe;
+    }
+
+    /**
+     * @param string $imageZoomListe
+     */
+    public function setImageZoomListe(string $imageZoomListe)
+    {
+        $this->imageZoomListe = $imageZoomListe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageZoomItem(): string
+    {
+        return $this->imageZoomItem;
+    }
+
+    /**
+     * @param string $imageZoomItem
+     */
+    public function setImageZoomItem(string $imageZoomItem)
+    {
+        $this->imageZoomItem = $imageZoomItem;
+    }
+
+
 
 
 }

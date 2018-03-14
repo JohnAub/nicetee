@@ -21,30 +21,30 @@ class ProduitIntern extends Produit
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $fournisseur;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $prixAchat;
 
     /**
      * @var float
      *
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float", nullable=true)
      */
     private $tauxVente;
 
-    public function __construct($prixAchat, $tauxVente)
+   /* public function __construct($prixAchat, $tauxVente)
     {
         $this->prixAchat = $prixAchat;
         $prixVentesht = $this->prixAchat * $tauxVente;
         parent::__construct($prixVentesht);
-    }
+    }*/
 
 
     /**
@@ -59,7 +59,7 @@ class ProduitIntern extends Produit
     /**
      * @return string
      */
-    public function getFournisseur(): string
+    public function getFournisseur()
     {
         return $this->fournisseur;
     }
@@ -75,7 +75,7 @@ class ProduitIntern extends Produit
     /**
      * @return float
      */
-    public function getPrixAchat(): float
+    public function getPrixAchat()
     {
         return $this->prixAchat;
     }
@@ -91,7 +91,7 @@ class ProduitIntern extends Produit
     /**
      * @return float
      */
-    public function getTauxVente(): float
+    public function getTauxVente()
     {
         return $this->tauxVente;
     }
@@ -103,7 +103,5 @@ class ProduitIntern extends Produit
     {
         $this->tauxVente = $tauxVente;
     }
-
-
 
 }
