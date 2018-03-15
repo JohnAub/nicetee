@@ -20,6 +20,11 @@ class ProduitInternController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
             if ($form->isSubmitted() && $form->isValid()){
+                if ($tee->getPrixAchat() && $tee->getTauxVente() && $tee->getTva()){
+                    $prixDeVente = $tee->getPrixAchat() * $tee->getTauxVente() * $tee->getTva();
+                    $tee->setPrixventes($prixDeVente);
+                }
+
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($tee);
                 $em->flush();

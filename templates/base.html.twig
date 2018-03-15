@@ -16,8 +16,9 @@
     {% block stylesheets %}{% endblock %}
 </head>
 
-
 <body>
+
+
     <div class="container">
         <div id="sidebar">
             {% block sidebar %}
@@ -35,7 +36,7 @@
                 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
                     <a class="navbar-brand" href="#" id="navLogo">Tee Nice</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        {#<span class="navbar-toggler-icon"></span>#}
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                         <ul class="navbar-nav ">
@@ -151,9 +152,10 @@
                         </div>
                         <div class="container">
                             <div class="row">
+                            {% for tee in teeIntern %}
                                 <div class="col-md-4">
                                     <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" src="{{ asset('build/images/teeInterne/1515403004-122052-mens-500x600.jpg') }}" alt="Card image cap">
+                                        <img class="card-img-top" src="{{ asset(tee.imageZoomListe.webPath) }}" alt="Card image cap">
                                         <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
@@ -162,116 +164,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="card mb-4 box-shadow position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            {% endfor %}
                             </div>
                         </div>
                     </div>

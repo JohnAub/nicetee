@@ -22,7 +22,7 @@ class ProduitInternType extends AbstractType
             ->add('prixAchat',MoneyType::class)
             ->add('tauxVente',NumberType::class)
             ->add('designation',TextType::class)
-            ->add('prixVentes', MoneyType::class)
+            /*->add('prixVentes', MoneyType::class)*/
             ->add('tva', NumberType::class)
             ->add('dateAjout', DateType::class)
             ->add('imageFemme', ImageType::class)

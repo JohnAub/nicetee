@@ -13,6 +13,14 @@ class DefaultController extends Controller
      */
     public function default()
     {
-        return $this->render('base.html.twig');
+        $repository = $this
+            ->getDoctrine()
+            ->getManager()
+            ->getRepository('App:ProduitIntern')
+        ;
+        $listTeeIntern = $repository->findAll();
+        return $this->render('base.html.twig', array(
+            'teeIntern' => $listTeeIntern,
+        ));
     }
 }
