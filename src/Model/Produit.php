@@ -325,6 +325,41 @@ abstract class Produit
         $this->imageZoomItem = $imageZoomItem;
     }
 
+    public function getImageAdmin(){
+        $image = $this->getImageZoomListe();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+    public function getImageFemmeAdmin(){
+        $image = $this->getImageFemme();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+    public function getImageHommeAdmin(){
+        $image = $this->getImageHomme();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+    public function getImageZoomItemAdmin(){
+            $image = $this->getImageZoomItem();
+            $url = $image->getWebPath();
+            return $url;
+        }
+
+    public function getImageZoomListeAdmin(){
+        $image = $this->getImageZoomListe();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+   /* public function setImageAdmin($image){
+        $this->getImageZoomListe()->se
+    }*/
+   //todo faire un setter pour modifier les images depuis l'admin
+
 
 
 

@@ -175,8 +175,6 @@ class Image
     /**
      * @param UploadedFile $file
      */
-
-
     // On modifie le setter de File, pour prendre en compte l'upload d'un fichier lorsqu'il en existe déjà un autre
     public function setFile(UploadedFile $file)
     {

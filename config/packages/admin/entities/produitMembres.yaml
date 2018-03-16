@@ -1,0 +1,11 @@
+easy_admin:
+    entities:
+        ProduitsMembres:
+            class: App\Entity\ProduitMembre
+            list:
+                fields:
+                    - "id"
+                    - {property: 'ImageAdmin', type: 'image'}
+                    - {property: 'tva'}
+                    - {property: 'prixVentes'}
+                    - {property: 'qtyVendu'}

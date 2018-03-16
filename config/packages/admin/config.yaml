@@ -1,0 +1,8 @@
+easy_admin:
+    site_name: 'NiceTee Admin'
+    entities:
+        - App\Entity\ProduitIntern
+        - App\Entity\ProduitMembre
+        - App\Entity\User
+framework:
+    translator: { fallbacks: [ "fr" ] }

@@ -1,0 +1,35 @@
+easy_admin:
+        design:
+            templates:
+                paginator: '@App/Default/fragments/_paginator.html.twig'
+        entities:
+            LeBoTee:
+                class: App\Entity\ProduitIntern
+                form:
+                    fields:
+                        - {property: 'designation'}
+                        - {property: 'prixAchat'}
+                        - {property: 'tauxVente'}
+                        - {property: 'tva'}
+                list:
+                    dql_filter: "entity.fournisseur = 'LeBoTee'"
+                    fields: &produitIntern
+                        - "id"
+                        - {property: 'dateAjout', format: 'd/m/Y'}
+                        - {property: 'ImageAdmin', type: 'image'}
+                        - {property: 'designation'}
+                        - {property: 'prixAchat'}
+                        - {property: 'tauxVente'}
+                        - {property: 'tva'}
+                        - {property: 'prixVentes'}
+                        - {property: 'qtyVendu'}
+            TeeAuthentica:
+                class: App\Entity\ProduitIntern
+                list:
+                    dql_filter: "entity.fournisseur = 'Tee Authentica'"
+                    fields: *produitIntern
+            CoffeCentral:
+                class: App\Entity\ProduitIntern
+                list:
+                    dql_filter: "entity.fournisseur = 'Coffe Central'"
+                    fields: *produitIntern
