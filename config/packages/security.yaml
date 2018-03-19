@@ -1,18 +1,23 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders: #defini le type d'encodage
+         App\Entity\User:
+            algorithm: bcrypt
+
     providers:
-        our_db_provider: # fournisseur d'utilisateurs qui indique que c'est la propriétée username de l'entité User qui sera utilisé pour la co
-                    entity:
-                        class: App\Entity\User
-                        property: username
+        our_db_provider:
+            entity: # permet de dire a symfnony que quand il y a un log, c'est le username de User qu'il faut utiliser
+                class: App\Entity\User
+                property: username
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern:    ^/
-            http_basic: ~
-            provider: our_db_provider
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
 
             # activate different ways to authenticate
 
@@ -25,8 +30,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/test, roles: ROLE_ADMIN }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-    encoders:
-        App\Entity\User: # indique a Symfony que les mots de pass sont encodés en bcrypt
-            algorithm: bcrypt
+

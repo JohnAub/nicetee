@@ -91,10 +91,9 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @var string
+     * @var string $email
      *
-     * @ORM\column(type="string", length=255, unique=true)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\Email()
      */
     private $email;
@@ -140,10 +139,18 @@ class User implements UserInterface, \Serializable
      */
     private $portefeuille;
 
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     */
+    private $dateInscription;
+
     /****************Constructeur*******************/
 
     public function __construct()
     {
+        $this->dateInscription = new \DateTime();
+        $this->roles = 'ROLE_USER';
         $this->dessins = new ArrayCollection();
         $this->deliveryAdressUsers = new ArrayCollection();
         $this->commandes = new ArrayCollection();
@@ -157,7 +164,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -173,7 +180,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getNom(): string
+    public function getNom()
     {
         return $this->nom;
     }
@@ -189,7 +196,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getPrenom(): string
+    public function getPrenom()
     {
         return $this->prenom;
     }
@@ -205,7 +212,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getUserName(): string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -213,31 +220,16 @@ class User implements UserInterface, \Serializable
     /**
      * @param string $username
      */
-    public function setUserName(string $username)
+    public function setUsername(string $username)
     {
         $this->username = $username;
     }
 
-    /**
-     * @return string
-     */
-    public function getPseudo(): string
-    {
-        return $this->pseudo;
-    }
-
-    /**
-     * @param string $pseudo
-     */
-    public function setPseudo(string $pseudo)
-    {
-        $this->pseudo = $pseudo;
-    }
 
     /**
      * @return string
      */
-    public function getSex(): string
+    public function getSex()
     {
         return $this->sex;
     }
@@ -253,7 +245,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
-    public function getPhoneNumber(): int
+    public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
@@ -269,7 +261,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getAdresse(): string
+    public function getAdresse()
     {
         return $this->adresse;
     }
@@ -285,7 +277,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
-    public function getCodePostal(): int
+    public function getCodePostal()
     {
         return $this->codePostal;
     }
@@ -301,7 +293,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getVille(): string
+    public function getVille()
     {
         return $this->Ville;
     }
@@ -317,7 +309,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getPays(): string
+    public function getPays()
     {
         return $this->pays;
     }
@@ -333,7 +325,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -349,7 +341,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
@@ -369,6 +361,15 @@ class User implements UserInterface, \Serializable
     {
         return $this->plainPassword;
     }
+
+    /**
+     * @param mixed $plainPassword
+     */
+    public function setPlainPassword($plainPassword)
+    {
+        $this->plainPassword = $plainPassword;
+    }
+
 
 
 
@@ -471,16 +472,15 @@ class User implements UserInterface, \Serializable
     {
         //Supprime les données sensibles de l'utilisateur.
         //Ceci est important si, à un moment donné, des informations sensibles comme le mot de passe en texte clair sont stockées sur cet objet.
-        // Nous n'avons pas besoin de cette methode car nous n'utilions pas de plainPassword
-        // Mais elle est obligatoire car comprise dans l'interface UserInterface
-        // $this->plainPassword = null;
+        //
+        $this->plainPassword = null;
     }
 
     /**
      * @see \Serializable::serialize()
      *
      */
-    public function serialize(): string
+    public function serialize()
     {
         // Génère une représentation stockable d'une valeur
         // pratique pour stocker ou passer des valeurs PHP entre scripts, sans perdre leur structure ni leur type.
@@ -507,16 +507,10 @@ class User implements UserInterface, \Serializable
     /**
      * Retourne les rôles de l'user
      */
-    public function getRoles(): array
+    public function getRoles()
     {
         $roles = $this->roles;
-
-        // Afin d'être sûr qu'un user a toujours au moins 1 rôle
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
-
-        return array_unique($roles);
+        return array($roles);
     }
 
     public function setRoles(array $roles): void

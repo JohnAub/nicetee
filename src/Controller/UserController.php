@@ -32,7 +32,7 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/user/{id}", name="product_show")
+     * @Route("/user/{id}", name="user_show")
      */
     public function showAction($id)
     {
