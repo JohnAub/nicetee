@@ -111,7 +111,7 @@ class Image
     protected function getUploadRootDir()
     {
         // On retourne le chemin relatif vers l'image pour notre code PHP
-        return __DIR__.'/../../public/'.$this->getUploadDir(); //todo voir ou s'est foutu le fichier
+        return __DIR__.'/../../public/'.$this->getUploadDir();
     }
 
     public function getWebPath()

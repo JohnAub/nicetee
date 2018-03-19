@@ -2,6 +2,7 @@
 
 
 namespace App\Model;
+use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -75,21 +76,25 @@ abstract class Produit
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     *
      */
     protected $imageHomme;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     *
      */
     protected $imageFemme;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     *
      */
     protected $imageZoomListe;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     *
      */
     protected $imageZoomItem;
 
@@ -102,17 +107,6 @@ abstract class Produit
     {
         $this->dateAjout = new \Datetime();
     }
-    ///**
-     //* Produit constructor.
-     //* @param float $prixVentes
-     //*/
-   /* protected function __construct($prixVentes)
-    {
-        $this->tva = 1.20;
-        $this->prixVentes = $prixVentes * $this->tva;
-        $this->dateAjout = new \DateTime();
-    }*/
-
 
 
 
@@ -269,12 +263,11 @@ abstract class Produit
         return $this->imageHomme;
     }
 
-    /**
-     * @param mixed $imageHomme
-     */
-    public function setImageHomme($imageHomme)
+
+    public function setImageHomme(Image $imageHomme)
     {
         $this->imageHomme = $imageHomme;
+        return $this;
     }
 
     /**
@@ -285,12 +278,11 @@ abstract class Produit
         return $this->imageFemme;
     }
 
-    /**
-     * @param mixed $imageFemme
-     */
-    public function setImageFemme($imageFemme)
+
+    public function setImageFemme(Image $imageFemme)
     {
         $this->imageFemme = $imageFemme;
+        return $this;
     }
 
     /**
@@ -301,12 +293,11 @@ abstract class Produit
         return $this->imageZoomListe;
     }
 
-    /**
-     * @param mixed $imageZoomListe
-     */
-    public function setImageZoomListe($imageZoomListe)
+
+    public function setImageZoomListe(Image $imageZoomListe)
     {
         $this->imageZoomListe = $imageZoomListe;
+        return $this;
     }
 
     /**
@@ -317,18 +308,20 @@ abstract class Produit
         return $this->imageZoomItem;
     }
 
-    /**
-     * @param mixed $imageZoomItem
-     */
-    public function setImageZoomItem($imageZoomItem)
+
+    public function setImageZoomItem(Image $imageZoomItem)
     {
         $this->imageZoomItem = $imageZoomItem;
+        return $this;
     }
 
     public function getImageAdmin(){
-        $image = $this->getImageZoomListe();
-        $url = $image->getWebPath();
-        return $url;
+        if (!empty($this->getImageZoomListe())){
+            $image = $this->getImageZoomListe();
+            $url = $image->getWebPath();
+            return $url;
+        }
+        return null;
     }
 
     public function getImageFemmeAdmin(){

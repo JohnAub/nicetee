@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -25,23 +27,25 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @Orm\Column(type="string", length=255, nullable=true)
+     * @Orm\Column(type="string", length=255)
      */
-    private $fullName;
+    private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Orm\Column(type="string", length=255)
+     */
+    private $prenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
      */
     private $username;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $pseudo;
 
     /**
      * @var string
@@ -60,28 +64,28 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $adresse;
 
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", length=255, nullable=true)
+     * @ORM\Column(type="integer", length=255)
      */
     private $codePostal;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $Ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $pays;
 
@@ -89,16 +93,32 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\column(type="string", length=255, nullable=true)
+     * @ORM\column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=64)
      */
     private $password;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     * sert juste temporairement à l'inscription
+     */
+    private $plainPassword;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Dessin", mappedBy="user")
@@ -153,17 +173,33 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getFullName(): string
+    public function getNom(): string
     {
-        return $this->fullName;
+        return $this->nom;
     }
 
     /**
-     * @param string $fullName
+     * @param string $nom
      */
-    public function setFullName(string $fullName)
+    public function setNom(string $nom)
     {
-        $this->fullName = $fullName;
+        $this->nom = $nom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPrenom(): string
+    {
+        return $this->prenom;
+    }
+
+    /**
+     * @param string $prenom
+     */
+    public function setPrenom(string $prenom)
+    {
+        $this->prenom = $prenom;
     }
 
     /**
@@ -329,6 +365,16 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
     public function getDessins()
     {
         return $this->dessins;
@@ -404,6 +450,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * Salt pour cryptage des mots de passe fournis par -> Security component
+     * vu que j'utilise bcrypt je n'en ai pas besoin du coup on renvoi null
      *
      * {@inheritdoc}
      */
@@ -422,47 +469,58 @@ class User implements UserInterface, \Serializable
      */
     public function eraseCredentials(): void
     {
+        //Supprime les données sensibles de l'utilisateur.
+        //Ceci est important si, à un moment donné, des informations sensibles comme le mot de passe en texte clair sont stockées sur cet objet.
         // Nous n'avons pas besoin de cette methode car nous n'utilions pas de plainPassword
         // Mais elle est obligatoire car comprise dans l'interface UserInterface
         // $this->plainPassword = null;
     }
 
     /**
-     * {@inheritdoc}
+     * @see \Serializable::serialize()
+     *
      */
     public function serialize(): string
     {
         // Génère une représentation stockable d'une valeur
         // pratique pour stocker ou passer des valeurs PHP entre scripts, sans perdre leur structure ni leur type.
-        return serialize([$this->id, $this->username, $this->password]);
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            ));
     }
 
     /**
-     * {@inheritdoc}
+     * @see \Serializable::unserialize()
+     *
      */
     public function unserialize($serialized): void
     {
-        [$this->id, $this->username, $this->password] = unserialize($serialized, ['allowed_classes' => false]);
+        list(
+            $this->id,
+            $this->username,
+            $this->password,
+            )= unserialize($serialized);
     }
 
     /**
-     * Returns the roles granted to the user.
-     *
-     * <code>
-     * public function getRoles()
-     * {
-     *     return array('ROLE_USER');
-     * }
-     * </code>
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return (Role|string)[] The user roles
+     * Retourne les rôles de l'user
      */
-    public function getRoles()
+    public function getRoles(): array
     {
-        // TODO: Implement getRoles() method.
+        $roles = $this->roles;
+
+        // Afin d'être sûr qu'un user a toujours au moins 1 rôle
+        if (empty($roles)) {
+            $roles[] = 'ROLE_USER';
+        }
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
     }
 }

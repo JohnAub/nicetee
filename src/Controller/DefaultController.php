@@ -23,4 +23,12 @@ class DefaultController extends Controller
             'teeIntern' => $listTeeIntern,
         ));
     }
+
+    /**
+     * @Route("/test")
+     */
+    public function test()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
 }

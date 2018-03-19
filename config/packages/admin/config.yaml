@@ -4,5 +4,7 @@ easy_admin:
         - App\Entity\ProduitIntern
         - App\Entity\ProduitMembre
         - App\Entity\User
+        - App\Entity\Image
+        - App\Entity\DeliveryAdressUser
 framework:
     translator: { fallbacks: [ "fr" ] }

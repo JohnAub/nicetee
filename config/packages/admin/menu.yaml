@@ -4,9 +4,9 @@ easy_admin:
             - label: 'Manager'
             - label: 'Tee Intern'
               children:
-                  - { entity: 'LeBoTee', label: 'Le Bo Tee', default: true}
+                  - { entity: 'LeBoTee', label: 'LeBo Tee', default: true}
                   - { entity: 'TeeAuthentica', label: 'Tee Authentica'}
-                  - { entity: 'CoffeCentral', label: 'CoffeCentral'}
+                  - { entity: 'CoffeCentral', label: 'Coffe Central'}
             - label: 'Tee Membres'
               children:
                   - { entity: 'ProduitsMembres', label: 'Tee Membres'}

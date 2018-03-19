@@ -2,10 +2,28 @@ easy_admin:
     entities:
         ProduitsMembres:
             class: App\Entity\ProduitMembre
+            controller: App\Controller\AdminProduitMembreController
+            form:
+                fields: &formProduitIntern #récuperer le fournisseur et constructeur pour date d'ajout
+                    - {property: 'designation'}
+                    - {property: 'idUser', label: 'User'}
+                    - {property: 'tva'}
+                    - {property: 'imageHomme', type: 'App\Form\ImageType', label: 'Image Homme'}
+                    - {property: 'imageFemme', type: 'App\Form\ImageType', label: 'Image Femme'}
+                    - {property: 'imageZoomItem', type: 'App\Form\ImageType', label: 'Image Node'}
+                    - {property: 'imageZoomListe', type: 'App\Form\ImageType', label: 'Image Liste'}
+                edit:
+                    - {property: 'imageHomme', type: 'App\Form\ImageType', label: 'Image Homme', type_options: {required: false}}
+                    - {property: 'imageFemme', type: 'App\Form\ImageType', label: 'Image Femme', type_options: {required: false}}
+                    - {property: 'imageZoomItem', type: 'App\Form\ImageType', label: 'Image Node', type_options: {required: false}}
+                    - {property: 'imageZoomListe', type: 'App\Form\ImageType', label: 'Image Liste', type_options: {required: false}}
             list:
                 fields:
                     - "id"
-                    - {property: 'ImageAdmin', type: 'image'}
-                    - {property: 'tva'}
+                    - {property: 'idUser', label: 'User'}
+                    - {property: 'visibilite'}
+                    - {property: 'ImageAdmin', label: 'Image', type: 'image'}
                     - {property: 'prixVentes'}
                     - {property: 'qtyVendu'}
+                    - {property: 'dateAjout'}
+                    - {property: 'dateFinVente'}
