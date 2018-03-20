@@ -1,0 +1,44 @@
+easy_admin:
+        design:
+        entities:
+            LeBoTee:
+                class: App\Entity\ProduitIntern
+                controller: App\Controller\AdminProduitInternController
+                form:
+                    fields: &formProduitIntern #récuperer le fournisseur et constructeur pour date d'ajout
+                        - {property: 'designation'}
+                        - {property: 'prixAchat'}
+                        - {property: 'tauxVente'}
+                        - {property: 'tva'}
+                        - {property: 'imageHomme', type: 'App\Form\ImageType', label: 'Image Homme'}
+                        - {property: 'imageFemme', type: 'App\Form\ImageType', label: 'Image Femme'}
+                        - {property: 'imageZoomItem', type: 'App\Form\ImageType', label: 'Image Node'}
+                        - {property: 'imageZoomListe', type: 'App\Form\ImageType', label: 'Image Liste'}
+                list:
+                    dql_filter: "entity.fournisseur = 'LeBoTee'"
+                    fields: &listProduitIntern
+                        - "id"
+                        - {property: 'dateAjout', format: 'd/m/Y'}
+                        - {property: 'ImageAdmin', type: 'image'}
+                        - {property: 'designation'}
+                        - {property: 'prixAchat'}
+                        - {property: 'tauxVente'}
+                        - {property: 'tva'}
+                        - {property: 'prixVentes'}
+                        - {property: 'qtyVendu'}
+            TeeAuthentica:
+                class: App\Entity\ProduitIntern
+                controller: App\Controller\AdminProduitInternController
+                form:
+                    fields: *formProduitIntern
+                list:
+                    dql_filter: "entity.fournisseur = 'Tee Authentica'"
+                    fields: *listProduitIntern
+            CoffeCentral:
+                class: App\Entity\ProduitIntern
+                controller: App\Controller\AdminProduitInternController
+                form:
+                    fields: *formProduitIntern
+                list:
+                    dql_filter: "entity.fournisseur = 'Coffe Central'"
+                    fields: *listProduitIntern

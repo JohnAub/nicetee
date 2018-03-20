@@ -1,0 +1,13 @@
+easy_admin:
+    design:
+        menu:
+            - label: 'Manager'
+            - label: 'Tee Intern'
+              children:
+                  - { entity: 'LeBoTee', label: 'LeBo Tee', default: true}
+                  - { entity: 'TeeAuthentica', label: 'Tee Authentica'}
+                  - { entity: 'CoffeCentral', label: 'Coffe Central'}
+            - label: 'Tee Membres'
+              children:
+                  - { entity: 'ProduitsMembres', label: 'Tee Membres'}
+            - label: 'Env: %env(APP_ENV)%'

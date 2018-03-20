@@ -2,6 +2,7 @@
 
 
 namespace App\Model;
+use App\Entity\Image;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -73,32 +74,27 @@ abstract class Produit
      */
     protected $dateAjout;
 
-
     /**
-     * @var string
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $imageHomme;
 
     /**
-     * @var string
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $imageFemme;
 
     /**
-     * @var string
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $imageZoomListe;
 
     /**
-     * @var string
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $imageZoomItem;
 
@@ -111,17 +107,6 @@ abstract class Produit
     {
         $this->dateAjout = new \Datetime();
     }
-    ///**
-     //* Produit constructor.
-     //* @param float $prixVentes
-     //*/
-   /* protected function __construct($prixVentes)
-    {
-        $this->tva = 1.20;
-        $this->prixVentes = $prixVentes * $this->tva;
-        $this->dateAjout = new \DateTime();
-    }*/
-
 
 
 
@@ -271,68 +256,102 @@ abstract class Produit
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageHomme(): string
+    public function getImageHomme()
     {
         return $this->imageHomme;
     }
 
-    /**
-     * @param string $imageHomme
-     */
-    public function setImageHomme(string $imageHomme)
+
+    public function setImageHomme(Image $imageHomme)
     {
         $this->imageHomme = $imageHomme;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageFemme(): string
+    public function getImageFemme()
     {
         return $this->imageFemme;
     }
 
-    /**
-     * @param string $imageFemme
-     */
-    public function setImageFemme(string $imageFemme)
+
+    public function setImageFemme(Image $imageFemme)
     {
         $this->imageFemme = $imageFemme;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageZoomListe(): string
+    public function getImageZoomListe()
     {
         return $this->imageZoomListe;
     }
 
-    /**
-     * @param string $imageZoomListe
-     */
-    public function setImageZoomListe(string $imageZoomListe)
+
+    public function setImageZoomListe(Image $imageZoomListe)
     {
         $this->imageZoomListe = $imageZoomListe;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getImageZoomItem(): string
+    public function getImageZoomItem()
     {
         return $this->imageZoomItem;
     }
 
-    /**
-     * @param string $imageZoomItem
-     */
-    public function setImageZoomItem(string $imageZoomItem)
+
+    public function setImageZoomItem(Image $imageZoomItem)
     {
         $this->imageZoomItem = $imageZoomItem;
+        return $this;
     }
+
+    public function getImageAdmin(){
+        if (!empty($this->getImageZoomListe())){
+            $image = $this->getImageZoomListe();
+            $url = $image->getWebPath();
+            return $url;
+        }
+        return null;
+    }
+
+    public function getImageFemmeAdmin(){
+        $image = $this->getImageFemme();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+    public function getImageHommeAdmin(){
+        $image = $this->getImageHomme();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+    public function getImageZoomItemAdmin(){
+            $image = $this->getImageZoomItem();
+            $url = $image->getWebPath();
+            return $url;
+        }
+
+    public function getImageZoomListeAdmin(){
+        $image = $this->getImageZoomListe();
+        $url = $image->getWebPath();
+        return $url;
+    }
+
+   /* public function setImageAdmin($image){
+        $this->getImageZoomListe()->se
+    }*/
+   //todo faire un setter pour modifier les images depuis l'admin
 
 
 

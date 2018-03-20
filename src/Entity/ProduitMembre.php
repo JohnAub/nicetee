@@ -37,22 +37,11 @@ class ProduitMembre extends Produit
      */
     private $visibilite;
 
-    /**
-     *
-     * @ORM\Column(type="float")
-     */
-    private $PrixVenteMembre;
 
-
-
-    public function __construct($idUser)
+    public function __construct()
     {
-        $this->dateFinVente = $this->getDateAjout()+172800; //todo verifier format date
-        $this->idUser = $idUser;
         $this->visibilite = true;
-        $this->PrixVenteMembre = 12;
-        $prixVentesht = $this->PrixVenteMembre;
-        parent::__construct($prixVentesht);
+        parent::__construct();
     }
 
     /**
@@ -88,19 +77,29 @@ class ProduitMembre extends Produit
     }
 
     /**
-     * @return mixed
+     * @param mixed $dateFinVente
      */
-    public function getPrixVenteMembre()
+    public function setDateFinVente($dateFinVente)
     {
-        return $this->PrixVenteMembre;
+        $this->dateFinVente = $dateFinVente;
     }
 
     /**
-     * @param mixed $PrixVenteMembre
+     * @param mixed $idUser
      */
-    public function setPrixVenteMembre($PrixVenteMembre)
+    public function setIdUser($idUser)
     {
-        $this->PrixVenteMembre = $PrixVenteMembre;
+        $this->idUser = $idUser;
     }
+
+    /**
+     * @param mixed $visibilite
+     */
+    public function setVisibilite($visibilite)
+    {
+        $this->visibilite = $visibilite;
+    }
+
+
 
 }
