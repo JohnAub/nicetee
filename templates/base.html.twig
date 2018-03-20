@@ -22,29 +22,48 @@
     <div class="container">
         <div id="sidebar">
             {% block sidebar %}
-
-                <ul class="nav justify-content-end" id="navUser">
-                    <li class="nav-item">
-                        <a  href="#">Panier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  href="#">s'identifier</a>
-                    </li>
-                    <li class="nav-item">
-                        <a  href="#">Rejoins-nous</a>
-                </ul>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <ul class="nav justify-content-end" id="navUser">
+                        <li class="nav-item">
+                            <a  href="{{ asset('/panier') }}">Panier</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{{ asset('/logout') }}">Déconnexion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{{ asset('/compte') }}">Mon Compte</a>
+                        </li>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li class="nav-item">
+                            <a  href="{{ asset('/admin') }}">admin</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+                {% else %}
+                    <ul class="nav justify-content-end" id="navUser">
+                        <li class="nav-item">
+                            <a  href="{{ asset('/panier') }}">Panier</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{{ asset('/login') }}">s'identifier</a>
+                        </li>
+                        <li class="nav-item">
+                            <a  href="{{ asset('inscription') }}">Rejoins-nous</a>
+                        </li>
+                    </ul>
+                {% endif %}
                 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-                    <a class="navbar-brand" href="#" id="navLogo">Tee Nice</a>
+                    <a class="navbar-brand" href="{{ asset('/') }}" id="navLogo">Tee Nice</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         {#<span class="navbar-toggler-icon"></span>#}
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
                         <ul class="navbar-nav ">
                             <li class="nav-item active ">
-                                <a class="nav-link" href="#">Tee du jour <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="{{ asset('/') }}">Tee du jour <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tee Shop</a>
+                                <a class="nav-link" href="{{ asset('/shop') }}">Tee Shop</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Tee Vote</a>
@@ -57,6 +76,7 @@
                 </nav>
             {% endblock %}
         </div>
+        {% block node %}{% endblock %}
         <div id="teeDay">
             {% block teeDay %}
                 <div class="album bg-light">
@@ -153,7 +173,9 @@
                         <div class="container">
                             <div class="row">
                             {% for tee in teeIntern %}
+
                                 <div class="col-md-4">
+                                    <a href="{{ path('tee_intern_node', {'id': tee.id}) }}">
                                     <div class="card mb-4 box-shadow position-relative">
                                         <img class="card-img-top" src="{{ asset(tee.imageZoomListe.webPath) }}" alt="Card image cap">
                                         <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
@@ -163,7 +185,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </a>
                                 </div>
+
                             {% endfor %}
                             </div>
                         </div>

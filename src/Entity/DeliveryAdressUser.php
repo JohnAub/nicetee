@@ -111,9 +111,7 @@ class DeliveryAdressUser
         return $this->user;
     }
 
-    /**
-     * @param mixed $user
-     */
+
     public function setUser(User $user)
     {
         $this->user = $user;

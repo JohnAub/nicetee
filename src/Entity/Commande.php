@@ -55,7 +55,7 @@ class Commande
     public function addLigneCommande(LigneCommande $ligneCommande)
     {
         $this->ligneCommandes[] = $ligneCommande;
-        $ligneCommande->setUser($this);
+        $ligneCommande->setCommande($this);
         return $this;
     }
 
@@ -87,6 +87,22 @@ class Commande
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 
 }

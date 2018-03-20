@@ -76,25 +76,25 @@ abstract class Produit
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
-     *
+     * @Assert\NotNull()
      */
     protected $imageHomme;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
-     *
+     * @Assert\NotNull()
      */
     protected $imageFemme;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
-     *
+     * @Assert\NotNull()
      */
     protected $imageZoomListe;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
-     *
+     * @Assert\NotNull()
      */
     protected $imageZoomItem;
 

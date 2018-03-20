@@ -1,5 +1,4 @@
 easy_admin:
-        design:
         entities:
             LeBoTee:
                 class: App\Entity\ProduitIntern
@@ -15,7 +14,7 @@ easy_admin:
                         - {property: 'imageZoomItem', type: 'App\Form\ImageType', label: 'Image Node'}
                         - {property: 'imageZoomListe', type: 'App\Form\ImageType', label: 'Image Liste'}
                 list:
-                    dql_filter: "entity.fournisseur = 'LeBoTee'"
+                    dql_filter: "entity.fournisseur = 'Le Bo Tee'"
                     fields: &listProduitIntern
                         - "id"
                         - {property: 'dateAjout', format: 'd/m/Y'}

@@ -2,6 +2,9 @@
 /***
 *****Bare de navigation
 **/
+#sidebar{
+  margin-top:10px;
+}
 #navLogo{
   margin-left:10px;
 }
@@ -70,6 +73,30 @@
   }
 }
 
+/***
+*****node Tee
+**/
+.boxNode{
+  margin:83px 0px 140px;
+  .boxBarBot{
+    a{
+      text-decoration: none;
+      span{
+        width: 150px;
+        padding: 5px;
+        background-color: #0099FF;
+        color: white;
+        &:hover{
+          background-color: #39B54A;
+        }
+      }
+    }
+    span{
+      font-size: 26px;
+      color: yellow;
+    }
+  }
+}
 
 
 /***

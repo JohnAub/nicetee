@@ -13,16 +13,15 @@ class ProduitInternRepository extends ServiceEntityRepository
         parent::__construct($registry, ProduitIntern::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function findByRandom($value)
     {
         return $this->createQueryBuilder('p')
-            ->where('p.something = :value')->setParameter('value', $value)
-            ->orderBy('p.id', 'ASC')
+            ->orderBy('ASC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 }

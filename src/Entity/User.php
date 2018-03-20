@@ -80,7 +80,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $Ville;
+    private $ville;
 
     /**
      * @var string
@@ -295,7 +295,7 @@ class User implements UserInterface, \Serializable
      */
     public function getVille()
     {
-        return $this->Ville;
+        return $this->ville;
     }
 
     /**
@@ -303,7 +303,7 @@ class User implements UserInterface, \Serializable
      */
     public function setVille(string $Ville)
     {
-        $this->Ville = $Ville;
+        $this->ville = $Ville;
     }
 
     /**
@@ -368,6 +368,22 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
+    }
+
+    /**
+     * @param mixed $dateInscription
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
     }
 
 
@@ -513,7 +529,7 @@ class User implements UserInterface, \Serializable
         return array($roles);
     }
 
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
     }
