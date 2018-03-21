@@ -97,6 +97,40 @@
     }
   }
 }
+/***
+*****Page Vote
+**/
+#choixTri{
+  a{
+    text-decoration: none;
+    span{
+      width: 150px;
+      padding: 5px;
+      color: black;
+    }
+  }
+}
+#containerDessin{
+  margin-bottom: 30px;
+  #containerIcon{
+    position: relative;
+    #spanPouce{
+      position: absolute;
+      #iconPouce{
+        width:20%;
+      }
+    }
+    #spanCom{
+      position: absolute;
+      right: -38px;
+      #iconCom{
+        width:20%;
+      }
+    }
+  }
+
+}
+
 
 
 /***

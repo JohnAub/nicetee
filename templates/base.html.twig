@@ -12,6 +12,7 @@
     <!-- Custom styles for this template -->
     {#<link href="https://getbootstrap.com/docs/4.0/examples/album/album.css" rel="stylesheet">#}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('build//open-iconic-master/font/css/open-iconic.css') }}">
     <title>{% block title %}Nice-Tee{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
 </head>
@@ -53,7 +54,7 @@
                     </ul>
                 {% endif %}
                 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-                    <a class="navbar-brand" href="{{ asset('/') }}" id="navLogo">Tee Nice</a>
+                    <a class="navbar-brand" href="{{ asset('/') }}" id="navLogo">Nice Tee</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         {#<span class="navbar-toggler-icon"></span>#}
                     </button>
@@ -66,10 +67,10 @@
                                 <a class="nav-link" href="{{ asset('/shop') }}">Tee Shop</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Tee Vote</a>
+                                <a class="nav-link" href="{{ asset('/vote') }}">Tee Vote</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">poses ton Tee</a>
+                                <a class="nav-link" href="{{ asset('/submit-design') }}">poses ton Tee</a>
                             </li>
                         </ul>
                     </div>

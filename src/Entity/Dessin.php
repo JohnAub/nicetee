@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DessinRepository")
@@ -39,7 +41,7 @@ class Dessin
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $nbrVotes;
 
@@ -62,6 +64,18 @@ class Dessin
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     * @Assert\NotNull()
+     */
+    protected $imageDessin;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", cascade={"persist", "remove"})
+     * @Assert\NotNull()
+     */
+    protected $imageDessinMiniature;
+
 
 
 
@@ -79,7 +93,7 @@ class Dessin
     /**
      * @return integer
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -119,7 +133,7 @@ class Dessin
     /**
      * @return string
      */
-    public function getNbrVotes(): string
+    public function getNbrVotes()
     {
         return $this->nbrVotes;
     }
@@ -135,7 +149,7 @@ class Dessin
     /**
      * @return string
      */
-    public function getDesignation(): string
+    public function getDesignation()
     {
         return $this->designation;
     }
@@ -151,7 +165,7 @@ class Dessin
     /**
      * @return string
      */
-    public function getResume(): string
+    public function getResume()
     {
         return $this->resume;
     }
@@ -173,7 +187,7 @@ class Dessin
         return $this->commentaires;
     }
 
-    public function adCommentaire(Commentaire $commentaire)
+    public function addCommentaire(Commentaire $commentaire)
     {
         $this->commentaires[] = $commentaire;
         $commentaire->setDessin($this);
@@ -184,6 +198,42 @@ class Dessin
         $this->commentaires->removeElement($commentaire);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getImageDessin()
+    {
+        return $this->imageDessin;
+    }
 
 
+    public function setImageDessin(Image $imageDessin)
+    {
+        $this->imageDessin = $imageDessin;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageDessinMiniature()
+    {
+        return $this->imageDessinMiniature;
+    }
+
+
+    public function setImageDessinMiniature(Image $imageDessinMiniature)
+    {
+        $this->imageDessinMiniature = $imageDessinMiniature;
+        return $this;
+    }
+
+    public function getImageDessinAdmin(){
+        $image = $this->getImageDessinMiniature();
+        $url = $image->getWebPath();
+        return $url;
+    }
+    public function CountCom(){
+        return count($this->getCommentaires());
+    }
 }

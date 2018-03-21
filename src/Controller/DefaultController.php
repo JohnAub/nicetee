@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ProduitIntern;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,12 +14,10 @@ class DefaultController extends Controller
      */
     public function default()
     {
-        $repository = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('App:ProduitIntern')
-        ;
-        $listTeeIntern = $repository->findAll();
+      $listTeeIntern = $this->getDoctrine()
+            ->getRepository(ProduitIntern::class)
+            ->findAll();
+      shuffle($listTeeIntern);
         return $this->render('base.html.twig', array(
             'teeIntern' => $listTeeIntern,
         ));

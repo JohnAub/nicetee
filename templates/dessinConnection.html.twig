@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dépose ton Tee!!{% endblock %}
+{% block teeDay %}{% endblock %}
+
+{% block body %}
+    <div>Vous devez vous connecter pour proposer un dessin</div>
+    {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+        <div class="d-flex justify-content-end ">
+                <form action="{{ path('login') }}" method="post">
+                    <label for="username">Pseudo:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" />
+                    <input type="hidden" name="_target_path" value="{{ asset('/submit-design') }}" />
+                    <button type="submit">login</button>
+                </form>
+        </div>
+        <div>Ou creer un <a  href="{{ asset('inscription') }}">compte</a></div>
+{% endblock %}

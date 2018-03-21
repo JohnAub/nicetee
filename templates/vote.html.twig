@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block teeDay %}
+{% endblock %}
+{% block body %}
+    <main role="main">
+        <div class="album bg-light">
+            <div class="d-flex justify-content-between text-center mb-3">
+                <p><h2>VOTEZ POUR LES DESSINS</h2></p>
+                <p class="text-center">C'est vous qui choisissez le dessin que vous aimeriez voir sur votre future Tee!!</p>
+            </div>
+            <div class="mb-4 d-flex justify-content-center" id="choixTri">
+                <a href="{{ asset('/vote') }}"><span>Tri Aléatoire</span></a>
+                <span>/</span>
+                <a href="{{ asset('/vote/popular') }}"><span>Les plus populaires</span></a>
+            </div>
+            <div class="container">
+                <div class="row">
+                    {% for dessin in dessins %}
+
+                        <div class="col-md-3" id="containerDessin">
+                            <a href="#">
+                                <div class="card mb-2 box-shadow position-relative">
+                                    <img class="card-img-top" src="{{ asset(dessin.imageDessinMiniature.webPath) }}" alt="Card image cap">
+                                </div>
+                            </a>
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <span>{{ dessin.designation }}</span><br>
+                                    <span class="font-weight-light">par {{ dessin.user.username }}</span>
+                                </div>
+                                <div>
+                                    <div class="d-flex">
+                                        <a id="BoutonVote" href="#" class="btn btn-primary ml-auto ">Voter</a><br>
+                                    </div>
+                                    <div id="containerIcon">
+                                        <span id="spanPouce">{% if dessin.nbrVotes is empty %}0{% else %}{{ dessin.nbrVotes }}{% endif %} <img id="iconPouce" src="{{ asset('images/icons/pouce.png') }}" alt="pouce"></span>
+                                        <span id="spanCom">{{ dessin.CountCom }} <img id="iconCom" src="{{ asset('images/icons/comm.svg') }}" alt="comentaire"> </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
