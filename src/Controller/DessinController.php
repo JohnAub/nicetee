@@ -96,69 +96,59 @@ class DessinController extends Controller
 
     /**
      * @Route("/vote/addVote", name="add_vote")
+     * @Route("/vote/vote/addVote")
      */
-    public function addVote(Request $request){
+    public function addVote(Request $request/*, AuthorizationCheckerInterface $authChecker*/){
         if($request->isXmlHttpRequest())
         {
-            $em = $this->getDoctrine()->getManager();
-            $idDessin = $request->request->get('id_dessin');
-            $user = $this->getUser();
-            $idUser = $user->getId();
-            $dessin = $em->getRepository(Dessin::class)
-                ->find($idDessin);
-            $votes = $em->getRepository(Votes::class)
-                ->findByDessin($idDessin);
-            $dejaVote = false;
-            if (!empty($votes)){
-                foreach ($votes as $vote){
-                    if ($idUser == $vote->getIdUser()){
-                        $dejaVote = true;
+
+            if ($this->isGranted('ROLE_USER') || $this->isGranted('ROLE_ADMIN'))
+            {
+                $em = $this->getDoctrine()->getManager();
+                $idDessin = $request->request->get('id_dessin');
+                $user = $this->getUser();
+                $idUser = $user->getId();
+                $dessin = $em->getRepository(Dessin::class)
+                    ->find($idDessin);
+                $votes = $em->getRepository(Votes::class)
+                    ->findByDessin($idDessin);
+                $dejaVote = false;
+                if (!empty($votes)){
+                    foreach ($votes as $vote){
+                        if ($idUser == $vote->getIdUser()){
+                            $dejaVote = true;
+                        }
                     }
                 }
-            }
-            if ($dejaVote == false){
-                $vote = new Votes();
-                $vote->setIdUser($idUser);
-                $nbrVotes = count($votes);
-                $nbrVotes++;
-                $dessin->setNbrVotes($nbrVotes);
-                $dessin->addVotes($vote);
-                $em->persist($vote);
-                $em->flush();
-            }else{
-                $nbrVotes = count($votes);
-             }
+                if ($dejaVote == false){
+                    $vote = new Votes();
+                    $vote->setIdUser($idUser);
+                    $nbrVotes = count($votes);
+                    $nbrVotes++;
+                    $dessin->setNbrVotes($nbrVotes);
+                    $dessin->addVotes($vote);
+                    $em->persist($vote);
+                    $em->flush();
+                }else{
+                    $nbrVotes = count($votes);
+                }
 
-            $response = new JsonResponse();
-            $response->setData(array(
-                "nbr"=>$nbrVotes,
-                "dejaVote"=>$dejaVote
-            ));
-            return $response;
+                $response = new JsonResponse();
+                $response->setData(array(
+                    "nbr"=>$nbrVotes,
+                    "dejaVote"=>$dejaVote
+                ));
+                return $response;
+            }else
+            {
+                $response = new JsonResponse();
+                $response->setData(array(
+                    "noCo"=>"noCo"
+                ));
+                return $response;
+            }
         }else{
             throw new \Exception("Erreur");
-
         }
-
-       /* if ($request->isXmlHttpRequest()){
-            $em = $this->getDoctrine()->getManager();
-            $idDessin = $request->get('id_dessin');
-            $vote = new Votes();
-            $idUser = $this->getUser()->getId;
-            $vote->setIdUser($idUser);
-            $dessin = $em->getRepository(Dessin::class)
-                ->find($idDessin);
-            $dessin->addVotes($vote);
-            $em->persist($vote);
-            $em->flush();
-        }*/
-    }
-
-    /**
-     * @Route("/vote/{id_article}")
-     */
-    public function showVotes($id_article)
-    {
-        echo "ok";
     }
 }

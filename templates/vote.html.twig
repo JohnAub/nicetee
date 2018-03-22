@@ -30,11 +30,11 @@
                                 </div>
                                 <div>
                                     <div class="d-flex">
-                                        <a href="#" title="{{ dessin.id }}" class="btn btn-primary ml-auto boutonVote" >Voter</a><br>
+                                        <span id="{{ dessin.id }}" class="btn btn-primary ml-auto boutonVote" >Voter</span><br>
                                     </div>
                                     <div class="containerIcon">
-                                        <span class="spanPouce">{% if dessin.nbrVotes is empty %}0{% else %}{{ dessin.nbrVotes }}{% endif %} <img class="iconPouce" src="{{ asset('images/icons/pouce.png') }}" alt="pouce"></span>
-                                        <span class="spanCom">{{ dessin.CountCom }} <img class="iconCom comentaire" src="{{ asset('images/icons/comm.svg') }}"> </span>
+                                        <span  class="spanPouce"><span id="pouce{{ dessin.id }}">{% if dessin.nbrVotes is empty %}0{% else %}{{ dessin.nbrVotes }}{% endif %}</span><img class="iconPouce" src="{{ asset('images/icons/pouce.png') }}" alt="pouce"></span>
+                                        <span class="spanCom"><span></span>{{ dessin.CountCom }} <img class="iconCom comentaire" src="{{ asset('images/icons/comm.svg') }}"> </span>
                                     </div>
                                 </div>
                             </div>
