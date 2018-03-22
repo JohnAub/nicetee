@@ -46,6 +46,12 @@ class Dessin
     private $nbrVotes;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Votes", mappedBy="dessin")
+     */
+    private $votes;
+
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
@@ -84,6 +90,7 @@ class Dessin
     {
         $this->date = new \DateTime();
         $this->commentaires = new ArrayCollection();
+        $this->votes =  new ArrayCollection();
     }
 
 
@@ -145,6 +152,26 @@ class Dessin
     {
         $this->nbrVotes = $nbrVotes;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    public function addVotes(Votes $vote)
+    {
+        $this->votes[] = $vote;
+        $vote->setDessin($this);
+        return $this;
+    }
+
+    public function removeVote(Votes $vote){
+        $this->votes->removeElement($vote);
+    }
+
 
     /**
      * @return string

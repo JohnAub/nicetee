@@ -110,20 +110,20 @@
     }
   }
 }
-#containerDessin{
+.containerDessin{
   margin-bottom: 30px;
-  #containerIcon{
+  .containerIcon{
     position: relative;
-    #spanPouce{
+    .spanPouce{
       position: absolute;
-      #iconPouce{
+      .iconPouce{
         width:20%;
       }
     }
-    #spanCom{
+    .spanCom{
       position: absolute;
       right: -38px;
-      #iconCom{
+      .iconCom{
         width:20%;
       }
     }

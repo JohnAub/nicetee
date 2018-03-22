@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Dessin;
+use App\Entity\Votes;
 use App\Form\SubmitDessinType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -90,5 +92,73 @@ class DessinController extends Controller
         return $this->render('vote.html.twig', array(
             "dessins" => $dessins,
         ));
+    }
+
+    /**
+     * @Route("/vote/addVote", name="add_vote")
+     */
+    public function addVote(Request $request){
+        if($request->isXmlHttpRequest())
+        {
+            $em = $this->getDoctrine()->getManager();
+            $idDessin = $request->request->get('id_dessin');
+            $user = $this->getUser();
+            $idUser = $user->getId();
+            $dessin = $em->getRepository(Dessin::class)
+                ->find($idDessin);
+            $votes = $em->getRepository(Votes::class)
+                ->findByDessin($idDessin);
+            $dejaVote = false;
+            if (!empty($votes)){
+                foreach ($votes as $vote){
+                    if ($idUser == $vote->getIdUser()){
+                        $dejaVote = true;
+                    }
+                }
+            }
+            if ($dejaVote == false){
+                $vote = new Votes();
+                $vote->setIdUser($idUser);
+                $nbrVotes = count($votes);
+                $nbrVotes++;
+                $dessin->setNbrVotes($nbrVotes);
+                $dessin->addVotes($vote);
+                $em->persist($vote);
+                $em->flush();
+            }else{
+                $nbrVotes = count($votes);
+             }
+
+            $response = new JsonResponse();
+            $response->setData(array(
+                "nbr"=>$nbrVotes,
+                "dejaVote"=>$dejaVote
+            ));
+            return $response;
+        }else{
+            throw new \Exception("Erreur");
+
+        }
+
+       /* if ($request->isXmlHttpRequest()){
+            $em = $this->getDoctrine()->getManager();
+            $idDessin = $request->get('id_dessin');
+            $vote = new Votes();
+            $idUser = $this->getUser()->getId;
+            $vote->setIdUser($idUser);
+            $dessin = $em->getRepository(Dessin::class)
+                ->find($idDessin);
+            $dessin->addVotes($vote);
+            $em->persist($vote);
+            $em->flush();
+        }*/
+    }
+
+    /**
+     * @Route("/vote/{id_article}")
+     */
+    public function showVotes($id_article)
+    {
+        echo "ok";
     }
 }
