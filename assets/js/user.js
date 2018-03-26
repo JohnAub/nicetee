@@ -22,4 +22,8 @@ $(document).ready(function(){
         }
 
     });
+
+    $(".flash-notice").delay(4000).hide(500);
+
+
 });

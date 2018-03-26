@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\ChangePassword;
 use App\Entity\Dessin;
+use App\Form\ChangePasswordType;
 use App\Form\UserInfosType;
+use App\Form\UserpassType;
 use App\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,7 +35,7 @@ class UserController extends Controller
             // on encode le pass et on utilise le PlainPassword temporaire l'encodage a été defini dans security.yaml
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
-
+            $user->eraseCredentials();
             //on enregistre le nouveau user en bdd
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -97,9 +100,10 @@ class UserController extends Controller
     /**
      * @Route("/user/{id}/infos", name="page_user_infos")
      */
-    public function UserPageInfo($id, Request $request)
+    public function UserPageInfo($id, Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        $userPage = $this->getDoctrine()
+        $em = $this->getDoctrine()->getManager();
+        $userPage = $em
             ->getRepository(User::class)
             ->find($id);
         if (!$userPage) {
@@ -109,20 +113,67 @@ class UserController extends Controller
         }
         $user = $this->getUser();
         $pagePerso = ($userPage == $user)? true : false;
-        $form = $this->createForm(UserInfosType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()){
-            //on enregistre le nouveau user en bdd
-            $em = $this->getDoctrine()->getManager();
+        $formInfos = $this->createForm(UserInfosType::class, $user);
+
+
+        $changePasswordModel = new ChangePassword();
+        $formPass = $this->createForm(ChangePasswordType::class, $changePasswordModel);
+        $formPass->handleRequest($request);
+
+
+        $formInfos->handleRequest($request);
+        if ($formInfos->isSubmitted() && $formInfos->isValid()){
             $em->flush();
             return $this->redirectToRoute('page_user_infos', array('id' => $user->getId()));
         }
 
+
+
+        if ($formPass->isSubmitted() && $formPass->isValid()) {
+            // perform some action,
+            // such as encoding with MessageDigestPasswordEncoder and persist
+            $this->addFlash(
+                'notice',
+                'Votre mot de passe actuel ne coresponde pas'
+            );
+            return $this->redirectToRoute('page_user_infos', array('id' => $user->getId()));
+        }
+
+            /*            if ($verifPass === $passUser){
+
+                            dump("pass");
+                            if ($formPass->isSubmitted() && $formPass->isValid()){
+                                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                                $user->setPassword($password);
+                                $user->eraseCredentials();
+                                $em->flush();
+                                $this->addFlash(
+                                    'notice',
+                                    'Vos modifications ont été enregistrées !'
+                                );
+                                return $this->redirectToRoute('page_user_infos', array('id' => $user->getId()));
+                            }
+                        }{
+                            $this->addFlash(
+                                'notice',
+                                'Votre mot de passe actuel ne coresponde pas'
+                            );
+                        }*/
+
+
         return $this->render('user_infos.html.twig', array(
             'user' => $userPage,
             'pagePerso' => $pagePerso,
-            'form' => $form->createView(),
+            'formInfos' => $formInfos->createView(),
+            'formPass' => $formPass->createView(),
         ));
+    }
+    /**
+     * @Route("user/{id}/removePass")
+     */
+    public function Removepass(Request $request, $id)
+    {
+
     }
 
     /**
