@@ -7,6 +7,8 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
     .addEntry('app', './assets/js/app.js')
+    .addEntry('user', './assets/js/user.js')
+    .addEntry('vote', './assets/js/vote.js')
     .enableVueLoader()
     .enableSassLoader()
 ;

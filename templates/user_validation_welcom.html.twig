@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sur la page user{% endblock %}
+{% block teeDay %}
+{% endblock %}
+{% block body %}
+    <p>Bienvenue {{ user.username }}</p>
+    <p>connecte toi pour profiter de ton nouveau compte</p>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/user.js') }}"></script>
+{% endblock %}

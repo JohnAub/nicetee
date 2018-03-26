@@ -121,6 +121,13 @@
       }
     }
     .spanCom{
+      #lienComm{
+        text-decoration: none;
+        color: #000;
+        &:hover{
+          color: #0099FF;
+        }
+      }
       position: absolute;
       right: -38px;
       .iconCom{
@@ -130,7 +137,17 @@
   }
 
 }
-
+/***
+*****Page node dessin
+**/
+.pageDessin{
+  h2{
+    display: inline;
+  }
+}
+#linkUserPage{
+  text-decoration: none;
+}
 
 
 /***

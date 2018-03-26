@@ -106,7 +106,6 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      * sert juste temporairement à l'inscription
      */
@@ -120,7 +119,7 @@ class User implements UserInterface, \Serializable
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Dessin", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Dessin", mappedBy="user",  orphanRemoval=true)
      */
     private $dessins;
 

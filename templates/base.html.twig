@@ -32,7 +32,7 @@
                             <a  href="{{ asset('/logout') }}">Déconnexion</a>
                         </li>
                         <li class="nav-item">
-                            <a  href="{{ asset('/compte') }}">Mon Compte</a>
+                            <a  href="{{ path('page_user', {'id':  app.user.id}) }}">Mon Compte</a>
                         </li>
                     {% if is_granted("ROLE_ADMIN") %}
                         <li class="nav-item">
@@ -174,7 +174,6 @@
                         <div class="container">
                             <div class="row">
                             {% for tee in teeIntern %}
-
                                 <div class="col-md-4">
                                     <a href="{{ path('tee_intern_node', {'id': tee.id}) }}">
                                     <div class="card mb-4 box-shadow position-relative">

@@ -21,12 +21,4 @@ $(document).ready(function(){
             }
         })
     });
-
-    function addVote(id_article) {
-        $.post('/vote', {id_article:id_article}, function (data)
-        {
-            alert(data);
-        })
-    }
-
 });

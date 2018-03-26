@@ -18,7 +18,7 @@
                     {% for dessin in dessins %}
 
                         <div class="col-md-3 containerDessin">
-                            <a href="#">
+                            <a href="{{ path('page_dessin', {'id': dessin.id}) }}">
                                 <div class="card mb-2 box-shadow position-relative">
                                     <img class="card-img-top" src="{{ asset(dessin.imageDessinMiniature.webPath) }}" alt="Card image cap">
                                 </div>
@@ -34,7 +34,9 @@
                                     </div>
                                     <div class="containerIcon">
                                         <span  class="spanPouce"><span id="pouce{{ dessin.id }}">{% if dessin.nbrVotes is empty %}0{% else %}{{ dessin.nbrVotes }}{% endif %}</span><img class="iconPouce" src="{{ asset('images/icons/pouce.png') }}" alt="pouce"></span>
-                                        <span class="spanCom"><span></span>{{ dessin.CountCom }} <img class="iconCom comentaire" src="{{ asset('images/icons/comm.svg') }}"> </span>
+                                        <a href="{{ path('page_dessin', {'id': dessin.id}) }}" >
+                                            <span class="spanCom"><span id="lienComm">{{ dessin.CountCom }}</span> <img class="iconCom comentaire" src="{{ asset('images/icons/comm.svg') }}"> </span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -47,5 +49,5 @@
     </main>
 {% endblock %}
 {% block javascript %}
-    <script src="{{ asset('js/vote.js') }}"></script>
+    <script src="{{ asset('build/vote.js') }}"></script>
 {% endblock %}

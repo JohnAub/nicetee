@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Commentaire;
 use App\Entity\Dessin;
+use App\Entity\User;
 use App\Entity\Votes;
+use App\Form\CommentaireType;
 use App\Form\SubmitDessinType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -47,6 +50,75 @@ class DessinController extends Controller
 
 
     }
+    /**
+     * @Route("/dessin/{id}", name="page_dessin")
+     */
+    public function pageDessin($id, AuthorizationCheckerInterface $authChecker,Request $request)
+    {
+        $authOk = ($authChecker->isGranted('ROLE_USER') || $authChecker->isGranted('ROLE_ADMIN')) ? true :false;
+
+        $dessin = $this->getDoctrine()
+            ->getRepository(Dessin::class)
+            ->find($id);
+        $commentaires = $this->getDoctrine()
+            ->getRepository(Commentaire::class)
+            ->findBy(
+                array('dessin' => $id),
+                array('date' => 'desc')
+                );
+        if (!empty($commentaires))
+        {
+            foreach ($commentaires as $commentaire){
+                $userId = $commentaire->getAuteur();
+                $text = $commentaire->getCommentaire();
+                $date = $commentaire->getDate();
+                $user = $this->getDoctrine()
+                    ->getRepository(User::class)
+                    ->find($userId);
+                $userName = $user->getUsername();
+                $comms[] = array(
+                    "userName" => $userName,
+                    "userId" => $userId,
+                    "commentaire" => $text,
+                    "date" => $date,
+                );
+            }
+        }else
+        {
+            $comms = "";
+        }
+
+        if ($authOk){
+            $commentaire = new Commentaire();
+            $form = $this->createForm(CommentaireType::class, $commentaire);
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()){
+                $user = $this->getUser();
+                $userId = $user->getId();
+                $commentaire->setAuteur($userId);
+                $dessin->addCommentaire($commentaire);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($commentaire);
+                $em->flush();
+                return $this->redirectToRoute('page_dessin',array(
+                    'id' => $id,
+                ));
+            }
+            return $this->render('pageDessin.html.twig', array(
+                'dessin' => $dessin,
+                'autOk' => $authOk,
+                'commentaires' => $comms,
+                'form' => $form->createView()
+            ));
+        }
+        return $this->render('pageDessin.html.twig', array(
+            'dessin' => $dessin,
+            'autOk' => $authOk,
+            'commentaires' => $comms,
+        ));
+
+    }
+
 
     /**
      * @Route("/test/{id}", name="dessin_test")
@@ -97,8 +169,9 @@ class DessinController extends Controller
     /**
      * @Route("/vote/addVote", name="add_vote")
      * @Route("/vote/vote/addVote")
+     * @Route("/dessin/vote/addVote")
      */
-    public function addVote(Request $request/*, AuthorizationCheckerInterface $authChecker*/){
+    public function addVote(Request $request){
         if($request->isXmlHttpRequest())
         {
 
