@@ -36,12 +36,14 @@ class LigneCommande
      */
     private $prix;
 
-    /**
-     * @return mixed
-     */
+
 
     /***************Getter-Setter*****************/
 
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;

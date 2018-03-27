@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sur la page user{% endblock %}
+{% block teeDay %}
+{% endblock %}
+{% block body %}
+    {% if pagePerso %}
+        {% for flash in app.flashes('notice') %}
+            <div class="flash-notice">
+                {{ flash }}
+            </div>
+        {% endfor %}
+        <h3>Votre portefeuille: </h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Solde</th>
+                <th scope="col">A venir</th>
+                <th scope="col">retirer votre solde</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">{{ portefeuille.solde }} TeeCoins</th>
+                    <td>todo a gerer</td>
+                    <td><a href="#">Clic</a></td>
+                </tr>
+            </tbody>
+        </table>
+        {% if operations|length > 0 %}
+            <br><br><br>
+            <h3>Liste des opérations: </h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Ref</th>
+                    <th scope="col">date</th>
+                    <th scope="col">libele</th>
+                    <th scope="col">montant</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for operation in operations %}
+                    <tr>
+                        <th scope="row">{{ operation.ref }}</th>
+                        <td>{{ operation.date|date }}</td>
+                        <td>{{ operation.libele }}</td>
+                        <td>{{ operation.montant }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/user.js') }}"></script>
+{% endblock %}

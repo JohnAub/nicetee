@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\ChangePassword;
 use App\Entity\Dessin;
+use App\Entity\Portefeuille;
 use App\Form\ChangePasswordType;
 use App\Form\UserInfosType;
 use App\Form\UserpassType;
@@ -38,7 +39,12 @@ class UserController extends Controller
             $user->eraseCredentials();
             //on enregistre le nouveau user en bdd
             $em = $this->getDoctrine()->getManager();
+            //on lui cree un Portefeuille
+            $portefeuille = new Portefeuille();
+            $portefeuille->setUser($user);
+            $user->setPortefeuille($portefeuille);
             $em->persist($user);
+            $em->persist($portefeuille);
             $em->flush();
 
             return $this->redirectToRoute('user_validatation', array('id' => $user->getId()));
@@ -108,7 +114,7 @@ class UserController extends Controller
             ->find($id);
         if (!$userPage) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No user found for id '.$id
             );
         }
         $user = $this->getUser();
@@ -168,12 +174,55 @@ class UserController extends Controller
             'formPass' => $formPass->createView(),
         ));
     }
-    /**
-     * @Route("user/{id}/removePass")
-     */
-    public function Removepass(Request $request, $id)
-    {
 
+    /**
+     * @Route("user/{id}/portefeuille", name="user_portefeuille")
+     */
+    public function UserPortefeuille(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userPage = $em
+            ->getRepository(User::class)
+            ->find($id);
+        if (!$userPage) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+        $user = $this->getUser();
+        $pagePerso = ($userPage == $user)? true : false;
+        $portefeuille = $user->getPortefeuille();
+        $operations = $portefeuille->getOperations();
+        return $this->render('user_portefeuille.html.twig', array(
+            'user' => $userPage,
+            'pagePerso' => $pagePerso,
+            'portefeuille' => $portefeuille,
+            'operations' => $operations,
+        ));
+    }
+
+    /**
+     * @Route("user/{id}/commande", name="user_commande")
+     */
+    public function UserCommande(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userPage = $em
+            ->getRepository(User::class)
+            ->find($id);
+        if (!$userPage) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+        $user = $this->getUser();
+        $pagePerso = ($userPage == $user)? true : false;
+        $commandes = $user->getCommandes();
+        return $this->render('user_commande.html.twig', array(
+            'user' => $userPage,
+            'pagePerso' => $pagePerso,
+            'commandes' => $commandes,
+        ));
     }
 
     /**

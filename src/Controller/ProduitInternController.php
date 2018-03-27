@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\ProduitMembre;
+use App\Entity\User;
 use App\Form\ProduitInternType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use App\Entity\ProduitIntern;
@@ -27,10 +29,26 @@ class ProduitInternController extends Controller
         $listTeeIntern = $this->getDoctrine()
             ->getRepository(ProduitIntern::class)
             ->findAll();
+        $listTeeUser = $this->getDoctrine()
+            ->getRepository(ProduitMembre::class)
+            ->findBy(
+                array("visibilite" => "true"),
+                array("dateAjout" => "asc"),
+                3,
+                0
+            );
+        foreach ($listTeeUser as $teeUser){
+            $user = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->find($teeUser->getIdUser());
+            $teeUser->setIdUser($user->getUsername());
+        }
 
-        return $this->render('teeIntern.html.twig', array(
+        return $this->render('teeNode.html.twig', array(
+            'intern' => true,
             'tee' => $tee,
             'teeIntern' => $listTeeIntern,
+            'teeMembre' => $listTeeUser
         ));
     }
 

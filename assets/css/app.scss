@@ -46,16 +46,16 @@
     padding-right: 10px;
     padding-left: 10px;
     margin-bottom: 0px;
-    a{
+    span{
       text-decoration: none;
       color: black;
-      .cardPseudoTee_Pseudo{
-        font-size: 14px;
-        font-style: italic;
-      }
-      &:hover{
-        color: #718C00;
-      }
+    }
+    .cardPseudoTee_Pseudo{
+      font-size: 14px;
+      font-style: italic;
+    }
+    &:hover{
+      color: #718C00;
     }
   }
 }
