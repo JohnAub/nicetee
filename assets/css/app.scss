@@ -1,7 +1,16 @@
-
+.flash-notice{
+  font-size: 22px;
+  color: tomato;
+}
+.displayNone{
+  display: none;
+}
 /***
 *****Bare de navigation
 **/
+#sidebar{
+  margin-top:10px;
+}
 #navLogo{
   margin-left:10px;
 }
@@ -70,6 +79,81 @@
   }
 }
 
+/***
+*****node Tee
+**/
+.boxNode{
+  margin:83px 0px 140px;
+  .boxBarBot{
+    a{
+      text-decoration: none;
+      span{
+        width: 150px;
+        padding: 5px;
+        background-color: #0099FF;
+        color: white;
+        &:hover{
+          background-color: #39B54A;
+        }
+      }
+    }
+    span{
+      font-size: 26px;
+      color: yellow;
+    }
+  }
+}
+/***
+*****Page Vote
+**/
+#choixTri{
+  a{
+    text-decoration: none;
+    span{
+      width: 150px;
+      padding: 5px;
+      color: black;
+    }
+  }
+}
+.containerDessin{
+  margin-bottom: 30px;
+  .containerIcon{
+    position: relative;
+    .spanPouce{
+      position: absolute;
+      .iconPouce{
+        width:20%;
+      }
+    }
+    .spanCom{
+      #lienComm{
+        text-decoration: none;
+        color: #000;
+        &:hover{
+          color: #0099FF;
+        }
+      }
+      position: absolute;
+      right: -38px;
+      .iconCom{
+        width:20%;
+      }
+    }
+  }
+
+}
+/***
+*****Page node dessin
+**/
+.pageDessin{
+  h2{
+    display: inline;
+  }
+}
+#linkUserPage{
+  text-decoration: none;
+}
 
 
 /***

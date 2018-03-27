@@ -80,7 +80,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $Ville;
+    private $ville;
 
     /**
      * @var string
@@ -106,7 +106,6 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      * sert juste temporairement à l'inscription
      */
@@ -120,7 +119,7 @@ class User implements UserInterface, \Serializable
     private $roles = [];
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Dessin", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Dessin", mappedBy="user",  orphanRemoval=true)
      */
     private $dessins;
 
@@ -295,7 +294,7 @@ class User implements UserInterface, \Serializable
      */
     public function getVille()
     {
-        return $this->Ville;
+        return $this->ville;
     }
 
     /**
@@ -303,7 +302,7 @@ class User implements UserInterface, \Serializable
      */
     public function setVille(string $Ville)
     {
-        $this->Ville = $Ville;
+        $this->ville = $Ville;
     }
 
     /**
@@ -368,6 +367,22 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
+    }
+
+    /**
+     * @param mixed $dateInscription
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
     }
 
 
@@ -513,7 +528,7 @@ class User implements UserInterface, \Serializable
         return array($roles);
     }
 
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
     }

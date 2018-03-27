@@ -1,7 +1,82 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Sur la page user{% endblock %}
-
+{% block teeDay %}
+{% endblock %}
 {% block body %}
+    {% if pagePerso %}
+        <div class="d-flex flex-row-reverse">
+            <div class="d-flex mr-2 mb-1">
+                <a href="{{app.user.id}}/infos" class="btn btn-primary ml-auto boutonVote" >Mes Infos</a><br>
+            </div>
+            <div class="d-flex mr-2 mb-1">
+                <a href="#" class="btn btn-primary ml-auto boutonVote" >Portefeuille</a><br>
+            </div>
+            <div class="d-flex mr-2 mb-1">
+                <a href="#" class="btn btn-primary ml-auto boutonVote" >Mes commandes</a><br>
+            </div>
+            <div class="d-flex mr-2 mb-1">
+                <a href="{{ path('page_user', {'id': app.user.id} ) }}" class="btn btn-primary ml-auto boutonVote" >Gérer mes dessins</a><br>
+            </div>
+        </div>
 
+        <div class="p-2 bg-secondary text-white mb-0 mw-100 d-flex justify-content-between">
+            <div>
+                <h2>Bienvenue chez toi {{ user.username }} </h2>
+                <span class="font-italic text-sm">Ici tu peux gérer tes dessins, tes commandes et admirer ton portefeuille</span>
+            </div>
+        </div>
+    {% else %}
+        <div class="p-2 bg-secondary text-white mb-0 mw-100 d-flex justify-content-between">
+            <div>
+                <h2>Toutes les réalisations de </h2><span class="font-italic text-sm">{{ user.username }}</span>
+            </div>
+        </div>
+    {% endif %}
+    {% if dessins %}
+        <div class="container mt-4">
+            <div class="row">
+                {% for dessin in dessins %}
+                    <div class="col-md-3 containerDessin">
+                        <a href="{{ path('page_dessin', {'id': dessin.id}) }}">
+                            <div class="card mb-2 box-shadow position-relative">
+                                <img class="card-img-top" src="{{ asset(dessin.imageDessinMiniature.webPath) }}" alt="Card image cap">
+                            </div>
+                        </a>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span id="{{ dessin.designation }}" class="nom_dessin_{{ dessin.id }}">{{ dessin.designation }}</span><br>
+                                <span class="font-weight-light">par {{ dessin.user.username }}</span>
+                            </div>
+                            <div>
+                                <div class="d-flex">
+                                    {% if pagePerso %}
+                                        <span id="{{ dessin.id }}" class="btn btn-danger ml-auto dessin-danger" >Suprimer</span><br>
+                                    {% else %}
+                                        <span id="{{ dessin.id }}" class="btn btn-primary ml-auto boutonVote" >Voter</span><br>
+                                    {% endif %}
+                                </div>
+                                <div class="containerIcon">
+                                    <span  class="spanPouce"><span id="pouce{{ dessin.id }}">{% if dessin.nbrVotes is empty %}0{% else %}{{ dessin.nbrVotes }}{% endif %}</span><img class="iconPouce" src="{{ asset('images/icons/pouce.png') }}" alt="pouce"></span>
+                                    <a href="{{ path('page_dessin', {'id': dessin.id}) }}" >
+                                        <span class="spanCom"><span id="lienComm">{{ dessin.CountCom }}</span> <img class="iconCom comentaire" src="{{ asset('images/icons/comm.svg') }}"> </span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="container mt-4">
+            <div class="row">
+                {{ user.username }} n'a pas encore proposé de dessin
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/user.js') }}"></script>
 {% endblock %}

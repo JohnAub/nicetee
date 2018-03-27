@@ -109,7 +109,7 @@ class Commentaire
     /**
      * @return string
      */
-    public function getCommentaire(): string
+    public function getCommentaire()
     {
         return $this->commentaire;
     }

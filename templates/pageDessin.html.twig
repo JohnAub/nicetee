@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+{% block teeDay %}
+{% endblock %}
+{% block node %}
+    <div class="album bg-light pageDessin">
+         <div class="p-2 bg-secondary text-white mb-0 mw-100 d-flex justify-content-between">
+             <div>
+                 <h2>{{ dessin.designation }}</h2><small class="font-italic text-sm"> by {{ dessin.user.username }}</small>
+             </div>
+             <div class="bg-warning p-2 ml-auto rounded text-dark">Votes:
+                 <span id="pouce{{ dessin.id }}">
+                     {% if dessin.nbrVotes is empty %}0{% else %}{{ dessin.nbrVotes }}{% endif %}
+                 </span>
+             </div>
+         </div>
+         <div class="container">
+            <div class="row">
+                    <div class="col-md-12">
+                            <div class="card mb-0 box-shadow position-relative">
+                                <img class="card-img-top" src="{{ asset(dessin.imageDessin.webPath) }}" alt="Card image cap">
+                            </div>
+                    </div>
+            </div>
+        </div>
+        <div class="p-2 bg-secondary text-white mb-0 mw-100 d-flex justify-content-between">
+            <span></span>
+            <span></span>
+            <div class="d-flex">
+                <span id="{{ dessin.id }}" class="btn btn-primary ml-auto boutonVote" >Voter</span><br>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mt-4">
+                <h3 >Commentaires: </h3>
+                <div>
+                    {% if autOk == false  %}
+                        <a href="{{ asset('/login') }}" class="btn btn-warning mt-5">Connect-toi pour laisser un message!</a>
+                    {% else %}
+                        <div class="well mt-2">
+                            {{ form_widget(form) }}
+                        </div>
+                    {% endif %}
+                </div>
+                {% if commentaires %}
+                    {% for commentaire in commentaires %}
+                        <div class="card mb-2">
+                            <div class="card-header">
+                                <h4><a id="linkUserPage" href="{{ path('page_user', {'id': commentaire.userId}) }}">{{ commentaire.userName }}</a></h4>
+                                <span>{{ commentaire.date|date('m-d-Y h:i:s a') }}</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ commentaire.commentaire }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+            <div class="col-3 mt-4">
+                <h4 class="text-center">Tees du jour</h4>
+                <div class="col-md-12">
+                    <div class="card mb-3 box-shadow position-relative">
+                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card mb-3 box-shadow position-relative">
+                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card mb-3 box-shadow position-relative">
+                         <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('js/vote.js') }}"></script>
+{% endblock %}

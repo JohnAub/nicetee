@@ -10,4 +10,7 @@ easy_admin:
             - label: 'Tee Membres'
               children:
                   - { entity: 'ProduitsMembres', label: 'Tee Membres'}
+            - label: 'Membres'
+              children:
+                  - { entity: 'User', label: 'Membres'}
             - label: 'Env: %env(APP_ENV)%'
