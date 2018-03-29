@@ -112,25 +112,13 @@
       }
       .modal-body{
         .btnGenre{
-          img{
-            opacity:.45;
-          }
           div{
             height:155px;
-            &:hover{
-              img{
-                opacity:1;
-              }
-              span{
-                opacity:1;
-              }
-            }
           }
           a{
             position: relative;
           }
           span {
-            opacity:.45;
             position: absolute;
             width: 100%;
             left: -2px;
@@ -138,8 +126,14 @@
             background-color: #494949;
             color: white;
           }
+          .opacity{
+            opacity:.45;
+            &:hover{
+              opacity: 1;
+            }
+          }
         }
-        .btnTaille{
+        .btnTailleHomme, .btnTailleFemme{
           border-top: 1px solid #e9ecef;
           h5{
             color: #000;
@@ -150,6 +144,15 @@
               font-size:30px;
             }
           }
+        }
+        .displayNone{
+          display: none;
+        }
+        .displayBlock{
+          display: block;
+        }
+        .borderSelect{
+          border: 1px solid red;
         }
       }
     }

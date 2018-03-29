@@ -43,34 +43,59 @@
                     </div>
                     <div class="modal-body">
                         <div class="d-flex justify-content-around btnGenre">
-                                <div>
-                                    <a href="#" class="type " data-type="homme">
+                                <div class="typeHomme ">
+                                    <a href="#"  data-type="homme" class="opacityHomme opacity">
                                         <img class="icon mens" src="//cdn.qwertee.com/images/models/mens-big-hover.png"><br>
                                         <span class="name rounded">Homme</span>
                                     </a>
                                 </div>
-                                <div>
-                                    <a href="#" class="type " data-type="femme">
+                                <div class="typeFemme">
+                                    <a href="#"  data-type="femme" class="opacityFemme opacity">
                                         <img class="icon womens" src="//cdn.qwertee.com/images/models/womens-big-hover.png"><br>
                                         <span class="name rounded">Femme</span>
                                     </a>
                                 </div>
 
                         </div>
-                        <div class="btnTaille">
+                        <div class="btnTailleHomme displayNone">
+                            <br>
                             <h5>QUELLE TAILLE VOUDRAIS-TU?</h5>
                             <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-primary  mr-1 ">S</button>
-                                <button type="button" class="btn btn-primary  mr-1 ">M</button>
-                                <button type="button" class="btn btn-primary  mr-1 ">L</button>
-                                <button type="button" class="btn btn-primary  mr-1 ">XL</button>
-                                <button type="button" class="btn btn-primary  mr-1 ">XXL</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-S">S</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-M">M</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-L">L</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-XL">XL</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-XXL">XXL</button>
+                            </div>
+                            <br>
+                            <h5>QUELLE QUANTIT&Eacute;?</h5>
+                            <div class="d-flex justify-content-center">
+                                {% for i in 1..10 %}
+                                    <button  type="button" class="btn btn-secondary  mr-1 qty" id="{{ i }}">{{ i }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="btnTailleFemme displayNone">
+                            <br>
+                            <h5>QUELLE TAILLE VOUDRAIS-TU?</h5>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-S">S</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-M">M</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-L">L</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-XL">XL</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-XXL">XXL</button>
+                            </div>
+                            <br>
+                            <h5>QUELLE QUANTIT&Eacute;?</h5>
+                            <div class="d-flex justify-content-center">
+                                {% for i in 1..10 %}
+                                    <button  type="button" class="btn btn-secondary  mr-1 qty qt" id="{{ i }}">{{ i }}</button>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary commander">Commander</button>
                     </div>
                 </div>
 
@@ -80,4 +105,7 @@
         <span></span>
     </div>
 </div>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/tee.js') }}"></script>
 {% endblock %}
