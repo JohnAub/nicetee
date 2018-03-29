@@ -136,7 +136,7 @@
                                         <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
                                             <div class="btn-group">
                                                 <a href="{{ path('tee_intern_node', {'id': tee.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Voir</a>
-                                                <a href="#" type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</a>
+                                                <a href="{{ path('add_panier_produit_intern', {'id': tee.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</a>
                                             </div>
                                         </div>
                                     </div>

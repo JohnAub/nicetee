@@ -27,7 +27,56 @@
     </div>
     <div class="p-2 bg-secondary text-white mb-0 mw-100 d-flex flex-row-reverse boxBarBot justify-content-between">
         <span>{{ tee.prixventes }} €</span>
-        <a class="" href=""><span class="rounded">Acheter Maintenant</span></a>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            <span class="rounded">Acheter Maintenant</span>
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title" >QUE DÉSIRES-TU?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-around btnGenre">
+                                <div>
+                                    <a href="#" class="type " data-type="homme">
+                                        <img class="icon mens" src="//cdn.qwertee.com/images/models/mens-big-hover.png"><br>
+                                        <span class="name rounded">Homme</span>
+                                    </a>
+                                </div>
+                                <div>
+                                    <a href="#" class="type " data-type="femme">
+                                        <img class="icon womens" src="//cdn.qwertee.com/images/models/womens-big-hover.png"><br>
+                                        <span class="name rounded">Femme</span>
+                                    </a>
+                                </div>
+
+                        </div>
+                        <div class="btnTaille">
+                            <h5>QUELLE TAILLE VOUDRAIS-TU?</h5>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary  mr-1 ">S</button>
+                                <button type="button" class="btn btn-primary  mr-1 ">M</button>
+                                <button type="button" class="btn btn-primary  mr-1 ">L</button>
+                                <button type="button" class="btn btn-primary  mr-1 ">XL</button>
+                                <button type="button" class="btn btn-primary  mr-1 ">XXL</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
         <span></span>
     </div>
 </div>

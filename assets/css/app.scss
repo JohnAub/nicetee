@@ -101,6 +101,58 @@
       font-size: 26px;
       color: yellow;
     }
+    .modal{
+      .modal-header{
+        background-color: #000;
+        color: #fff;
+        span {
+          font-size: 30px;
+          color: #fff;
+        }
+      }
+      .modal-body{
+        .btnGenre{
+          img{
+            opacity:.45;
+          }
+          div{
+            height:155px;
+            &:hover{
+              img{
+                opacity:1;
+              }
+              span{
+                opacity:1;
+              }
+            }
+          }
+          a{
+            position: relative;
+          }
+          span {
+            opacity:.45;
+            position: absolute;
+            width: 100%;
+            left: -2px;
+            text-align: center;
+            background-color: #494949;
+            color: white;
+          }
+        }
+        .btnTaille{
+          border-top: 1px solid #e9ecef;
+          h5{
+            color: #000;
+          }
+          div{
+            button{
+              width: 75px;
+              font-size:30px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 /***

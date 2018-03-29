@@ -23,6 +23,18 @@ class LigneCommande
     private $commande;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProduitIntern", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $produitInterne;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $produitMembre;
+
+    /**
      * @var int
      *
      * @ORM\Column(type="integer")
@@ -100,5 +112,38 @@ class LigneCommande
     {
         $this->prix = $prix;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProduitInterne()
+    {
+        return $this->produitInterne;
+    }
+
+    /**
+     * @param mixed $produitInterne
+     */
+    public function setProduitInterne($produitInterne)
+    {
+        $this->produitInterne = $produitInterne;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduitMembre()
+    {
+        return $this->produitMembre;
+    }
+
+    /**
+     * @param mixed $produitMembre
+     */
+    public function setProduitMembre($produitMembre)
+    {
+        $this->produitMembre = $produitMembre;
+    }
+
 
 }

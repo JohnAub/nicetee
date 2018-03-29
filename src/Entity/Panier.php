@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Panier
 {
@@ -9,11 +12,16 @@ class Panier
     public function __construct()
     {
         if (!isset($_SESSION)){
-            session_start();
+
         }
-        if (!isset($_SESSION['panier'])){
-            $_SESSION['panier'] = array();
+        if (!($session->has('panier')))
+        {
+            $this->session->set('panier', array());
         }
     }
+
+
+
+
 
 }
