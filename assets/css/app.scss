@@ -5,6 +5,9 @@
 .displayNone{
   display: none;
 }
+.displayBlock{
+  display: block;
+}
 /***
 *****Bare de navigation
 **/
@@ -145,15 +148,14 @@
             }
           }
         }
-        .displayNone{
-          display: none;
-        }
-        .displayBlock{
-          display: block;
-        }
         .borderSelect{
           border: 1px solid red;
         }
+      }
+    }
+    #recapPanier{
+      span{
+        color: #000;;
       }
     }
   }

@@ -1,0 +1,28 @@
+<h3>Liste des produits: </h3>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Désignation</th>
+        <th scope="col">Quatité</th>
+        <th scope="col">Prix/Unité</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for produit in produits %}
+        <tr>
+            <th scope="row">{{ produit.id }}</th>
+            <td>{{ produit.designation }}</td>
+            <td>
+                <select name="qty" onchange="this.form.submit()" id="">
+                    {% for i in 1..10 %}
+                        <option value="{{ i }}" {% if panier[produit.id] == i %} selected="selected" {% endif %}>
+                            {{ i }}
+                        </option>
+                    {% endfor %}
+            </td>
+            <td>{{ produit.prixVentes  }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

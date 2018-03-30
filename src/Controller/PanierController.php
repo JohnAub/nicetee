@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\ProduitIntern;
+use function PHPSTORM_META\elementType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,28 +16,36 @@ class PanierController extends Controller
 
 
 
-    /*
-     * @Route("/panier/produitIntern/{id}", name="add_panier_produit_intern")
+    /**
+     * @Route("/panier", name="panier")
      */
-   /* public function addPanier(Request $request,$id)
+    public function panier(Request $request)
     {
-        if ($id){
-            $em = $this->getDoctrine()->getManager();
-            $product = $em->getRepository(ProduitIntern::class)
-                ->find($id);
-            if (empty($product)){
-                die("Ce produit n'existe pas");
-            }
-            $session = $request->getSession();
-            $panier = new Panier($session);
-            dump($panier);
-        }else{
-            die("Vous n'avez pas sélectionné de produit à ajouter au panier");
+        $session = $request->getSession();
+        if (!$session->has('panier')) $session->set('panier', array());
+        $panier = $session->get('panier');
+        $em = $this->getDoctrine()->getManager();
+        //todo voir comment récuperer produitintern et membre en meme temps
+        $produits = $em->getRepository(ProduitIntern::class)
+            ->findArray(array_keys($panier));
+        $produit=array();
+        foreach ($panier as $p){
+            $idProduit = array_keys($p);
+            $sex = array_keys($p[$idProduit]);
+            $taille = array_keys($p[$idProduit][$sex]);
+            $qty = $p[$idProduit][$sex][$taille];
+            $produit[$idProduit] =array(
+                'sex' => $sex,
+                'taille' => $taille,
+                'qty' => $qty
+            );
         }
-
-        return $this->render('add_panier.html.twig', array(
+        dump($panier);
+        return $this->render('panier.html.twig', array(
+            "produits" => $produits,
+            "panier" => $panier
         ));
-    }*/
+    }
 
     /**
      * @Route("/product/{id}/panier", name="add_panier_produit_intern")
@@ -49,19 +58,21 @@ class PanierController extends Controller
             {
                 $tailleSex = $request->request->get('taille_sex');
                 $tailleSex = explode('-', $tailleSex);
-                $sex = $tailleSex[0];
-                $taille = $tailleSex[1];
+                $sex = $tailleSex['0'];
+                $taille = $tailleSex['1'];
                 $qty = $request->request->get('qty');
-                //************************************//
-
-/*
                 $em = $this->getDoctrine()->getManager();
                 $product = $em->getRepository(ProduitIntern::class)
                     ->find($id);
-                dump($product);
-                if (empty($product)){
-                    die("Ce produit n'existe pas");
-                }
+
+              /*  if ( empty($product) || $sex != 'H' ||$sex != 'F' || $taille != 'S' || $taille != 'M' ||
+                    $taille != 'L' || $taille != 'XL' || $taille != 'XXL' ||
+                    is_nan($qty) || $qty <= 0 )
+                {
+                    die( "Un problème est survenu pendant l'ajout au panier" );
+                }*/
+
+                $productName = $product->getDesignation();
                 //On récupere la session
                 $session = $request->getSession();
 
@@ -74,13 +85,11 @@ class PanierController extends Controller
                 //on stock la variable session panier dans $panier pour plus de simplicité
                 $panier = $session->get('panier');
 
-                //on vérifie si le produit n'est pas déja dans le panier
-                if (array_key_exists($id, $panier))
-                {
-                    //10.30
-                }
-                dump($panier);*/
-
+                //On ajoute au panier
+                $panier[$id][$sex][$taille] = array(
+                    'qty' => $qty
+                );
+                $session->set('panier', $panier);
 
 
                 //************************************//
@@ -88,11 +97,13 @@ class PanierController extends Controller
                 $response->setData(array(
                     "taille" => $taille,
                     "sex" => $sex,
-                    "qtys" => $qty
+                    "qtys" => $qty,
+                    "productName" => $productName
                 ));
                 return $response;
 
-            }else{
+            }else
+            {
                 die("Vous n'avez pas sélectionné de produit à ajouter au panier");
             }
         }

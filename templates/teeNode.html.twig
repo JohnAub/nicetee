@@ -33,7 +33,7 @@
         </button>
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered" id="modalAjout" role="document">
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <h5 class="modal-title" >QUE DÉSIRES-TU?</h5>
@@ -93,13 +93,33 @@
                                 {% endfor %}
                             </div>
                         </div>
+                        <div class="modal-footer displayNone">
+                            <button type="button" class="btn btn-primary commander">Commander</button>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary commander">Commander</button>
-                    </div>
+
                 </div>
 
 
+            </div>
+            <div class="modal-dialog modal-dialog-centered displayNone" id="modalAjoutOk" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title" >Vous avez bien Ajouter au panier: </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="recapPanier">
+                        <span id="retourQty"></span><span> Tee(s) </span><span id="retourName"></span>
+                        <span> en taille </span><span id="retourTaille"></span>
+                        <span> Pour </span><span id="retourSex"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continuer vos achat</button>
+                        <a href="{{ path('panier') }}" class="btn btn-primary" role="button">Aller au panier</a>
+                    </div>
+                </div>
             </div>
         </div>
         <span></span>
