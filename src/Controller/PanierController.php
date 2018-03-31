@@ -23,27 +23,23 @@ class PanierController extends Controller
     {
         $session = $request->getSession();
         if (!$session->has('panier')) $session->set('panier', array());
-        $panier = $session->get('panier');
+        $panier = new Panier($session);
         $em = $this->getDoctrine()->getManager();
         //todo voir comment récuperer produitintern et membre en meme temps
-        $produits = $em->getRepository(ProduitIntern::class)
-            ->findArray(array_keys($panier));
-        $produit=array();
-        foreach ($panier as $p){
-            $idProduit = array_keys($p);
-            $sex = array_keys($p[$idProduit]);
-            $taille = array_keys($p[$idProduit][$sex]);
-            $qty = $p[$idProduit][$sex][$taille];
-            $produit[$idProduit] =array(
-                'sex' => $sex,
-                'taille' => $taille,
-                'qty' => $qty
-            );
+        /*$produits = $em->getRepository(ProduitIntern::class)
+            ->findArray($panier->getIds());*/
+        $sortPanier = $panier->sortPanier();
+        $produits = array();
+        foreach ($sortPanier as $produit){
+            $produits[] = $em->getRepository(ProduitIntern::class)
+                ->find($produit[0]);
         }
-        dump($panier);
+        dump($produits);
+        dump($sortPanier);
+
         return $this->render('panier.html.twig', array(
             "produits" => $produits,
-            "panier" => $panier
+            "paniers" => $sortPanier
         ));
     }
 

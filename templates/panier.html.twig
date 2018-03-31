@@ -4,24 +4,34 @@
     <tr>
         <th scope="col">id</th>
         <th scope="col">Désignation</th>
+        <th scope="col">Visu</th>
+        <th scope="col">sex</th>
+        <th scope="col">Taille</th>
         <th scope="col">Quatité</th>
         <th scope="col">Prix/Unité</th>
+        <th scope="col">Prix total</th>
     </tr>
     </thead>
     <tbody>
-    {% for produit in produits %}
+    {% for key, panier in paniers %}
+        {% set produit = produits[key] %}
         <tr>
             <th scope="row">{{ produit.id }}</th>
             <td>{{ produit.designation }}</td>
+            <td><img src="{{ asset(produit.imageZoomListe.webPath) }}" width="50" alt=""></td>
+            <td>{{ panier[1] }}</td>
+            <td>{{ panier[2]}}</td>
             <td>
                 <select name="qty" onchange="this.form.submit()" id="">
                     {% for i in 1..10 %}
-                        <option value="{{ i }}" {% if panier[produit.id] == i %} selected="selected" {% endif %}>
+                        <option value="{{ i }}" {% if panier[3] == i %} selected="selected" {% endif %}>
                             {{ i }}
                         </option>
                     {% endfor %}
+                </select>
             </td>
             <td>{{ produit.prixVentes  }}</td>
+            <td>{{ produit.prixVentes * panier[3]  }}</td>
         </tr>
     {% endfor %}
     </tbody>
