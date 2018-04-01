@@ -24,4 +24,15 @@ class ProduitInternRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findArray($array)
+    {
+        return $this->createQueryBuilder('p')
+            ->Select('p')
+            ->Where('p.id IN (:array)')
+            ->setParameter('array', $array)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

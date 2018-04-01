@@ -3,16 +3,18 @@ $(document).ready(function(){
         let id_dessin = $(this).attr('id');
         let nom_dessin = $('.nom_dessin_'+id_dessin).attr('id');
         let chemin = window.location.pathname;
-        chemin = chemin.substring(6);
+        let id_user = chemin.substring(6);
+        console.log(id_user);
         result = confirm("Attention!! es-tu sur de bien vouloir suprimer le dessin "+nom_dessin+' ???');
         if(result){
             $.ajax({
                 type: "POST",
-                url: chemin+"/removeDessin",
+                url: id_user+"/removeDessin",
                 data: {id_dessin: id_dessin},
                 success: function (resp)
                 {
-                        alert(resp.resp)
+                    alert(resp.resp)
+                    location.reload();
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown)
                 {

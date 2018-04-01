@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ProduitIntern;
+use App\Entity\ProduitMembre;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,11 +26,20 @@ class SecurityController extends Controller
         $listTeeIntern = $this->getDoctrine()
             ->getRepository(ProduitIntern::class)
             ->findAll();
+        $listTeeUser = $this->getDoctrine()
+            ->getRepository(ProduitMembre::class)
+            ->findBy(
+                array("visibilite" => "true"),
+                array("dateAjout" => "desc"),
+                3,
+                0
+            );
 
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error' => $error,
             'teeIntern' => $listTeeIntern,
+            'teeMembre' => $listTeeUser
         ));
     }
 

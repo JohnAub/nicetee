@@ -348,6 +348,7 @@ abstract class Produit
         return $url;
     }
 
+
    /* public function setImageAdmin($image){
         $this->getImageZoomListe()->se
     }*/

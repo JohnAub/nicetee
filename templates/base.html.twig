@@ -80,88 +80,43 @@
         {% block node %}{% endblock %}
         <div id="teeDay">
             {% block teeDay %}
-                <div class="album bg-light">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <p><h1>Les Tee du jour</h1></p>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                    <div class="position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <span class="position-absolute priceTeeJour">12€</span>
-                                    </div>
-                                    <div class="d-flex justify-content-end align-items-center">
-                                        <p class="border border-dark cardPseudoTee">
-                                            <span>Nom du tee</span>
-                                            <a href="#"><span class="font-weight-light cardPseudoTee_Pseudo">par pseudo</span></a>
-                                        </p>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
+                {% if teeMembre %}
+                    <div class="album bg-light">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p><h1>Les Tees du jour dessinés par les membres</h1></p>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                {% for teeMembre in teeMembre %}
+                                    <div class="col-md-4">
+                                        <a href="{{ path('tee_membre_node', {'id': teeMembre.id}) }}">
+                                            <div class="card mb-4 box-shadow">
+                                                <div class="position-relative">
+                                                    <img class="card-img-top" src="{{ asset(teeMembre.imageZoomListe.webPath) }}" alt="Card image cap">
+                                                    <span class="position-absolute priceTeeJour">{{ teeMembre.prixventes }}</span>
+                                                </div>
+                                                <div class="d-flex justify-content-end align-items-center">
+                                                    <p class="border border-dark cardPseudoTee">
+                                                        <span>{{ teeMembre.designation }}</span>
+                                                        <span class="font-weight-light cardPseudoTee_Pseudo">by {{ teeMembre.idUser }}</span>
+                                                    </p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <div class="btn-group">
+                                                            <a href="{{ path('tee_membre_node', {'id': teeMembre.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                                            <a href="#" type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
+                                {% endfor %}
                             </div>
-
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                    <div class="position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <span class="position-absolute priceTeeJour">12€</span>
-                                    </div>
-                                    <div class="d-flex justify-content-end align-items-center">
-                                        <p class="border border-dark cardPseudoTee">
-                                            <span>Nom du tee</span>
-                                            <a href="#"><span class="font-weight-light cardPseudoTee_Pseudo">par pseudo</span></a>
-                                        </p>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="card mb-4 box-shadow">
-                                    <div class="position-relative">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                                        <span class="position-absolute priceTeeJour">12€</span>
-                                    </div>
-                                    <div class="d-flex justify-content-end align-items-center">
-                                        <p class="border border-dark cardPseudoTee">
-                                            <span>Nom du tee</span>
-                                            <a href="#"><span class="font-weight-light cardPseudoTee_Pseudo">par pseudo</span></a>
-                                        </p>
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endblock %}
         </div>
         <div id="content">
@@ -180,8 +135,8 @@
                                         <img class="card-img-top" src="{{ asset(tee.imageZoomListe.webPath) }}" alt="Card image cap">
                                         <div class="d-flex justify-content-center align-items-center position-absolute" id="boutonTeeList">
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Voir</button>
-                                                <button type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</button>
+                                                <a href="{{ path('tee_intern_node', {'id': tee.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Voir</a>
+                                                <a href="{{ path('add_panier_produit_intern', {'id': tee.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Ajouter au panier</a>
                                             </div>
                                         </div>
                                     </div>

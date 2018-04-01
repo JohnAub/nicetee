@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+{% block node %}
+<div class="container boxNode">
+    <div class="p-2 bg-secondary text-white mb-0 mw-100 boxBarTop">{{ tee.designation }}<small class="font-italic text-sm">
+            {% if intern  %}
+            by {{ tee.fournisseur }}
+            {% else %}
+            by {{ user.username }}
+            {% endif %}
+        </small></div>
+    <div class="row BoxPicture">
+        <div class="col-md-4 p-0 m-0">
+                <div class="  position-relative">
+                    <img class="card-img-top" src="{{ asset(tee.imageHomme.webPath) }}"  alt="Card image cap">
+                </div>
+        </div>
+        <div class="col-md-4 p-0 m-0">
+            <div class="   position-relative">
+                <img class="card-img-top" src="{{ asset(tee.imageFemme.webPath) }}" alt="Card image cap">
+            </div>
+        </div>
+        <div class="col-md-4 p-0 m-0">
+            <div class="   position-relative">
+                <img class="card-img-top" src="{{ asset(tee.imageZoomItem.webPath) }}" alt="Card image cap">
+            </div>
+        </div>
+    </div>
+    <div class="p-2 bg-secondary text-white mb-0 mw-100 d-flex flex-row-reverse boxBarBot justify-content-between">
+        <span>{{ tee.prixventes }} €</span>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            <span class="rounded">Acheter Maintenant</span>
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" id="modalAjout" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title" >QUE DÉSIRES-TU?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-around btnGenre">
+                                <div class="typeHomme ">
+                                    <a href="#"  data-type="homme" class="opacityHomme opacity">
+                                        <img class="icon mens" src="//cdn.qwertee.com/images/models/mens-big-hover.png"><br>
+                                        <span class="name rounded">Homme</span>
+                                    </a>
+                                </div>
+                                <div class="typeFemme">
+                                    <a href="#"  data-type="femme" class="opacityFemme opacity">
+                                        <img class="icon womens" src="//cdn.qwertee.com/images/models/womens-big-hover.png"><br>
+                                        <span class="name rounded">Femme</span>
+                                    </a>
+                                </div>
+
+                        </div>
+                        <div class="btnTailleHomme displayNone">
+                            <br>
+                            <h5>QUELLE TAILLE VOUDRAIS-TU?</h5>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-S">S</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-M">M</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-L">L</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-XL">XL</button>
+                                <button type="button" class="btn btn-primary  mr-1 tailleSex ts" id="H-XXL">XXL</button>
+                            </div>
+                            <br>
+                            <h5>QUELLE QUANTIT&Eacute;?</h5>
+                            <div class="d-flex justify-content-center">
+                                {% for i in 1..10 %}
+                                    <button  type="button" class="btn btn-secondary  mr-1 qty" id="{{ i }}">{{ i }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="btnTailleFemme displayNone">
+                            <br>
+                            <h5>QUELLE TAILLE VOUDRAIS-TU?</h5>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-S">S</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-M">M</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-L">L</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-XL">XL</button>
+                                <button type="button" class="btn btn-warning  mr-1 tailleSex ts" id="F-XXL">XXL</button>
+                            </div>
+                            <br>
+                            <h5>QUELLE QUANTIT&Eacute;?</h5>
+                            <div class="d-flex justify-content-center">
+                                {% for i in 1..10 %}
+                                    <button  type="button" class="btn btn-secondary  mr-1 qty qt" id="{{ i }}">{{ i }}</button>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="modal-footer displayNone">
+                            <button type="button" class="btn btn-primary commander">Commander</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-dialog modal-dialog-centered displayNone" id="modalAjoutOk" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title" >Vous avez bien Ajouter au panier: </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="recapPanier">
+                        <span id="retourQty"></span><span> Tee(s) </span><span id="retourName"></span>
+                        <span> en taille </span><span id="retourTaille"></span>
+                        <span> Pour </span><span id="retourSex"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continuer vos achat</button>
+                        <a href="{{ path('panier') }}" class="btn btn-primary" role="button">Aller au panier</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span></span>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/tee.js') }}"></script>
+{% endblock %}

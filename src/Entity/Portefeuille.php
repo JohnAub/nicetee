@@ -46,6 +46,7 @@ class Portefeuille
     {
         $this->date = new \DateTime();
         $this->operations = new ArrayCollection();
+        $this->solde = 0;
     }
 
 

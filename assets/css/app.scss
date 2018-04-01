@@ -5,6 +5,9 @@
 .displayNone{
   display: none;
 }
+.displayBlock{
+  display: block;
+}
 /***
 *****Bare de navigation
 **/
@@ -46,16 +49,16 @@
     padding-right: 10px;
     padding-left: 10px;
     margin-bottom: 0px;
-    a{
+    span{
       text-decoration: none;
       color: black;
-      .cardPseudoTee_Pseudo{
-        font-size: 14px;
-        font-style: italic;
-      }
-      &:hover{
-        color: #718C00;
-      }
+    }
+    .cardPseudoTee_Pseudo{
+      font-size: 14px;
+      font-style: italic;
+    }
+    &:hover{
+      color: #718C00;
     }
   }
 }
@@ -100,6 +103,60 @@
     span{
       font-size: 26px;
       color: yellow;
+    }
+    .modal{
+      .modal-header{
+        background-color: #000;
+        color: #fff;
+        span {
+          font-size: 30px;
+          color: #fff;
+        }
+      }
+      .modal-body{
+        .btnGenre{
+          div{
+            height:155px;
+          }
+          a{
+            position: relative;
+          }
+          span {
+            position: absolute;
+            width: 100%;
+            left: -2px;
+            text-align: center;
+            background-color: #494949;
+            color: white;
+          }
+          .opacity{
+            opacity:.45;
+            &:hover{
+              opacity: 1;
+            }
+          }
+        }
+        .btnTailleHomme, .btnTailleFemme{
+          border-top: 1px solid #e9ecef;
+          h5{
+            color: #000;
+          }
+          div{
+            button{
+              width: 75px;
+              font-size:30px;
+            }
+          }
+        }
+        .borderSelect{
+          border: 1px solid red;
+        }
+      }
+    }
+    #recapPanier{
+      span{
+        color: #000;;
+      }
     }
   }
 }
