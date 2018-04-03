@@ -1,3 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription{% endblock %}
+{% block teeDay %}
+{% endblock %}
+{% block body %}
+
+{% if vide %}
+    <div class="d-flex justify-content-center">
+        <p class=" mb-3">Votre panier est vide</p>
+    </div>
+{% else %}
 <h3>Liste des produits: </h3>
 <table class="table table-striped">
     <thead>
@@ -8,31 +19,50 @@
         <th scope="col">sex</th>
         <th scope="col">Taille</th>
         <th scope="col">Quatité</th>
-        <th scope="col">Prix/Unité</th>
-        <th scope="col">Prix total</th>
+        <th scope="col">Prix/Unité ttc</th>
+        <th scope="col">Prix total ttc</th>
     </tr>
     </thead>
-    <tbody>
-    {% for key, panier in paniers %}
-        {% set produit = produits[key] %}
+        {% for key, panier in paniers %}
+            {% set produit = produits[key] %}
+            <tr>
+                <form class="form_produit" action="{{ path('add_panier_produit_intern', {'id' : produit.id }) }}" method="post">
+                    <td scope="row" class="id_produit_{{ produit.id }}" id="{{ produit.id }}">{{ produit.id }}</td>
+                    <td>{{ produit.designation }}</td>
+                    <td><img src="{{ asset(produit.imageZoomListe.webPath) }}" width="50" alt=""></td>
+                    <td class="sex_produit_{{ produit.id }}" id="{{ panier[1] }}">{{ panier[1] }}</td>
+                    <td class="taille_produit_{{ produit.id }}" id="{{ panier[2] }}">{{ panier[2]}}</td>
+                    <td>
+                        <select name="qty" {#onchange="this.form.submit()"#} class="qty_produit" id="{{ produit.id }}">
+                            {% for i in 1..10 %}
+                                <option  value="{{ i }}" {% if panier[3] == i %} selected="selected" {% endif %}>
+                                    {{ i }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                        <a href="{{ path('remove_panier_produit', {'id' : produit.id, "sex" : panier[1], 'taille': panier[2]}) }}" ><img src="{{ asset('images/icons/corbeille.jpg') }}" width="15" alt="corbeille"></a>
+                    </td>
+                    <td>{{ produit.prixVentes  }} € </td>
+                    <td>{{ produit.prixVentes * panier[3]  }} €</td>
+                </form>
+            </tr>
+        {% endfor %}
+    </table>
+    <table class="table table-striped d-flex justify-content-end">
         <tr>
-            <th scope="row">{{ produit.id }}</th>
-            <td>{{ produit.designation }}</td>
-            <td><img src="{{ asset(produit.imageZoomListe.webPath) }}" width="50" alt=""></td>
-            <td>{{ panier[1] }}</td>
-            <td>{{ panier[2]}}</td>
-            <td>
-                <select name="qty" onchange="this.form.submit()" id="">
-                    {% for i in 1..10 %}
-                        <option value="{{ i }}" {% if panier[3] == i %} selected="selected" {% endif %}>
-                            {{ i }}
-                        </option>
-                    {% endfor %}
-                </select>
-            </td>
-            <td>{{ produit.prixVentes  }}</td>
-            <td>{{ produit.prixVentes * panier[3]  }}</td>
+            <th scope="row">Prix Total TTC</th>
+            <th scope="row">{{ prix_total }}</th>
         </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    </table >
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-danger mr-4">Vider le panier</button>
+        <button type="button" class="btn btn-primary">Commander</button>
+    </div>
+    {% endif %}
+
+
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/tee.js') }}"></script>
+{% endblock %}
+
