@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    /**
+     *Modal Hiden
+     */
     let tailleSex;
     let qty;
     let button = 0;
@@ -34,15 +38,48 @@ $(document).ready(function(){
         buttonEnable()
     })
 
+    /**
+     * Ajax Modif Quantité dans le panier
+     */
+    $('.qty_produit', this).change(function () {
+        let id = $(this).attr('id');
+        let taille = $('.taille_produit_'+id).attr('id');
+        let sex = $('.sex_produit_'+id).attr('id');
+        let qty = $(this).val();
+        let chemin = window.location.pathname;
+        $.ajax({
+            type:"POST",
+            url: '/product/'+id+'/panier',
+            data: {
+                "ajouter" : 1,
+                "taille" : taille,
+                "sex" : sex,
+                "qty" : qty,
+            },
+            success: function (resp) {
+                location.reload();
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown)
+            {
+                alert('Error: '+ errorThrown);
+            }
+        })
+    })
+
+
+    /**
+     * Ajax ajout produit
+     */
+
     $('.commander').click(function () {
         let chemin = window.location.pathname;
         $.ajax({
             type: "POST",
             url: chemin+"/panier",
             data: {
+                "ajouter" : 0,
                 taille_sex: tailleSex,
                 qty: qty
-
             },
             success: function (resp)
             {
@@ -65,6 +102,12 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('.continuerAchat').click(function () {
+        location.reload();
+    })
+
+
     function buttonEnable() {
         if(button >= 2){
             $('.commander').prop('disabled', false);

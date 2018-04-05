@@ -10,6 +10,7 @@ Encore
     .addEntry('user', './assets/js/user.js')
     .addEntry('vote', './assets/js/vote.js')
     .addEntry('tee', './assets/js/tee.js')
+    .addEntry('validCommande', './assets/js/validCommande.js')
     .enableVueLoader()
     .enableSassLoader()
 ;

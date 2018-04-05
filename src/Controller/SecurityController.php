@@ -34,7 +34,7 @@ class SecurityController extends Controller
                 3,
                 0
             );
-
+        $this->addFlash("error", "Vous devez être connecté ou creer un compte");
         return $this->render('security/login.html.twig', array(
             'last_username' => $lastUsername,
             'error' => $error,

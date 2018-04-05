@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}Inscription{% endblock %}
+{% block teeDay %}
+{% endblock %}
+{% block body %}
+    <div class="container validationCommande">
+        <div class="d-flex justify-content-center">
+            <div class=" pr-3 border-right">
+                <h3>Adresse de livraison</h3>
+                <form id="selectedAdress">
+                    <div>
+                        <input  type="radio" id="adresse0" name="adresse" value="0" checked>
+                        <label  for="adresse0">
+                            {{ user.adresse }} {{ user.codePostal }} {{ user.ville }} {{ user.pays }}
+                        </label>
+                    </div>
+                    {% for adresse in user.deliveryAdressUsers %}
+                    <div>
+                        <input  type="radio" name="adresse" id="adresse{{ adresse.id }}" value="{{ adresse.id }}">
+                        <label for="adresse{{ adresse.id }}">
+                            {{ adresse.designation }}
+                        </label>
+                    </div>
+                    {% endfor %}
+
+                </form>
+                <a  class="btn btn-primary mt-4 btnAdresse"  >Valider l'adresse</a>
+            </div>
+            <div class="ml-3">
+                <h3>nouvelle adresse de livraison</h3>
+                <div class="well">
+                    {{ form(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block javascript %}
+    <script src="{{ asset('build/validCommande.js') }}"></script>
+{% endblock %}
+
