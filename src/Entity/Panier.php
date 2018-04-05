@@ -2,21 +2,18 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
 class Panier
 {
     private $panier;
-
-
+    public function __construct()
+    {
+        $this->panier = array();
+    }
 
     public function sortPanier(){
         $ids = $this->getIds();
+        $tab = array();
         if ($ids){
-            $tab = array();
             foreach($ids as $idValue) {
                 //On va faire 3 boucles avec idValue = id tee
                 // on recupere tous les sex qu'il y a dans idValue
@@ -34,16 +31,18 @@ class Panier
                     }
                 }
             }
-            return $tab;
         }
-        return null;
+        return $tab;
     }
+
     public function ajouterProduit($id, $sex, $taille, $qty){
         $this->panier[$id][$sex][$taille] = array('qty' => $qty);
     }
 
     public function getIds(){
-        return array_keys($this->panier);
+        if (!empty($this->panier))
+            return array_keys($this->panier);
+        return null;
     }
 
     public function removeProduit($id, $sex, $taille){
@@ -64,13 +63,11 @@ class Panier
     }
 
     /**
-     * @param mixed $panier
+     * @param array $panier
      */
-    public function setPanier($panier)
+    public function setPanier(array $panier)
     {
         $this->panier = $panier;
     }
-
-
 
 }

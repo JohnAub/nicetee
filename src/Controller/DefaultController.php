@@ -7,6 +7,7 @@ use App\Entity\ProduitMembre;
 use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -14,8 +15,10 @@ class DefaultController extends Controller
     /**
      * @Route("/")
      */
-    public function default()
+    public function default(Request $request)
     {
+        $session = $request->getSession();
+        $session->clear();
       $listTeeIntern = $this->getDoctrine()
             ->getRepository(ProduitIntern::class)
             ->findAll();

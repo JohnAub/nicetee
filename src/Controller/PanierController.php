@@ -4,12 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\ProduitIntern;
-use function PHPSTORM_META\elementType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class PanierController extends Controller
 {
@@ -21,14 +19,19 @@ class PanierController extends Controller
      */
     public function panier(Request $request)
     {
-        $session = $request->getSession();
-        if (!$session->has('panier')) $session->set('panier', Panier::class);
-
-
-
-        $panier = $session->get('panier');
-        dump($panier);
         $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        if (!($session->has('panier')))
+        {
+            $panier = new Panier();
+            $arrayPanier = $panier->getPanier();
+            $session->set('panier', $arrayPanier);
+        }else{
+            $arrayPanier = $session->get('panier');
+            $panier = new Panier();
+            $panier->setPanier($arrayPanier);
+        }
+
         //todo voir comment récuperer produitintern et membre en meme temps
         $sortPanier = $panier->sortPanier();
 
@@ -64,7 +67,6 @@ class PanierController extends Controller
             if ($id)
             {
                 if ($request->request->get('ajouter') == 1){
-                    die('ici');
                     $sex = $request->request->get('sex');
                     $taille = $request->request->get('taille');
                     $qty = $request->request->get('qty');
@@ -81,34 +83,23 @@ class PanierController extends Controller
 
                 $productName = $product->getDesignation();
                 $session = $request->getSession();
+
+                //On serialize en json le panier pour le stocker en session
+
                 if (!($session->has('panier')))
                 {
                     $panier = new Panier();
-                    $session->set('panier', $panier);
+                    $panier->ajouterProduit($id, $sex, $taille, $qty);
+                    $arrayPanier = $panier->getPanier();
+                    $session->set('panier', $arrayPanier);
                 }else{
-                    $panier = $session->get('panier');
+                    $arrayPanier = $session->get('panier');
+                    $panier = new Panier();
+                    $panier->setPanier($arrayPanier);
+                    $panier->ajouterProduit($id, $sex, $taille, $qty);
+                    $arrayPanier = $panier->getPanier();
+                    $session->set('panier', $arrayPanier);
                 }
-
-                $panier->ajouterProduit($id, $sex, $taille, $qty);
-                //On récupere la session
-               /* $session = $request->getSession();
-
-                //on vérifie que dans notre session on est bien un array panier sinon on le cree
-                if (!($session->has('panier')))
-                {
-                    $session->set('panier', array());
-                }
-
-                //on stock la variable session panier dans $panier pour plus de simplicité
-                $panier = $session->get('panier');
-
-                //On ajoute au panier
-                $panier[$id][$sex][$taille] = array(
-                    'qty' => $qty
-                );*/
-
-                $session->set('panier', $panier);
-
 
                 //************************************//
                 $response = new JsonResponse();
@@ -137,9 +128,26 @@ class PanierController extends Controller
         $taille = $request->get('taille');
         $session = $request->getSession();
         if (!$session->has('panier')) $session->set('panier', array());
-        $panier = $session->get('panier');
+        $arrayPanier = $session->get('panier');
+        $panier = new Panier();
+        $panier->setPanier($arrayPanier);
         $panier->removeProduit($id, $sex, $taille);
-        $session->set('panier', $panier);
+        $arrayPanier = $panier->getPanier();
+        $session->set('panier', $arrayPanier);
+        return $this->panier($request);
+
+    }
+
+    /**
+     * @Route("/product/panier/vider", name="remove_panier_full")
+     */
+    public function vider( Request $request)
+    {
+        $session = $request->getSession();
+        if (!$session->has('panier')) $session->set('panier', array());
+        $panier = new Panier();
+        $arrayPanier = $panier->getPanier();
+        $session->set('panier', $arrayPanier);
         return $this->panier($request);
 
     }

@@ -51,7 +51,7 @@ class DeliveryAdressUser
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $tel;
 
@@ -65,7 +65,7 @@ class DeliveryAdressUser
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $complementAdresse;
 
@@ -98,7 +98,7 @@ class DeliveryAdressUser
     /**
      * @return mixed
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -120,7 +120,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getDesignation(): string
+    public function getDesignation()
     {
         return $this->designation;
     }
@@ -136,7 +136,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getNom(): string
+    public function getNom()
     {
         return $this->nom;
     }
@@ -152,7 +152,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getPrenom(): string
+    public function getPrenom()
     {
         return $this->prenom;
     }
@@ -168,7 +168,7 @@ class DeliveryAdressUser
     /**
      * @return int
      */
-    public function getTel(): int
+    public function getTel()
     {
         return $this->tel;
     }
@@ -184,7 +184,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getAdresse(): string
+    public function getAdresse()
     {
         return $this->adresse;
     }
@@ -200,7 +200,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getComplementAdresse(): string
+    public function getComplementAdresse()
     {
         return $this->complementAdresse;
     }
@@ -216,7 +216,7 @@ class DeliveryAdressUser
     /**
      * @return int
      */
-    public function getCodePostal(): int
+    public function getCodePostal()
     {
         return $this->codePostal;
     }
@@ -232,7 +232,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getVille(): string
+    public function getVille()
     {
         return $this->ville;
     }
@@ -248,7 +248,7 @@ class DeliveryAdressUser
     /**
      * @return string
      */
-    public function getPays(): string
+    public function getPays()
     {
         return $this->pays;
     }

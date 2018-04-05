@@ -3,13 +3,8 @@
 {% block teeDay %}
 {% endblock %}
 {% block body %}
-<main role="main">
-    {% if vide %}
-        <div class="d-flex justify-content-center">
-            <p class=" mb-3">Votre panier est vide</p>
-        </div>
-    {% else %}
-    <h3>Liste des produits: </h3>
+<div class="container">
+    <h3>récapitulatif des achats: </h3>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -33,15 +28,8 @@
                         <td><img src="{{ asset(produit.imageZoomListe.webPath) }}" width="50" alt=""></td>
                         <td class="sex_produit_{{ produit.id }}" id="{{ panier[1] }}">{{ panier[1] }}</td>
                         <td class="taille_produit_{{ produit.id }}" id="{{ panier[2] }}">{{ panier[2]}}</td>
-                        <td>
-                            <select name="qty" {#onchange="this.form.submit()"#} class="qty_produit" id="{{ produit.id }}">
-                                {% for i in 1..10 %}
-                                    <option  value="{{ i }}" {% if panier[3] == i %} selected="selected" {% endif %}>
-                                        {{ i }}
-                                    </option>
-                                {% endfor %}
-                            </select>
-                            <a href="{{ path('remove_panier_produit', {'id' : produit.id, "sex" : panier[1], 'taille': panier[2]}) }}" ><img src="{{ asset('images/icons/corbeille.jpg') }}" width="15" alt="corbeille"></a>
+                        <td class="qty" {#onchange="this.form.submit()"#} class="qty_produit" id="{{ produit.id }}">
+                            {{ panier[3] }}
                         </td>
                         <td>{{ produit.prixVentes  }} € </td>
                         <td>{{ produit.prixVentes * panier[3]  }} €</td>
@@ -49,9 +37,8 @@
                 </tr>
             {% endfor %}
         </table>
-    </div>
-    <div class="table-responsive">
         <table class="table table-striped d-flex justify-content-end">
+            <span> A l'adresse: {{ adresse.adresse }} {{ adresse.codePostal }} {{ adresse.ville }} {{ adresse.pays }}</span>
             <tr>
                 <th scope="row">Prix Total TTC</th>
                 <th scope="row">{{ prix_total }} €</th>
@@ -59,11 +46,8 @@
         </table >
     </div>
     <div class="d-flex justify-content-end">
-        <a href="{{ path('remove_panier_full') }}" class="btn btn-danger mr-4" role="button">Vider le panier</a>
-        <a href="{{ path('livraison') }}" class="btn btn-primary" role="button">Commander</a>
-
+        <a href="{{ path('panier') }}" class="btn btn-danger mr-4" role="button">Revenir au panier</a>
+        <a href="{{ path('livraison') }}" class="btn btn-primary" role="button">payer</a>
     </div>
-    {% endif %}
-</main>
-
+</div>
 {% endblock %}

@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    /**
+     *Modal Hiden
+     */
     let tailleSex;
     let qty;
     let button = 0;
@@ -34,6 +38,9 @@ $(document).ready(function(){
         buttonEnable()
     })
 
+    /**
+     * Ajax Modif Quantité dans le panier
+     */
     $('.qty_produit', this).change(function () {
         let id = $(this).attr('id');
         let taille = $('.taille_produit_'+id).attr('id');
@@ -60,6 +67,9 @@ $(document).ready(function(){
     })
 
 
+    /**
+     * Ajax ajout produit
+     */
 
     $('.commander').click(function () {
         let chemin = window.location.pathname;
@@ -92,6 +102,10 @@ $(document).ready(function(){
             }
         })
     });
+
+    $('.continuerAchat').click(function () {
+        location.reload();
+    })
 
 
     function buttonEnable() {
