@@ -2,29 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b2b1913-1712-4442-82f3-c7f95eb397e2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/js/validCommande.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/paypal.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/livraison.html.twig" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/payement.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/payement_test.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/payement_test_cancel.html.twig" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/payement_test_pay.html.twig" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/config/paypal.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/NiceTee.iml" afterPath="$PROJECT_DIR$/.idea/NiceTee.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/app.scss" afterPath="$PROJECT_DIR$/assets/css/app.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/tee.js" afterPath="$PROJECT_DIR$/assets/js/tee.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/CommandeController.php" afterPath="$PROJECT_DIR$/src/Controller/CommandeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/PanierController.php" afterPath="$PROJECT_DIR$/src/Controller/PanierController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/DeliveryAdressUser.php" afterPath="$PROJECT_DIR$/src/Entity/DeliveryAdressUser.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Entity/Panier.php" afterPath="$PROJECT_DIR$/src/Entity/Panier.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/symfony.lock" afterPath="$PROJECT_DIR$/symfony.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/panier.html.twig" afterPath="$PROJECT_DIR$/templates/panier.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/security/login.html.twig" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/teeNode.html.twig" afterPath="$PROJECT_DIR$/templates/teeNode.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/webpack.config.js" afterPath="$PROJECT_DIR$/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn-error.log" afterPath="$PROJECT_DIR$/yarn-error.log" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,8 +29,8 @@
       <file leaf-file-name="CommandeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/CommandeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+            <state relative-caret-position="384">
+              <caret line="15" column="7" lean-forward="false" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
               <folding>
                 <element signature="e#34#68#0#PHP" expanded="true" />
                 <element signature="e#1657#1678#0#PHP" expanded="true" />
@@ -53,11 +40,58 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="paypal.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/paypal.php">
+      <file leaf-file-name="PaymentPayPalController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/PaymentPayPalController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="4" column="2" lean-forward="false" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+            <state relative-caret-position="488">
+              <caret line="29" column="80" lean-forward="false" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
+              <folding>
+                <element signature="e#34#63#0#PHP" expanded="true" />
+                <element signature="e#1028#1048#1#PHP" expanded="true" />
+                <element signature="e#1273#1298#1#PHP" expanded="true" />
+                <element signature="e#1443#1472#1#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="payement_test.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/payement_test.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PaymentPayPal.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/PaymentPayPal.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DessinController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/DessinController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="23" column="7" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="23" selection-end-column="7" />
+              <folding>
+                <element signature="e#34#61#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChangePassword.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/ChangePassword.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="5" column="53" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -125,9 +159,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Entity/Commentaire.php" />
-        <option value="$PROJECT_DIR$/src/Form/CommentaireType.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DessinController.php" />
         <option value="$PROJECT_DIR$/templates/pageDessin.html.twig" />
         <option value="$PROJECT_DIR$/public/js/user.js" />
         <option value="$PROJECT_DIR$/yarn-error.log" />
@@ -176,6 +207,9 @@
         <option value="$PROJECT_DIR$/templates/panier.html.twig" />
         <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/config/paypal.php" />
+        <option value="$PROJECT_DIR$/src/paypal/payment.php" />
+        <option value="$PROJECT_DIR$/src/Entity/PaymentPayPal.php" />
+        <option value="$PROJECT_DIR$/src/Controller/PaymentPayPalController.php" />
       </list>
     </option>
   </component>
@@ -266,13 +300,14 @@
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-common" />
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
+      <path value="$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-840" />
-    <option name="y" value="-138" />
-    <option name="width" value="840" />
-    <option name="height" value="1010" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="778" />
+    <option name="y" value="-20" />
+    <option name="width" value="1294" />
+    <option name="height" value="678" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -329,13 +364,24 @@
             <path>
               <item name="NiceTee" type="b2602c69:ProjectViewProjectNode" />
               <item name="NiceTee" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NiceTee" type="b2602c69:ProjectViewProjectNode" />
               <item name="NiceTee" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NiceTee" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NiceTee" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="NiceTee" type="b2602c69:ProjectViewProjectNode" />
+              <item name="NiceTee" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -356,17 +402,17 @@
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Documents\Formation\projets perso\NiceTee\templates" />
-      <recent name="D:\Documents\Formation\projets perso\NiceTee\assets\css" />
-      <recent name="D:\Documents\Formation\projets perso\NiceTee\public\build" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Documents\Formation\projets perso\NiceTee\assets\js" />
       <recent name="D:\Documents\Formation\projets perso\NiceTee\templates\security" />
       <recent name="D:\Documents\Formation\projets perso\NiceTee\src" />
       <recent name="D:\Documents\Formation\projets perso\NiceTee\app\Ressources\views\easy_admin\ProduitIntern" />
       <recent name="D:\Documents\Formation\projets perso\NiceTee\templates\easy_admin\entities" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Documents\Formation\projets perso\NiceTee\templates" />
+      <recent name="D:\Documents\Formation\projets perso\NiceTee\assets\css" />
+      <recent name="D:\Documents\Formation\projets perso\NiceTee\public\build" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -506,15 +552,15 @@
       <workItem from="1522744413315" duration="18313000" />
       <workItem from="1522849066855" duration="7273000" />
       <workItem from="1522856457836" duration="3601000" />
-      <workItem from="1522861016263" duration="20132000" />
+      <workItem from="1522861016263" duration="25994000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="410037000" />
+    <option name="totallyTimeSpent" value="415899000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-840" y="-138" width="840" height="1010" extended-state="0" />
+    <frame x="-9" y="-9" width="2578" height="1408" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -530,7 +576,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32160193" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20507812" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -559,77 +605,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Portefeuille.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1380">
-          <caret line="47" column="38" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/console">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/dev/web_profiler.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/dev/routing.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/test/framework.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/test/web_profiler.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/build/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Kernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-562">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.lock">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3600">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="8" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -712,22 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DessinController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="959">
-          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="36" column="46" lean-forward="false" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/security/login.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -756,19 +715,19 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1522861604140" expanded="true" signature="70:876" ph="{&quot;php&quot;: &quot;^7.1.3&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="897:1071" ph="{&quot;doctrine/doctrine-fixtures-bundle&quot;: &quot;^3.0&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="1087:1190" ph="{&quot;sort-packages&quot;: true...}" />
-            <marker date="1522861604140" expanded="true" signature="1118:1153" ph="{&quot;*&quot;: &quot;dist&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="1208:1272" ph="{...}" />
-            <marker date="1522861604140" expanded="true" signature="1227:1266" ph="{&quot;App\&quot;: &quot;src/&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="1294:1367" ph="{...}" />
-            <marker date="1522861604140" expanded="true" signature="1313:1361" ph="{&quot;App\Tests\&quot;: &quot;tests/&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="1384:1546" ph="{&quot;symfony/polyfill-iconv&quot;: &quot;*&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="1563:1863" ph="{...}" />
-            <marker date="1522861604140" expanded="true" signature="1589:1720" ph="{&quot;cache:clear&quot;: &quot;symfony-cmd&quot;...}" />
-            <marker date="1522861604140" expanded="true" signature="1750:1789" ph="[...]" />
-            <marker date="1522861604140" expanded="true" signature="1881:1919" ph="{&quot;symfony/symfony&quot;: &quot;*&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="70:920" ph="{&quot;php&quot;: &quot;^7.1.3&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="941:1115" ph="{&quot;doctrine/doctrine-fixtures-bundle&quot;: &quot;^3.0&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="1131:1234" ph="{&quot;sort-packages&quot;: true...}" />
+            <marker date="1522941115941" expanded="true" signature="1162:1197" ph="{&quot;*&quot;: &quot;dist&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="1252:1316" ph="{...}" />
+            <marker date="1522941115941" expanded="true" signature="1271:1310" ph="{&quot;App\&quot;: &quot;src/&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="1338:1411" ph="{...}" />
+            <marker date="1522941115941" expanded="true" signature="1357:1405" ph="{&quot;App\Tests\&quot;: &quot;tests/&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="1428:1590" ph="{&quot;symfony/polyfill-iconv&quot;: &quot;*&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="1607:1907" ph="{...}" />
+            <marker date="1522941115941" expanded="true" signature="1633:1764" ph="{&quot;cache:clear&quot;: &quot;symfony-cmd&quot;...}" />
+            <marker date="1522941115941" expanded="true" signature="1794:1833" ph="[...]" />
+            <marker date="1522941115941" expanded="true" signature="1925:1963" ph="{&quot;symfony/symfony&quot;: &quot;*&quot;...}" />
           </folding>
         </state>
       </provider>
@@ -945,18 +904,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/payement.html.twig">
+    <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="43" column="55" lean-forward="false" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20180309142925.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/ChangePassword.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="53" lean-forward="false" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/paypal/payment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="29" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/paypal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CommandeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="14" column="1" lean-forward="true" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        <state relative-caret-position="384">
+          <caret line="15" column="7" lean-forward="false" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
           <folding>
             <element signature="e#34#68#0#PHP" expanded="true" />
             <element signature="e#1657#1678#0#PHP" expanded="true" />
@@ -965,11 +964,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/paypal.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="4" column="2" lean-forward="false" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        <state relative-caret-position="900">
+          <caret line="36" column="46" lean-forward="false" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="46" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/payement.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="728">
+          <caret line="43" column="55" lean-forward="false" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/PaymentPayPal.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" column="6" lean-forward="false" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/payement_test.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DessinController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="23" column="7" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="23" selection-end-column="7" />
+          <folding>
+            <element signature="e#34#61#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/payement_test_pay.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/payement_test_cancel.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/PaymentPayPalController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="29" column="80" lean-forward="false" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
+          <folding>
+            <element signature="e#34#63#0#PHP" expanded="true" />
+            <element signature="e#1028#1048#1#PHP" expanded="true" />
+            <element signature="e#1273#1298#1#PHP" expanded="true" />
+            <element signature="e#1443#1472#1#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
