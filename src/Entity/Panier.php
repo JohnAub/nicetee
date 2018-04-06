@@ -2,12 +2,17 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\EntityManager;
+
 class Panier
 {
     private $panier;
-    public function __construct()
+    private $em;
+
+    public function __construct(EntityManager $em)
     {
         $this->panier = array();
+        $this->em = $em;
     }
 
     public function sortPanier(){
@@ -68,6 +73,39 @@ class Panier
     public function setPanier(array $panier)
     {
         $this->panier = $panier;
+    }
+
+    public function getProducts(){
+        $em = $this->em;
+        $sortPanier = $this->sortPanier();
+        $products = array();
+        foreach ($sortPanier as $produit){
+            $product = $em->getRepository(ProduitIntern::class)
+                ->find($produit[0]);
+            $products[] = array(
+                "designation" => $product->getDesignation(),
+                "sex" => $produit[1],
+                "taille" => $produit[2],
+                "qty" => $produit[3],
+                "prixUnitaire" =>$product->getPrixventes(),
+            );
+        }
+        return $products;
+    }
+
+    public function getPrice(){
+        $em = $this->em;
+        $sortPanier = $this->sortPanier();
+        $price = 0;
+        foreach ($sortPanier as $produit){
+            $product = $em->getRepository(ProduitIntern::class)
+                ->find($produit[0]);
+            $price += $product->getPrixVentes() * $produit[3];
+        }
+        return $price;
+    }
+    public function getVatPrice($rate){
+        return round($this->getPrice() * $rate * 100) / 100;
     }
 
 }

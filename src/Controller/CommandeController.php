@@ -18,13 +18,14 @@ class CommandeController extends Controller
      */
     public function ajouter(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
         if (!($session->has('panier')))
         {
             return $this->redirectToRoute('panier');
         }else{
             $arrayPanier = $session->get('panier');
-            $panier = new Panier();
+            $panier = new Panier($em);
             $panier->setPanier($arrayPanier);
         }
         $sortPanier = $panier->sortPanier();
@@ -38,7 +39,6 @@ class CommandeController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
             $user->addDeliveryAdressUser($deliveryAdressUser);
-            $em = $this->getDoctrine()->getManager();
             $em->persist($deliveryAdressUser);
             $em->flush();
             return $this->redirectToRoute('payement', array(
@@ -83,7 +83,7 @@ class CommandeController extends Controller
             return $this->redirectToRoute('panier');
         }else{
             $arrayPanier = $session->get('panier');
-            $panier = new Panier();
+            $panier = new Panier($em);
             $panier->setPanier($arrayPanier);
         }
         $sortPanier = $panier->sortPanier();
