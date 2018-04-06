@@ -23,12 +23,12 @@ class PanierController extends Controller
         $session = $request->getSession();
         if (!($session->has('panier')))
         {
-            $panier = new Panier();
+            $panier = new Panier($em);
             $arrayPanier = $panier->getPanier();
             $session->set('panier', $arrayPanier);
         }else{
             $arrayPanier = $session->get('panier');
-            $panier = new Panier();
+            $panier = new Panier($em);
             $panier->setPanier($arrayPanier);
         }
 
@@ -88,13 +88,13 @@ class PanierController extends Controller
 
                 if (!($session->has('panier')))
                 {
-                    $panier = new Panier();
+                    $panier = new Panier($em);
                     $panier->ajouterProduit($id, $sex, $taille, $qty);
                     $arrayPanier = $panier->getPanier();
                     $session->set('panier', $arrayPanier);
                 }else{
                     $arrayPanier = $session->get('panier');
-                    $panier = new Panier();
+                    $panier = new Panier($em);
                     $panier->setPanier($arrayPanier);
                     $panier->ajouterProduit($id, $sex, $taille, $qty);
                     $arrayPanier = $panier->getPanier();
@@ -124,12 +124,13 @@ class PanierController extends Controller
      */
     public function supprimer($id, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $sex = $request->get('sex');
         $taille = $request->get('taille');
         $session = $request->getSession();
         if (!$session->has('panier')) $session->set('panier', array());
         $arrayPanier = $session->get('panier');
-        $panier = new Panier();
+        $panier = new Panier($em);
         $panier->setPanier($arrayPanier);
         $panier->removeProduit($id, $sex, $taille);
         $arrayPanier = $panier->getPanier();
@@ -143,9 +144,10 @@ class PanierController extends Controller
      */
     public function vider( Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
         if (!$session->has('panier')) $session->set('panier', array());
-        $panier = new Panier();
+        $panier = new Panier($em);
         $arrayPanier = $panier->getPanier();
         $session->set('panier', $arrayPanier);
         return $this->panier($request);
