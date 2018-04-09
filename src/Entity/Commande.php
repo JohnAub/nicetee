@@ -30,9 +30,23 @@ class Commande
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Commande", mappedBy="commande")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneCommande", mappedBy="commande")
      */
     private $ligneCommandes;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     */
+    private $idSale;
 
     /***************Constructeur*****************/
     public function __construct()
@@ -60,10 +74,9 @@ class Commande
     }
 
     public function removeLigneCommande(LigneCommande $ligneCommande){
-        $this->ligneCommandes->removeElement($ligneCommande);
-        //todo effacer lignecommande à vérifier $ligneCommande->setCommande(null);
-        $ligneCommande->setCommande(null);
+        $this->ligneCommandes->removeElement($ligneCommande);;
     }
+
 
     /**
      * @return mixed
@@ -105,4 +118,35 @@ class Commande
         $this->user = $user;
     }
 
+    /**
+     * @return bool
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param bool $status
+     */
+    public function setStatus(bool $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdSale()
+    {
+        return $this->idSale;
+    }
+
+    /**
+     * @param string $idSale
+     */
+    public function setIdSale(string $idSale)
+    {
+        $this->idSale = $idSale;
+    }
 }

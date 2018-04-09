@@ -59,16 +59,9 @@ class CommandeController extends Controller
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $em = $this->getDoctrine()->getManager();
         $adresse = $idAdresse;
-        $user = $this->getUser();
+         $user = $this->getUser();
         if ($adresse == 0){
-            $adresse = new DeliveryAdressUser();
-            $adresse->setAdresse($user->getAdresse());
-            $adresse->setCodePostal($user->getCodePostal());
-            $adresse->setVille($user->getVille());
-            $adresse->setPays($user->getPays());
-            $adresse->setNom($user->getNom());
-            $adresse->setPrenom($user->getPrenom());
-            $adresse->setTel($user->getPhoneNumber());
+            $adresse = $user->getCompletAdress();
         }else
         {
             $adresse = $em->getRepository(DeliveryAdressUser::class)
@@ -78,6 +71,7 @@ class CommandeController extends Controller
             }
         }
         $session = $request->getSession();
+        $session->set('adresseLivraison', $adresse->getId());
         if (!($session->has('panier')))
         {
             return $this->redirectToRoute('panier');

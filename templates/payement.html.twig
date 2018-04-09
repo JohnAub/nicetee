@@ -28,7 +28,7 @@
                         <td><img src="{{ asset(produit.imageZoomListe.webPath) }}" width="50" alt=""></td>
                         <td class="sex_produit_{{ produit.id }}" id="{{ panier[1] }}">{{ panier[1] }}</td>
                         <td class="taille_produit_{{ produit.id }}" id="{{ panier[2] }}">{{ panier[2]}}</td>
-                        <td class="qty" {#onchange="this.form.submit()"#} class="qty_produit" id="{{ produit.id }}">
+                        <td class="qty" {#onchange="this.form.submit()"#}  id="{{ produit.id }}">
                             {{ panier[3] }}
                         </td>
                         <td>{{ produit.prixVentes  }} € </td>
@@ -59,15 +59,26 @@
         paypal.Button.render({
             env: 'sandbox', // Or 'sandbox',
             commit: true, // Show a 'Pay Now' button
+            locale: 'fr_FR',
+            style: {
+                color: 'blue',
+                shape: 'pill',
+                label: 'checkout'
+            },
             payment: function(data, actions) {
-                /*
-                 * Set up the payment here
-                 */
+                return paypal.request.post('{{ path('payment_paypal') }}').then(function(data) {
+                    return data.id;
+                });
             },
             onAuthorize: function(data, actions) {
-                /*
-                 * Execute the payment here
-                 */
+                return paypal.request.post('{{ path('payment_paypal_pay') }}', {
+                    paymentID: data.paymentID,
+                    payerID:   data.payerID
+                }).then(function(data) {
+                    window.location.replace('{{ path('payment_paypal_pay_success') }}')
+                }).catch(function (err) {
+                    alert("Une erreur est apparu pendant le paiement.");
+                });
             }
         }, '#paypal-button');
     </script>
