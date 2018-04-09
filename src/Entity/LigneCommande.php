@@ -29,7 +29,7 @@ class LigneCommande
     private $produitInterne;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commande", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProduitMembre", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $produitMembre;
@@ -47,6 +47,24 @@ class LigneCommande
      * @ORM\Column(type="float")
      */
     private $prix;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     */
+    private $sex;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     */
+    private $taille;
+
+
+
 
 
 
@@ -84,7 +102,7 @@ class LigneCommande
     /**
      * @return int
      */
-    public function getQty(): int
+    public function getQty()
     {
         return $this->qty;
     }
@@ -100,7 +118,7 @@ class LigneCommande
     /**
      * @return float
      */
-    public function getPrix(): float
+    public function getPrix()
     {
         return $this->prix;
     }
@@ -143,6 +161,38 @@ class LigneCommande
     public function setProduitMembre($produitMembre)
     {
         $this->produitMembre = $produitMembre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSex(): string
+    {
+        return $this->sex;
+    }
+
+    /**
+     * @param string $sex
+     */
+    public function setSex(string $sex)
+    {
+        $this->sex = $sex;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaille(): string
+    {
+        return $this->taille;
+    }
+
+    /**
+     * @param string $taille
+     */
+    public function setTaille(string $taille)
+    {
+        $this->taille = $taille;
     }
 
 

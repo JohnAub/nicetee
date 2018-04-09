@@ -478,6 +478,18 @@ class User implements UserInterface, \Serializable
         return null;
     }
 
+    public function getCompletAdress(){
+        $adresse = new DeliveryAdressUser();
+        $adresse->setAdresse($this->getAdresse());
+        $adresse->setCodePostal($this->getCodePostal());
+        $adresse->setVille($this->getVille());
+        $adresse->setPays($this->getPays());
+        $adresse->setNom($this->getNom());
+        $adresse->setPrenom($this->getPrenom());
+        $adresse->setTel($this->getPhoneNumber());
+        return $adresse;
+    }
+
     /**
      * Removes sensitive data from the user.
      *

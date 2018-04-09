@@ -93,6 +93,30 @@ class Panier
         return $products;
     }
 
+    public function addCommande(User $user, $idSale){
+        $em = $this->em;
+        $sortPanier = $this->sortPanier();
+        $commande = new Commande();
+        foreach ($sortPanier as $produit){
+            $product = $em->getRepository(ProduitIntern::class)
+                ->find($produit[0]);
+            $ligneCommande = new LigneCommande();
+            $ligneCommande->setPrix($product->getPrixventes());
+            $ligneCommande->setQty($produit[3]);
+            $ligneCommande->setProduitInterne($product);
+            $ligneCommande->setSex($produit[1]);
+            $ligneCommande->setTaille($produit[2]);
+            $commande->addLigneCommande($ligneCommande);
+            $em->persist($ligneCommande);
+        }
+        $user->addCommandes($commande);
+        $commande->setStatus(true);
+        $commande->setIdSale($idSale);
+        $em->persist($commande);
+        $em->flush();
+        return $commande->getId();
+    }
+
     public function getPrice(){
         $em = $this->em;
         $sortPanier = $this->sortPanier();
