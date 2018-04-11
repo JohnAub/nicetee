@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Panier;
 use App\Entity\ProduitIntern;
+use App\Entity\ProduitMembre;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -39,12 +40,18 @@ class PanierController extends Controller
         if ($sortPanier){
             $produits = array();
             foreach ($sortPanier as $key => $produit){
-                $produits[] = $em->getRepository(ProduitIntern::class)
-                    ->find($produit[0]);
-                $prixTotal += $produits[$key]->getPrixVentes() * $produit[3];
+                $id = $produit[0];
+                if (preg_match('#m#i', $id)){
+                    $id = substr($id,1);
+                    $produits[] = $em->getRepository(ProduitMembre::class)
+                        ->find($id);
+                    $prixTotal += $produits[$key]->getPrixVentes() * $produit[3];
+                }else{
+                    $produits[] = $em->getRepository(ProduitIntern::class)
+                        ->find($produit[0]);
+                    $prixTotal += $produits[$key]->getPrixVentes() * $produit[3];
+                }
             }
-
-
             return $this->render('panier.html.twig', array(
                 'vide' => false,
                 'prix_total' => $prixTotal,
@@ -120,7 +127,73 @@ class PanierController extends Controller
     }
 
     /**
-     * @Route("/product/{id}/panier/suprimer", name="remove_panier_produit")
+     * @Route("/productuser/{id}/panier", name="add_panier_produit_membre")
+     */
+    public function ajouterProductUser(Request $request,$id)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            if ($id)
+            {
+                if ($request->request->get('ajouter') == 1){ //Modif depuis le panier
+                    $sex = $request->request->get('sex');
+                    $taille = $request->request->get('taille');
+                    $qty = $request->request->get('qty');
+                }else{                                          //ajout depuis node
+                    $tailleSex = $request->request->get('taille_sex');
+                    $tailleSex = explode('-', $tailleSex);
+                    $sex = $tailleSex['0'];
+                    $taille = $tailleSex['1'];
+                    $qty = $request->request->get('qty');
+                }
+                if (preg_match('#m#i', $id))
+                {
+                    $id = substr($id, 1);
+                }
+                $em = $this->getDoctrine()->getManager();
+                $product = $em->getRepository(ProduitIntern::class)
+                    ->find($id);
+
+                $productName = $product->getDesignation();
+                $id = 'M'.$id;
+                $session = $request->getSession();
+
+                if (!($session->has('panier')))
+                {
+                    $panier = new Panier($em);
+                    $panier->ajouterProduit($id, $sex, $taille, $qty);
+                    $arrayPanier = $panier->getPanier();
+                    $session->set('panier', $arrayPanier);
+                }else{
+                    $arrayPanier = $session->get('panier');
+                    $panier = new Panier($em);
+                    $panier->setPanier($arrayPanier);
+                    $panier->ajouterProduit($id, $sex, $taille, $qty);
+                    $arrayPanier = $panier->getPanier();
+                    $session->set('panier', $arrayPanier);
+                }
+
+                //************************************//
+                $response = new JsonResponse();
+                $response->setData(array(
+                    "taille" => $taille,
+                    "sex" => $sex,
+                    "qtys" => $qty,
+                    "productName" => $productName
+                ));
+                return $response;
+
+            }else
+            {
+                die("Vous n'avez pas sélectionné de produit à ajouter au panier");
+            }
+        }
+        throw new \Exception("Erreur");
+
+    }
+
+    /**
+     * @Route("/{id}/panier/suprimer", name="remove_panier_produit")
      */
     public function supprimer($id, Request $request)
     {

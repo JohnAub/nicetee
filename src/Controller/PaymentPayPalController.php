@@ -8,14 +8,9 @@ use App\Entity\LigneCommande;
 use App\Entity\Panier;
 use App\Entity\PaymentPayPal;
 use App\Entity\TransactionFactory;
-use PayPal\Api\Amount;
-use PayPal\Api\Details;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
 use PayPal\Exception\PayPalConnectionException;
 use PayPal\Api\Payment;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -92,43 +87,24 @@ class PaymentPayPalController extends Controller
             $trans = $payment->getTransactions();
             $relatedRessource = $trans[0]->getRelatedResources();
             $idSale = $relatedRessource[0]->getSale()->getId();
-            $idCommande = $panier->addCommande($user, $idSale);
+            $session = $request->getSession();
+            $idAdresse = $session->get('adresseLivraison');
+            $idCommande = $panier->addCommande($user, $idSale, $idAdresse);
             $session = $request->getSession();
             $session->set('idCommande', $idCommande );
+            $session->set('panier', array());
             return $this->redirectToRoute('payment_paypal_pay_success');
         }
         return $this->redirectToRoute('payment_paypal_pay_fail');
     }
 
     /**
-     * @param Request $request
+     *
      * @return Response
      * @Route("/payment/test/pay/success", name="payment_paypal_pay_success")
      */
-    public function paySuccess(Request $request){
-        $session = $request->getSession();
-        $user = $this->getUser();
-        $idCommande = $session->get("idCommande");
-        $commande =  $this->getDoctrine()
-            ->getRepository(Commande::class)
-            ->find($idCommande);
-        $lignesCommande =  $this->getDoctrine()
-            ->getRepository(LigneCommande::class)
-            ->findBy(
-                array('commande' => $commande->getId())
-            );
-        $adresseId = $session->get('adresseLivraison');
-        if ($adresseId == 0){
-            $adresse = $user->getCompletAdress();
-        }else{
-            $adresse = $this->getDoctrine()
-                ->getRepository(DeliveryAdressUser::class)
-                ->find($adresseId);
-        }
-
-        dump($adresse);
-        return $this->render('payment_success.html.twig', array(
-        ));
+    public function paySuccess(){
+        return $this->render('payment_success.html.twig');
     }
 
     /**

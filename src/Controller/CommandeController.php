@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\DeliveryAdressUser;
 use App\Entity\Panier;
 use App\Entity\ProduitIntern;
+use App\Entity\ProduitMembre;
 use App\Entity\User;
 use App\Form\DeliveryAdressUserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -70,8 +71,9 @@ class CommandeController extends Controller
                 return $this->redirectToRoute('panier');
             }
         }
+        $idAdresse = $adresse->getId();
         $session = $request->getSession();
-        $session->set('adresseLivraison', $adresse->getId());
+        $session->set('adresseLivraison', $idAdresse);
         if (!($session->has('panier')))
         {
             return $this->redirectToRoute('panier');
@@ -86,9 +88,17 @@ class CommandeController extends Controller
         $prixTotal = 0;
         $produits = array();
         foreach ($sortPanier as $key => $produit){
-            $produits[] = $em->getRepository(ProduitIntern::class)
-                ->find($produit[0]);
-            $prixTotal += $produits[$key]->getPrixVentes() * $produit[3];
+            $id = $produit[0];
+            if (preg_match('#m#i', $id)){
+                $id = substr($id,1);
+                $produits[] = $em->getRepository(ProduitMembre::class)
+                    ->find($id);
+                $prixTotal += $produits[$key]->getPrixVentes() * $produit[3];
+            }else{
+                $produits[] = $em->getRepository(ProduitIntern::class)
+                    ->find($produit[0]);
+                $prixTotal += $produits[$key]->getPrixVentes() * $produit[3];
+            }
         }
         return $this->render('payement.html.twig', array(
             'adresse' => $adresse,

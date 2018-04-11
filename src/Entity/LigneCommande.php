@@ -63,7 +63,12 @@ class LigneCommande
      */
     private $taille;
 
-
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $typeProduit;
 
 
 
@@ -193,6 +198,22 @@ class LigneCommande
     public function setTaille(string $taille)
     {
         $this->taille = $taille;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTypeProduit()
+    {
+        return $this->typeProduit;
+    }
+
+    /**
+     * @param int $typeProduit
+     */
+    public function setTypeProduit(int $typeProduit)
+    {
+        $this->typeProduit = $typeProduit;
     }
 
 

@@ -24,8 +24,18 @@ $(document).ready(function(){
         }
 
     });
-
     $(".flash-notice").delay(4000).hide(500);
 
+    let url = window.location.pathname;
+    let divHidden = getLastPartOfUrl(url);
+    function getLastPartOfUrl(url) {
+        var urlsplit = url.split("/");
+        var lastpart = urlsplit[urlsplit.length-1];
+        if($.isNumeric(lastpart)) {
+            lastpart = 'dessin';
+        }
+        return lastpart;
+    }
+    $('.'+divHidden+'').addClass('displayNone');
 
 });

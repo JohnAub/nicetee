@@ -76,12 +76,10 @@ class Panier
     }
 
     public function getProducts(){
-        $em = $this->em;
         $sortPanier = $this->sortPanier();
         $products = array();
         foreach ($sortPanier as $produit){
-            $product = $em->getRepository(ProduitIntern::class)
-                ->find($produit[0]);
+            $product = $this->returnProduct($produit);
             $products[] = array(
                 "designation" => $product->getDesignation(),
                 "sex" => $produit[1],
@@ -93,43 +91,63 @@ class Panier
         return $products;
     }
 
-    public function addCommande(User $user, $idSale){
+    public function addCommande(User $user, $idSale, $idAdresse){
         $em = $this->em;
         $sortPanier = $this->sortPanier();
         $commande = new Commande();
         foreach ($sortPanier as $produit){
-            $product = $em->getRepository(ProduitIntern::class)
-                ->find($produit[0]);
+            $product = $this->returnProduct($produit);
             $ligneCommande = new LigneCommande();
             $ligneCommande->setPrix($product->getPrixventes());
             $ligneCommande->setQty($produit[3]);
-            $ligneCommande->setProduitInterne($product);
+            $id = $produit[0];
+            if (preg_match('#m#i', $id)){
+                $ligneCommande->setProduitMembre($product);
+                $ligneCommande->setTypeProduit(2);
+            }else
+            {
+                $ligneCommande->setProduitInterne($product);
+                $ligneCommande->setTypeProduit(1);
+            }
             $ligneCommande->setSex($produit[1]);
             $ligneCommande->setTaille($produit[2]);
             $commande->addLigneCommande($ligneCommande);
             $em->persist($ligneCommande);
         }
         $user->addCommandes($commande);
-        $commande->setStatus(true);
         $commande->setIdSale($idSale);
+        $commande->setIdAdresse($idAdresse);
         $em->persist($commande);
         $em->flush();
         return $commande->getId();
     }
 
     public function getPrice(){
-        $em = $this->em;
         $sortPanier = $this->sortPanier();
         $price = 0;
         foreach ($sortPanier as $produit){
-            $product = $em->getRepository(ProduitIntern::class)
-                ->find($produit[0]);
+            $product = $this->returnProduct($produit);
             $price += $product->getPrixVentes() * $produit[3];
         }
         return $price;
     }
+
     public function getVatPrice($rate){
         return round($this->getPrice() * $rate * 100) / 100;
+    }
+
+    private function returnProduct($produit){
+        $em = $this->em;
+        $id = $produit[0];
+        if (preg_match('#m#i', $id)){
+            $id = substr($id,1);
+            $product = $em->getRepository(ProduitMembre::class)
+                ->find($id);
+        }else{
+            $product = $em->getRepository(ProduitIntern::class)
+                ->find($id);
+        }
+        return $product;
     }
 
 }
