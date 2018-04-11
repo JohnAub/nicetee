@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\ChangePassword;
+use App\Entity\Commande;
+use App\Entity\DeliveryAdressUser;
 use App\Entity\Dessin;
 use App\Entity\Portefeuille;
+use App\Entity\ProduitIntern;
 use App\Form\ChangePasswordType;
 use App\Form\UserInfosType;
 use App\Form\UserpassType;
@@ -94,7 +97,6 @@ class UserController extends Controller
         $dessins = $this->getDoctrine()
             ->getRepository(Dessin::class)
             ->findByUser($id);
-
         return $this->render('User.html.twig', array(
             'user' => $userPage,
             'dessins' => $dessins,
@@ -218,10 +220,59 @@ class UserController extends Controller
         $user = $this->getUser();
         $pagePerso = ($userPage == $user)? true : false;
         $commandes = $user->getCommandes();
+        $lignesCommandes = array();
+        foreach ($commandes as $commande){
+            $lignesCommandes[] = $commande->getLigneCommandes();
+        }
         return $this->render('user_commande.html.twig', array(
             'user' => $userPage,
             'pagePerso' => $pagePerso,
             'commandes' => $commandes,
+            'lignesCommandes' => $lignesCommandes
+        ));
+    }
+    /**
+     * @Route("user/{id}/commande/{idCommande}", name="user_commande_detail")
+     */
+    public function UserCommandeDetail(Request $request, $id, $idCommande)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $userPage = $em
+            ->getRepository(User::class)
+            ->find($id);
+        if (!$userPage) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+        $user = $this->getUser();
+        $pagePerso = ($userPage == $user)? true : false;
+        $commande = $em->getRepository(Commande::class)
+            ->find($idCommande);
+        $lignesCommande = $commande->getLigneCommandes();
+        $produits = array();
+        foreach ($lignesCommande as $ligneCommande){
+            if ($ligneCommande->getTypeProduit() == 1){
+                $produits[] = $ligneCommande->getProduitInterne();
+            }else{
+                $produits[] = $ligneCommande->getProduitMembre();
+            }
+
+        }
+        if ($commande->getIdAdresse() == 0){
+            $adresse = $user->getCompletAdress();
+        }else{
+            $adresse = $em->getRepository(DeliveryAdressUser::class)
+                ->find($commande->getIdAdresse());
+        }
+
+        return $this->render('user_commande_detail.html.twig', array(
+            'user' => $userPage,
+            'pagePerso' => $pagePerso,
+            'commande' => $commande,
+            'lignesCommandes' => $lignesCommande,
+            'produits' => $produits,
+            'adresse' => $adresse
         ));
     }
 

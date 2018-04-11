@@ -46,10 +46,15 @@ $(document).ready(function(){
         let taille = $('.taille_produit_'+id).attr('id');
         let sex = $('.sex_produit_'+id).attr('id');
         let qty = $(this).val();
-        let chemin = window.location.pathname;
+        let url ='';
+        if(id.match('M')){
+            url = '/productuser/'+id+'/panier';
+        }else {
+            url = '/product/'+id+'/panier';
+        }
         $.ajax({
             type:"POST",
-            url: '/product/'+id+'/panier',
+            url: url,
             data: {
                 "ajouter" : 1,
                 "taille" : taille,

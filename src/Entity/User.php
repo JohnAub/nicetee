@@ -480,6 +480,7 @@ class User implements UserInterface, \Serializable
 
     public function getCompletAdress(){
         $adresse = new DeliveryAdressUser();
+        $adresse->setId(0);
         $adresse->setAdresse($this->getAdresse());
         $adresse->setCodePostal($this->getCodePostal());
         $adresse->setVille($this->getVille());

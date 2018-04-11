@@ -9,6 +9,11 @@
             <p class=" mb-3">Votre panier est vide</p>
         </div>
     {% else %}
+    {% for flashMessage in app.session.flashbag.get('Paypal') %}
+
+        {{ flashMessage }}
+
+    {% endfor %}
     <h3>Liste des produits: </h3>
     <div class="table-responsive">
         <table class="table table-striped">
@@ -28,20 +33,20 @@
                 {% set produit = produits[key] %}
                 <tr>
                     <form class="form_produit" action="{{ path('add_panier_produit_intern', {'id' : produit.id }) }}" method="post">
-                        <td scope="row" class="id_produit_{{ produit.id }}" id="{{ produit.id }}">{{ produit.id }}</td>
+                        <td scope="row" class="id_produit_{{ produit.id }}" id="{{ panier[0] }}">{{ panier[0]}}</td>
                         <td>{{ produit.designation }}</td>
                         <td><img src="{{ asset(produit.imageZoomListe.webPath) }}" width="50" alt=""></td>
-                        <td class="sex_produit_{{ produit.id }}" id="{{ panier[1] }}">{{ panier[1] }}</td>
-                        <td class="taille_produit_{{ produit.id }}" id="{{ panier[2] }}">{{ panier[2]}}</td>
+                        <td class="sex_produit_{{ panier[0] }}" id="{{ panier[1] }}">{{ panier[1] }}</td>
+                        <td class="taille_produit_{{ panier[0]}}" id="{{ panier[2] }}">{{ panier[2]}}</td>
                         <td>
-                            <select name="qty" {#onchange="this.form.submit()"#} class="qty_produit" id="{{ produit.id }}">
+                            <select name="qty" class="qty_produit" id="{{ panier[0] }}">
                                 {% for i in 1..10 %}
                                     <option  value="{{ i }}" {% if panier[3] == i %} selected="selected" {% endif %}>
                                         {{ i }}
                                     </option>
                                 {% endfor %}
                             </select>
-                            <a href="{{ path('remove_panier_produit', {'id' : produit.id, "sex" : panier[1], 'taille': panier[2]}) }}" ><img src="{{ asset('images/icons/corbeille.jpg') }}" width="15" alt="corbeille"></a>
+                            <a href="{{ path('remove_panier_produit', {'id' : panier[0], "sex" : panier[1], 'taille': panier[2]}) }}" ><img src="{{ asset('images/icons/corbeille.jpg') }}" width="15" alt="corbeille"></a>
                         </td>
                         <td>{{ produit.prixVentes  }} € </td>
                         <td>{{ produit.prixVentes * panier[3]  }} €</td>

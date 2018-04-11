@@ -35,9 +35,9 @@ class Commande
     private $ligneCommandes;
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $status;
 
@@ -48,11 +48,19 @@ class Commande
      */
     private $idSale;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $idAdresse;
+
     /***************Constructeur*****************/
     public function __construct()
     {
         $this->date = new \DateTime();
         $this->ligneCommandes = new ArrayCollection();
+        $this->status =  0;
     }
 
 
@@ -149,4 +157,22 @@ class Commande
     {
         $this->idSale = $idSale;
     }
+
+    /**
+     * @return int
+     */
+    public function getIdAdresse()
+    {
+        return $this->idAdresse;
+    }
+
+    /**
+     * @param int $idAdresse
+     */
+    public function setIdAdresse(int $idAdresse)
+    {
+        $this->idAdresse = $idAdresse;
+    }
+
+
 }

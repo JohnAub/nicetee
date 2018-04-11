@@ -261,6 +261,14 @@ class DeliveryAdressUser
         $this->pays = $pays;
     }
 
+    /**
+     * @param int $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
+
 
 
 }
