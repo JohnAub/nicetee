@@ -104,6 +104,7 @@ class Panier
             if (preg_match('#m#i', $id)){
                 $ligneCommande->setProduitMembre($product);
                 $ligneCommande->setTypeProduit(2);
+                $product->crediterMembre($produit[3], $em);
             }else
             {
                 $ligneCommande->setProduitInterne($product);

@@ -77,11 +77,29 @@
             "ref": "66070ea553247b0cd5275e21d0fe5399a25f40be"
         }
     },
+    "endroid/asset": {
+        "version": "1.0.1"
+    },
+    "endroid/pdf": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "bf31aa09b7d29ee588506141f1436688ded50254"
+        }
+    },
     "fzaninotto/faker": {
         "version": "v1.7.1"
     },
+    "iio/libmergepdf": {
+        "version": "3.1.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "knplabs/knp-snappy": {
+        "version": "v1.0.4"
     },
     "ocramius/package-versions": {
         "version": "1.3.0"
@@ -124,6 +142,15 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "setasign/fpdf": {
+        "version": "1.8.1"
+    },
+    "setasign/fpdi": {
+        "version": "v2.0.2"
+    },
+    "setasign/fpdi-fpdf": {
+        "version": "v2.0.0"
     },
     "symfony/asset": {
         "version": "v4.0.4"

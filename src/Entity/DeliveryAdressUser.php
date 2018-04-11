@@ -4,11 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DeliveryAdressUserRepository")
  * @ORM\Table(name="deliveryAdressUser")
  */
-
 class DeliveryAdressUser
 {
     /**
@@ -21,8 +21,8 @@ class DeliveryAdressUser
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="DeliveryAdressUsers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="deliveryAdressUsers")
+     * @ORM\JoinColumn(nullable=false)     *
      */
     private $user;
 
@@ -111,7 +111,9 @@ class DeliveryAdressUser
         return $this->user;
     }
 
-
+    /**
+     * @param mixed $user
+     */
     public function setUser(User $user)
     {
         $this->user = $user;

@@ -4,7 +4,7 @@ easy_admin:
                 class: App\Entity\ProduitIntern
                 controller: App\Controller\AdminProduitInternController
                 form:
-                    fields: &formProduitIntern #récuperer le fournisseur et constructeur pour date d'ajout
+                    fields: &formProduitIntern
                         - {property: 'designation'}
                         - {property: 'prixAchat'}
                         - {property: 'tauxVente'}

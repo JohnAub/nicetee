@@ -32,10 +32,7 @@ class PanierController extends Controller
             $panier = new Panier($em);
             $panier->setPanier($arrayPanier);
         }
-
-        //todo voir comment récuperer produitintern et membre en meme temps
         $sortPanier = $panier->sortPanier();
-
         $prixTotal = 0;
         if ($sortPanier){
             $produits = array();
@@ -107,8 +104,6 @@ class PanierController extends Controller
                     $arrayPanier = $panier->getPanier();
                     $session->set('panier', $arrayPanier);
                 }
-
-                //************************************//
                 $response = new JsonResponse();
                 $response->setData(array(
                     "taille" => $taille,
@@ -117,7 +112,6 @@ class PanierController extends Controller
                     "productName" => $productName
                 ));
                 return $response;
-
             }else
             {
                 die("Vous n'avez pas sélectionné de produit à ajouter au panier");
@@ -172,8 +166,6 @@ class PanierController extends Controller
                     $arrayPanier = $panier->getPanier();
                     $session->set('panier', $arrayPanier);
                 }
-
-                //************************************//
                 $response = new JsonResponse();
                 $response->setData(array(
                     "taille" => $taille,
@@ -182,7 +174,6 @@ class PanierController extends Controller
                     "productName" => $productName
                 ));
                 return $response;
-
             }else
             {
                 die("Vous n'avez pas sélectionné de produit à ajouter au panier");

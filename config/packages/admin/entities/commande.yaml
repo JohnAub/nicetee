@@ -1,0 +1,20 @@
+easy_admin:
+        entities:
+            CommandeATraiter:
+                class: App\Entity\Commande
+                controller: App\Controller\AdminCommandeController
+                list:
+                    actions: ['imprimer','valide', '-edit', '-delete']
+                    dql_filter: "entity.status = '0'"
+                    fields:
+                        - "id"
+                        - {property: 'date', format: 'd/m/Y'}
+            CommandeTraite:
+                class: App\Entity\Commande
+                controller: App\Controller\AdminCommandeController
+                list:
+                    actions: ['imprimer','valide','-edit', '-delete']
+                    dql_filter: "entity.status = '1'"
+                    fields:
+                        - "id"
+                        - {property: 'date', format: 'd/m/Y'}

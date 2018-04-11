@@ -47,7 +47,7 @@ class AdminProduitInternController extends BaseAdminController
             $prixDeVente = $entity->getPrixAchat() * $entity->getTauxVente() * $entity->getTva();
             $entity->setPrixventes($prixDeVente);
         }
-        if ($fournisseurUppercase = $this->request->query->get('entity')){ //todo faire en sorte que ce soit pas attaché
+        if ($fournisseurUppercase = $this->request->query->get('entity')){
             $fournisseur = preg_replace('/(?=(?<!^)[[:upper:]])/', ' ', $fournisseurUppercase);
             $entity->setFournisseur($fournisseur);
         }

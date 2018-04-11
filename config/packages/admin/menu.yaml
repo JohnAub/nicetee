@@ -12,5 +12,9 @@ easy_admin:
                   - { entity: 'ProduitsMembres', label: 'Tee Membres'}
             - label: 'Membres'
               children:
-                  - { entity: 'User', label: 'Membres'}
+                  - { entity: 'Membres', label: 'Membres'}
+            - label: 'Gestion des Commande'
+              children:
+                  - { entity: 'CommandeATraiter', label: 'Commande à traiter'}
+                  - { entity: 'CommandeTraite', label: 'Commande traité'}
             - label: 'Env: %env(APP_ENV)%'

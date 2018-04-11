@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 use App\Model\Produit;
 
@@ -101,5 +102,18 @@ class ProduitMembre extends Produit
     }
 
 
-
+    public function crediterMembre($qty,EntityManager $em):void{
+        $idUser = $this->getIdUser();
+        $user = $em->getRepository(User::class)
+            ->find($idUser);
+        $portefeuilleUser = $user->getPortefeuille();
+        $operation = new Operation();
+        $operation->setLibele($this->getDesignation());
+        $operation->setRef('vente');
+        $operation->setMontant($qty);
+        $portefeuilleUser->addOperation($operation);
+        $em->persist($portefeuilleUser);
+        $em->persist($operation);
+        $em->flush();
+    }
 }
