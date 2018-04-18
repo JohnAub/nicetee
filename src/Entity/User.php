@@ -545,4 +545,13 @@ class User implements UserInterface, \Serializable
     {
         $this->roles = $roles;
     }
+
+    public function getDeliveryAdressById($id){
+        foreach ($this->deliveryAdressUsers as $deliveryAdressUser){
+            if ($deliveryAdressUser->getId() == $id){
+                return $deliveryAdressUser;
+            }
+        }
+        return $this->getCompletAdress();
+    }
 }
