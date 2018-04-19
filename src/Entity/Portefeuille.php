@@ -121,9 +121,9 @@ class Portefeuille
     {
         $this->operations[] = $operation;
         $operation->setPortefeuille($this);
+        $this->setSolde($operation->getMontant());
         return $this;
     }
-
 
 
 }

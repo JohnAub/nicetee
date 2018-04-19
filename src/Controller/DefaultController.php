@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/")
+     * @Route("/", name="acceuil")
      */
     public function default(Request $request)
     {

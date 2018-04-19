@@ -1,6 +1,7 @@
 easy_admin:
     site_name: 'NiceTee Admin'
     entities:
+        - App\Entity\Commande
         - App\Entity\ProduitIntern
         - App\Entity\ProduitMembre
         - App\Entity\User

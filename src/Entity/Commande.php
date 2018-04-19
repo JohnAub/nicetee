@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -174,5 +175,22 @@ class Commande
         $this->idAdresse = $idAdresse;
     }
 
+    public function getProducts(){
+        $products  = array();
+        foreach ($this->ligneCommandes as $ligneCommande){
+            if ($ligneCommande->getTypeProduit() == 1){
+                $products[] = array(
+                    'product' => $ligneCommande->getProduitInterne(),
+                    'qty' => $ligneCommande->getQty()
+                );
+            }else{
+                $products[] = array(
+                    'product' => $ligneCommande->getProduitMembre(),
+                    'qty' => $ligneCommande->getQty()
+                );
+            }
+        }
+        return $products;
+    }
 
 }
