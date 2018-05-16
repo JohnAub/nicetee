@@ -47,9 +47,8 @@ class DessinController extends Controller
             'last_username' => $lastUsername,
             'error' => $error,
         ));
-
-
     }
+
     /**
      * @Route("/dessin/{id}", name="page_dessin")
      */
@@ -87,7 +86,6 @@ class DessinController extends Controller
         {
             $comms = "";
         }
-
         if ($authOk){
             $commentaire = new Commentaire();
             $form = $this->createForm(CommentaireType::class, $commentaire);
@@ -118,7 +116,6 @@ class DessinController extends Controller
         ));
 
     }
-
 
     /**
      * @Route("/test/{id}", name="dessin_test")
@@ -225,3 +222,4 @@ class DessinController extends Controller
         }
     }
 }
+

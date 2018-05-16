@@ -12,8 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\DessinRepository")
  * @ORM\Table(name="dessin")
  */
-
-
 class Dessin
 {
     /**
@@ -82,9 +80,6 @@ class Dessin
      */
     protected $imageDessinMiniature;
 
-
-
-
     /**Constructeur*/
     public function __construct()
     {
@@ -92,8 +87,6 @@ class Dessin
         $this->commentaires = new ArrayCollection();
         $this->votes =  new ArrayCollection();
     }
-
-
 
     /****************************GETTER SETTER************************/
 

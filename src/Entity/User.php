@@ -14,10 +14,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, \Serializable
 {
-    //@var sert a php Documentor
+
     /**
      * @var int
-     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -385,9 +384,6 @@ class User implements UserInterface, \Serializable
         $this->dateInscription = $dateInscription;
     }
 
-
-
-
     /**
      * @return mixed
      */
@@ -465,8 +461,6 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * Salt pour cryptage des mots de passe fournis par -> Security component
-     * vu que j'utilise bcrypt je n'en ai pas besoin du coup on renvoi null
      *
      * {@inheritdoc}
      */
@@ -510,8 +504,6 @@ class User implements UserInterface, \Serializable
      */
     public function serialize()
     {
-        // Génère une représentation stockable d'une valeur
-        // pratique pour stocker ou passer des valeurs PHP entre scripts, sans perdre leur structure ni leur type.
         return serialize(array(
             $this->id,
             $this->username,
@@ -555,3 +547,4 @@ class User implements UserInterface, \Serializable
         return $this->getCompletAdress();
     }
 }
+

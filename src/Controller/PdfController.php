@@ -63,7 +63,6 @@ class PdfController extends Controller
         }else{
             $adresseLivraison = $userCommande->getDeliveryAdressById($commande->getIdAdresse());
         }
-
         return $this->render('pdf_commande.html.twig', array(
             'userCommande' => $userCommande,
             'commande' => $commande,
@@ -73,3 +72,4 @@ class PdfController extends Controller
     }
 
 }
+

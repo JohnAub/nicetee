@@ -56,8 +56,6 @@ class Operation
         $this->date = new \DateTime();
     }
 
-
-
     /****************************GETTER SETTER************************/
     /**
      * @return mixed
@@ -115,8 +113,6 @@ class Operation
         $this->date = $date;
     }
 
-
-
     /**
      * @return string
      */
@@ -148,8 +144,5 @@ class Operation
     {
         $this->ref = $ref;
     }
-
-
-
-
 }
+

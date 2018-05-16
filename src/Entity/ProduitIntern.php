@@ -39,14 +39,6 @@ class ProduitIntern extends Produit
      */
     private $tauxVente;
 
-   /* public function __construct($prixAchat, $tauxVente)
-    {
-        $this->prixAchat = $prixAchat;
-        $prixVentesht = $this->prixAchat * $tauxVente;
-        parent::__construct($prixVentesht);
-    }*/
-
-
     /**
      * @return mixed
      */
@@ -54,7 +46,6 @@ class ProduitIntern extends Produit
     {
         return $this->id;
     }
-
 
     /**
      * @return string
@@ -103,5 +94,5 @@ class ProduitIntern extends Produit
     {
         $this->tauxVente = $tauxVente;
     }
-
 }
+

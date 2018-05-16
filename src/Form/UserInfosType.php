@@ -44,3 +44,4 @@ class UserInfosType extends AbstractType
         ));
     }
 }
+

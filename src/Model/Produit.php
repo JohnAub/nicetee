@@ -347,14 +347,4 @@ abstract class Produit
         $url = $image->getWebPath();
         return $url;
     }
-
-
-   /* public function setImageAdmin($image){
-        $this->getImageZoomListe()->se
-    }*/
-   //todo faire un setter pour modifier les images depuis l'admin
-
-
-
-
 }

@@ -29,10 +29,9 @@ class UserController extends Controller
      */
     public function inscriptionAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // on instancie un user et on cree le formulaire grace au UserType et on lui indique qu'on utilise le $User que l'on vient de cree
+        // on instancie un user et on cree le formulaire grace au UserType et on lui indique qu'on utilise le $user que l'on vient de cree
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
-
         //on recup les info du formulaire
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()){
@@ -49,12 +48,8 @@ class UserController extends Controller
             $em->persist($user);
             $em->persist($portefeuille);
             $em->flush();
-
             return $this->redirectToRoute('user_validatation', array('id' => $user->getId()));
         }
-
-
-
         return $this->render('inscription.html.twig', array(
             'form' => $form->createView()
         ));
@@ -122,21 +117,14 @@ class UserController extends Controller
         $user = $this->getUser();
         $pagePerso = ($userPage == $user)? true : false;
         $formInfos = $this->createForm(UserInfosType::class, $user);
-
-
         $changePasswordModel = new ChangePassword();
         $formPass = $this->createForm(ChangePasswordType::class, $changePasswordModel);
         $formPass->handleRequest($request);
-
-
         $formInfos->handleRequest($request);
         if ($formInfos->isSubmitted() && $formInfos->isValid()){
             $em->flush();
             return $this->redirectToRoute('page_user_infos', array('id' => $user->getId()));
         }
-
-
-
         if ($formPass->isSubmitted() && $formPass->isValid()) {
             // perform some action,
             // such as encoding with MessageDigestPasswordEncoder and persist
@@ -146,29 +134,6 @@ class UserController extends Controller
             );
             return $this->redirectToRoute('page_user_infos', array('id' => $user->getId()));
         }
-
-            /*            if ($verifPass === $passUser){
-
-                            dump("pass");
-                            if ($formPass->isSubmitted() && $formPass->isValid()){
-                                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-                                $user->setPassword($password);
-                                $user->eraseCredentials();
-                                $em->flush();
-                                $this->addFlash(
-                                    'notice',
-                                    'Vos modifications ont été enregistrées !'
-                                );
-                                return $this->redirectToRoute('page_user_infos', array('id' => $user->getId()));
-                            }
-                        }{
-                            $this->addFlash(
-                                'notice',
-                                'Votre mot de passe actuel ne coresponde pas'
-                            );
-                        }*/
-
-
         return $this->render('user_infos.html.twig', array(
             'user' => $userPage,
             'pagePerso' => $pagePerso,
@@ -193,8 +158,17 @@ class UserController extends Controller
         }
         $user = $this->getUser();
         $pagePerso = ($userPage == $user)? true : false;
-        $portefeuille = $user->getPortefeuille();
-        $operations = $portefeuille->getOperations();
+        $portefeuille = "";
+        $operations = "";
+        if ($pagePerso == true){
+            $portefeuille = $user->getPortefeuille();
+            $operations = $portefeuille->getOperations();
+            $credit = "";
+            foreach ($operations as $operation){
+                $credit += $operation->getMontant();
+            }
+            $portefeuille->setSolde($credit);
+        }
         return $this->render('user_portefeuille.html.twig', array(
             'user' => $userPage,
             'pagePerso' => $pagePerso,
@@ -231,6 +205,7 @@ class UserController extends Controller
             'lignesCommandes' => $lignesCommandes
         ));
     }
+
     /**
      * @Route("user/{id}/commande/{idCommande}", name="user_commande_detail")
      */
@@ -257,7 +232,6 @@ class UserController extends Controller
             }else{
                 $produits[] = $ligneCommande->getProduitMembre();
             }
-
         }
         if ($commande->getIdAdresse() == 0){
             $adresse = $user->getCompletAdress();
@@ -265,7 +239,6 @@ class UserController extends Controller
             $adresse = $em->getRepository(DeliveryAdressUser::class)
                 ->find($commande->getIdAdresse());
         }
-
         return $this->render('user_commande_detail.html.twig', array(
             'user' => $userPage,
             'pagePerso' => $pagePerso,
@@ -312,3 +285,4 @@ class UserController extends Controller
             throw new \Exception("Erreur");
     }
 }
+

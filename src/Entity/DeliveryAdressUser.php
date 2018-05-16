@@ -26,7 +26,6 @@ class DeliveryAdressUser
      */
     private $user;
 
-
     /**
      * @var string
      *
@@ -89,9 +88,6 @@ class DeliveryAdressUser
      * @ORM\Column(type="string", length=255)
      */
     private $pays;
-
-
-
 
     /**GETTER SETTER*/
 
@@ -274,3 +270,4 @@ class DeliveryAdressUser
 
 
 }
+

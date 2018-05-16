@@ -12,9 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PanierController extends Controller
 {
-
-
-
     /**
      * @Route("/panier", name="panier")
      */
@@ -58,7 +55,7 @@ class PanierController extends Controller
         };
         return $this->render('panier.html.twig', array(
         "vide" => true,
-    ));
+        ));
     }
 
     /**
@@ -87,8 +84,6 @@ class PanierController extends Controller
 
                 $productName = $product->getDesignation();
                 $session = $request->getSession();
-
-                //On serialize en json le panier pour le stocker en session
 
                 if (!($session->has('panier')))
                 {
@@ -218,3 +213,4 @@ class PanierController extends Controller
 
     }
 }
+

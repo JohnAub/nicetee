@@ -18,8 +18,6 @@ class PortefeuilleController extends Controller
         return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
     }
 
-
-
     public function createUserPortefeuille($id){
         $em = $this->getDoctrine()->getManager();
         $portefeuille = new Portefeuille();
