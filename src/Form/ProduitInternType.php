@@ -32,7 +32,6 @@ class ProduitInternType extends AbstractType
             ->getForm()
         ;
     }
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -40,3 +39,4 @@ class ProduitInternType extends AbstractType
         ));
     }
 }
+

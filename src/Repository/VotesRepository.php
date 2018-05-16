@@ -26,3 +26,4 @@ class VotesRepository extends ServiceEntityRepository
     }
     */
 }
+

@@ -26,7 +26,6 @@ class UserType extends AbstractType
             ->add('username', TextType::class)
             ->add('nom', TextType::class)
             ->add('prenom', TextType::class)
-            ->add('prenom', TextType::class)
             ->add('sex', ChoiceType::class, array(
                 'choices' => array(
                     'Autre' => 'autre',
@@ -59,3 +58,4 @@ class UserType extends AbstractType
         ));
     }
 }
+

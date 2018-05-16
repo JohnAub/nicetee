@@ -24,3 +24,4 @@ class ImageType extends AbstractType
         ]);
     }
 }
+

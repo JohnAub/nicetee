@@ -59,7 +59,6 @@ class Portefeuille
         return $this->id;
     }
 
-
     /**
      * @return float
      */
@@ -124,6 +123,5 @@ class Portefeuille
         $this->setSolde($operation->getMontant());
         return $this;
     }
-
-
 }
+

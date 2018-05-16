@@ -17,12 +17,8 @@ class SecurityController extends Controller
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        //pour récuperer l'erreur si il y en a une
         $error = $authenticationUtils->getLastAuthenticationError();
-
-        //Récupere le dernier username entré par l'utilisateur
         $lastUsername = $authenticationUtils->getLastUsername();
-
         $listTeeIntern = $this->getDoctrine()
             ->getRepository(ProduitIntern::class)
             ->findAll();
@@ -54,3 +50,4 @@ class SecurityController extends Controller
         );
     }
 }
+

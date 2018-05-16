@@ -17,8 +17,8 @@ class DefaultController extends Controller
      */
     public function default(Request $request)
     {
-        $session = $request->getSession();
-        $session->clear();
+      $session = $request->getSession();
+      $session->clear();
       $listTeeIntern = $this->getDoctrine()
             ->getRepository(ProduitIntern::class)
             ->findAll();
@@ -51,3 +51,4 @@ class DefaultController extends Controller
         return new Response('<html><body>Admin page!</body></html>');
     }
 }
+

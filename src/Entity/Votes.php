@@ -72,6 +72,5 @@ class Votes
     {
         $this->id_user = $id_user;
     }
-
-
 }
+

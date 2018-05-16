@@ -26,10 +26,7 @@ class FakerFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // On configure dans quelles langues nous voulons nos données
-        // sert a generer des entitées https://github.com/fzaninotto/Faker#formatters
         $faker = Faker\Factory::create('fr_FR');
-
         // on créé 10 personnes
         for ($i = 0; $i < 50; $i++) {
             $user = new User();

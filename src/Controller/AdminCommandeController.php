@@ -48,11 +48,6 @@ class AdminCommandeController extends BaseAdminController
     {
         $id = $this->request->query->get('id');
         return $this->redirectToRoute('pdf_preparation_commande', array('idCommande' => $id));
-/*
-        return $this->redirectToRoute('easyadmin', array(
-            'action' => 'list',
-            'entity' => $this->request->query->get('entity'),
-        ));*/
     }
 
 }

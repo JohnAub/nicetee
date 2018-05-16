@@ -86,7 +86,6 @@ class Commande
         $this->ligneCommandes->removeElement($ligneCommande);;
     }
 
-
     /**
      * @return mixed
      */
@@ -194,3 +193,4 @@ class Commande
     }
 
 }
+

@@ -61,5 +61,4 @@ class AdminProduitInternController extends BaseAdminController
             'entity' => $this->request->query->get('entity'),
         ]);
     }
-
 }

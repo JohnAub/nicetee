@@ -20,7 +20,6 @@ class ProduitMembre extends Produit
      */
     private $id;
 
-
     /**
      * @ORM\Column(type="datetime")
      *
@@ -117,3 +116,4 @@ class ProduitMembre extends Produit
         $em->flush();
     }
 }
+

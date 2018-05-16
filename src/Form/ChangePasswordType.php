@@ -27,7 +27,6 @@ class ChangePasswordType extends AbstractType
         ;
     }
 
-
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -41,3 +40,4 @@ class ChangePasswordType extends AbstractType
         return 'change_passwd';
     }
 }
+

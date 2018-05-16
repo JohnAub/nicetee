@@ -11,7 +11,6 @@ use PayPal\Api\Transaction;
 
 class TransactionFactory
 {
-
     static function fromPanier(Panier $panier, float $vatRate = 0): Transaction{
         //on defini la transaction
         $list = new ItemList(); //La liste des produits
@@ -38,6 +37,6 @@ class TransactionFactory
             ->setItemList($list)
             ->setDescription('Achat sur NiceTee.fr')
             ->setAmount($amount)
-            ->setCustom('test-1'); //todo mettre le numero de la commande
+            ->setCustom('test-1');
     }
 }

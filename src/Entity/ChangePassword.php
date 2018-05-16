@@ -22,9 +22,6 @@ class ChangePassword
      */
     protected $newPassword;
 
-
-
-
     /**
      * @return mixed
      */
@@ -56,8 +53,4 @@ class ChangePassword
     {
         $this->newPassword = $newPassword;
     }
-
-
-
-
 }

@@ -69,3 +69,4 @@ class ProduitInternController extends Controller
 
 
 }
+

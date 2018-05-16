@@ -34,7 +34,7 @@ class Image
      */
     private $file;
 
-    // On ajoute cet attribut pour y stocker le nom du fichier temporairement
+
     private $tempFilename;
 
 
@@ -54,7 +54,6 @@ class Image
         // Et on génère l'attribut alt de la balise <img>, à la valeur du nom du fichier sur le PC de l'internaute
         $this->alt = $this->file->getClientOriginalName(); //todo faire en sorte de récupérer le nom du tee
     }
-
 
     /**
      * @ORM\PostPersist()
@@ -189,3 +188,4 @@ class Image
         }
     }
 }
+

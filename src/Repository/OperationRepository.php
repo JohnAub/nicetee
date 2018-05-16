@@ -26,3 +26,4 @@ class OperationRepository extends ServiceEntityRepository
     }
     */
 }
+

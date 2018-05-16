@@ -70,11 +70,7 @@ class LigneCommande
      */
     private $typeProduit;
 
-
-
-
-    /***************Getter-Setter*****************/
-
+    /**************Getter-Setter*****************/
 
     /**
      * @return mixed
@@ -218,3 +214,4 @@ class LigneCommande
 
 
 }
+

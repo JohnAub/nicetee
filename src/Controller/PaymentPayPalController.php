@@ -29,8 +29,6 @@ class PaymentPayPalController extends Controller
         $panier = $this->getPanier($request);
         $apiContext = (new PaymentPayPal())
             ->getApiContext();
-
-
         //on genere le payment
         $payement = new Payment();
         $payement->addTransaction(TransactionFactory::fromPanier($panier));
@@ -43,7 +41,6 @@ class PaymentPayPalController extends Controller
         $payement->setRedirectUrls($redirectUrls);
         // Ensuite on defini le payer on utilise l'interface de paypal on pourais renvoyer les information cb..
         $payement->setPayer((new Payer())->setPaymentMethod('paypal'));
-
         try{
             $payement->create($apiContext);
 
@@ -115,9 +112,6 @@ class PaymentPayPalController extends Controller
         $this->addFlash('Paypal', "La transaction à rencontré un probleme. veuillez tenter de nouveau");
         return $this->redirectToRoute('panier');
     }
-
-
-
     public function getPanier(Request $request){
         $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
@@ -128,3 +122,4 @@ class PaymentPayPalController extends Controller
     }
 
 }
+
